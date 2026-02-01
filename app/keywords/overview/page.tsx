@@ -93,9 +93,7 @@ export default function KeywordOverviewPage() {
     const value = kw.toLowerCase();
     const newChips = chips.includes(value) ? chips : [...chips, value];
     setChips(newChips);
-    search(newChips);
-    const loc = getLocationByCode(location);
-    recordSearch(userId, value, "overview", loc.locationCode);
+    // Intentionally do NOT search. User must click the Search button.
   }
 
   return (
