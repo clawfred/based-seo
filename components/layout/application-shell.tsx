@@ -1,6 +1,7 @@
 "use client";
 
 import { Search, Sparkles, FolderOpen, Settings, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
@@ -205,9 +206,14 @@ export function ApplicationShell({ className, children }: ApplicationShellProps)
             href="/"
             className="flex items-center gap-2.5 rounded-md transition-opacity hover:opacity-90"
           >
-            <div className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
-              <Search className="size-4" />
-            </div>
+            <Image
+              src="/logo.png"
+              alt="Based SEO"
+              width={36}
+              height={36}
+              className="size-9 rounded-lg object-contain"
+              priority
+            />
             <div className="flex flex-col items-start">
               <span className="text-sm font-semibold leading-tight text-foreground md:text-base">
                 Based SEO
