@@ -24,11 +24,6 @@ export function usePrivyWalletAddress() {
 
       if (!isConnected) {
         setActiveWallet(privyWallet);
-        console.log(
-          "[PrivyWallet] Set active wallet:",
-          privyWallet.address,
-          privyWallet.walletClientType,
-        );
       }
     }
   }, [ready, authenticated, wallets, isConnected, setActiveWallet]);

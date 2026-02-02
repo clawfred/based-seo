@@ -1,7 +1,7 @@
 import { Redis } from "@upstash/redis";
 import { Ratelimit } from "@upstash/ratelimit";
 
-export interface RateLimitResult {
+interface RateLimitResult {
   allowed: boolean;
   remaining: number;
   resetMs: number;
@@ -82,7 +82,7 @@ export async function rateLimit(
   }
 
   try {
-    const { success, limit, remaining, reset } = await limiter.limit(key);
+    const { success, remaining, reset } = await limiter.limit(key);
 
     return {
       allowed: success,

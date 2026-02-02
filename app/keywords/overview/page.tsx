@@ -117,31 +117,38 @@ export default function KeywordOverviewPage() {
               placeholder="Enter or paste keywords…"
             />
 
-            <div className="flex items-center justify-center gap-3">
-              <Select value={location} onValueChange={handleLocationChange}>
-                <SelectTrigger className="w-44">
-                  <SelectValue placeholder="Select location" />
-                </SelectTrigger>
-                <SelectContent>
-                  {locations.map((loc) => (
-                    <SelectItem key={loc.code} value={loc.code}>
-                      {loc.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Button
-                onClick={handleSearch}
-                className="gap-2"
-                disabled={loading || (chips.length === 0 && !inputValue.trim())}
-              >
-                {loading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Search className="h-4 w-4" />
-                )}
-                Search
-              </Button>
+            <div className="flex flex-col items-center gap-3">
+              <div className="flex items-center gap-3">
+                <Select value={location} onValueChange={handleLocationChange}>
+                  <SelectTrigger className="w-44">
+                    <SelectValue placeholder="Select location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {locations.map((loc) => (
+                      <SelectItem key={loc.code} value={loc.code}>
+                        {loc.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Button
+                  onClick={handleSearch}
+                  className="gap-2"
+                  disabled={loading || (chips.length === 0 && !inputValue.trim())}
+                >
+                  {loading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Search className="h-4 w-4" />
+                  )}
+                  Search
+                </Button>
+              </div>
+              {(chips.length > 0 || inputValue.trim()) && (
+                <p className="text-xs text-muted-foreground">
+                  Cost: ${((chips.length + (inputValue.trim() ? 1 : 0)) * 0.03).toFixed(2)} USDC
+                </p>
+              )}
             </div>
 
             <p className="text-xs text-muted-foreground">

@@ -20,76 +20,31 @@ const DEFAULT_FILTERS: FilterValues = {
   intentFilter: "all",
 };
 
-// Module-level state that survives page navigations
-let persistedSeedKeyword = "";
-let persistedLocation = "US";
-let persistedSearch: SearchState = {
-  loading: false,
-  error: null,
-  warning: null,
-  results: [],
-  hasSearched: false,
-};
-let persistedSelectedGroup = "all";
-let persistedSort: { field: SortField; direction: SortDirection } = {
-  field: "volume",
-  direction: "desc",
-};
-let persistedFilters: FilterValues = DEFAULT_FILTERS;
-let persistedCurrentPage = 1;
-
 export function useKeywordFinder() {
-  const [seedKeyword, _setSeedKeyword] = useState(persistedSeedKeyword);
-  const [location, _setLocation] = useState(persistedLocation);
-  const [search, _setSearch] = useState<SearchState>(persistedSearch);
-  const [selectedGroup, _setSelectedGroup] = useState(persistedSelectedGroup);
+  const [seedKeyword, setSeedKeyword] = useState("");
+  const [location, setLocation] = useState("US");
+  const [search, setSearch] = useState<SearchState>({
+    loading: false,
+    error: null,
+    warning: null,
+    results: [],
+    hasSearched: false,
+  });
+  const [selectedGroup, setSelectedGroup] = useState("all");
   const [selectedKeywords, setSelectedKeywords] = useState<Set<string>>(new Set());
-  const [sort, _setSort] = useState(persistedSort);
-  const [filters, _setFilters] = useState<FilterValues>(persistedFilters);
-  const [currentPage, _setCurrentPage] = useState(persistedCurrentPage);
+  const [sort, setSort] = useState<{ field: SortField; direction: SortDirection }>({
+    field: "volume",
+    direction: "desc",
+  });
+  const [filters, setFilters] = useState<FilterValues>(DEFAULT_FILTERS);
+  const [currentPage, setCurrentPage] = useState(1);
   const [saveDialogOpen, setSaveDialogOpen] = useState(false);
-
-  // Wrappers that sync to module-level storage
-  const setSeedKeyword = useCallback((v: string) => {
-    persistedSeedKeyword = v;
-    _setSeedKeyword(v);
-  }, []);
-
-  const setLocation = useCallback((v: string) => {
-    persistedLocation = v;
-    _setLocation(v);
-  }, []);
-
-  const setSearch = useCallback((v: SearchState) => {
-    persistedSearch = v;
-    _setSearch(v);
-  }, []);
-
-  const setSelectedGroup = useCallback((v: string) => {
-    persistedSelectedGroup = v;
-    _setSelectedGroup(v);
-  }, []);
-
-  const setSort = useCallback((v: { field: SortField; direction: SortDirection }) => {
-    persistedSort = v;
-    _setSort(v);
-  }, []);
-
-  const setFilters = useCallback((v: FilterValues) => {
-    persistedFilters = v;
-    _setFilters(v);
-  }, []);
-
-  const setCurrentPage = useCallback((v: number) => {
-    persistedCurrentPage = v;
-    _setCurrentPage(v);
-  }, []);
 
   const handleSearch = useCallback(async () => {
     const kw = seedKeyword.trim();
     if (!kw) return;
 
-    setSearch({ ...search, loading: true, error: null, warning: null, hasSearched: true });
+    setSearch({ loading: true, error: null, warning: null, results: [], hasSearched: true });
     setCurrentPage(1);
     setSelectedKeywords(new Set());
 
@@ -113,7 +68,7 @@ export function useKeywordFinder() {
         hasSearched: true,
       });
     }
-  }, [seedKeyword, location, search, setSearch, setCurrentPage]);
+  }, [seedKeyword, location]);
 
   const handleSort = useCallback(
     (field: SortField) => {
@@ -123,24 +78,18 @@ export function useKeywordFinder() {
           : { field, direction: "desc" },
       );
     },
-    [sort, setSort],
+    [sort],
   );
 
-  const handleFiltersChange = useCallback(
-    (next: FilterValues) => {
-      setFilters(next);
-      setCurrentPage(1);
-    },
-    [setFilters, setCurrentPage],
-  );
+  const handleFiltersChange = useCallback((next: FilterValues) => {
+    setFilters(next);
+    setCurrentPage(1);
+  }, []);
 
-  const handleGroupChange = useCallback(
-    (group: string) => {
-      setSelectedGroup(group);
-      setCurrentPage(1);
-    },
-    [setSelectedGroup, setCurrentPage],
-  );
+  const handleGroupChange = useCallback((group: string) => {
+    setSelectedGroup(group);
+    setCurrentPage(1);
+  }, []);
 
   const filteredKeywords = useMemo(() => {
     const { volumeMin, volumeMax, kdMin, kdMax, intentFilter } = filters;

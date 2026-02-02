@@ -184,12 +184,21 @@ export async function POST(request: NextRequest) {
           ? (serpTask.result?.[0]?.items || [])
               .filter((item: any) => item.type === "organic")
               .slice(0, 10)
-              .map((item: any, index: number) => ({
-                position: index + 1,
-                url: item.url || "",
-                title: item.title || "",
-                description: item.description || "",
-              }))
+              .map((item: any, index: number) => {
+                let domain = "";
+                try {
+                  domain = item.url ? new URL(item.url).hostname.replace(/^www\./, "") : "";
+                } catch {
+                  domain = "";
+                }
+                return {
+                  position: index + 1,
+                  url: item.url || "",
+                  domain,
+                  title: item.title || "",
+                  description: item.description || "",
+                };
+              })
           : [];
 
       return {

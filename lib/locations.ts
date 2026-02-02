@@ -1,4 +1,4 @@
-export interface LocationOption {
+interface LocationOption {
   code: string;
   name: string;
   locationCode: number;

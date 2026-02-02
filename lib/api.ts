@@ -20,7 +20,6 @@ export function getAuthToken(): Promise<string | null> | null {
 let _privyWalletAddress: `0x${string}` | null = null;
 export function setPrivyWalletAddress(address: `0x${string}`) {
   _privyWalletAddress = address;
-  console.log("[API] Privy wallet address set:", address);
 }
 
 interface ApiResponse<T> {
@@ -55,9 +54,6 @@ async function apiFetch<T>(
     }
 
     const account = getAccount(_wagmiConfig);
-    console.log("[Payment] Active connector:", account.connector?.name);
-    console.log("[Payment] Connected address:", account.address);
-    console.log("[Payment] Connection status:", account.isConnected);
 
     if (!account.isConnected) {
       throw new Error("Payment required — connect wallet to continue");
@@ -66,9 +62,6 @@ async function apiFetch<T>(
     const walletClient = await getWalletClient(_wagmiConfig, {
       account: _privyWalletAddress || account.address,
     });
-
-    console.log("[Payment] WalletClient address:", walletClient?.account.address);
-    console.log("[Payment] Using Privy wallet:", _privyWalletAddress);
 
     const paidRes = await x402Fetch(url, body, walletClient, extraHeaders);
 
@@ -162,18 +155,6 @@ export async function fetchKeywordIdeas(
   languageCode: string = "en",
 ): Promise<ApiResponse<KeywordIdeaWithMeta[]>> {
   return apiFetch<KeywordIdeaWithMeta[]>("/api/keywords/ideas", {
-    keyword,
-    location_code: locationCode,
-    language_code: languageCode,
-  });
-}
-
-export async function fetchSerpResults(
-  keyword: string,
-  locationCode: number = 2840,
-  languageCode: string = "en",
-): Promise<ApiResponse<SerpResult[]>> {
-  return apiFetch<SerpResult[]>("/api/serp", {
     keyword,
     location_code: locationCode,
     language_code: languageCode,

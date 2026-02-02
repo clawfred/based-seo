@@ -51,15 +51,6 @@ export function deleteFolder(folderId: string): void {
   persistFolders(folders);
 }
 
-export function addKeywordToFolder(folderId: string, keyword: KeywordData): void {
-  const folders = getFolders();
-  const folder = folders.find((f) => f.id === folderId);
-  if (!folder) return;
-  if (folder.keywords.some((k) => k.keyword === keyword.keyword)) return;
-  folder.keywords.push(keyword);
-  persistFolders(folders);
-}
-
 export function removeKeywordFromFolder(folderId: string, keywordName: string): void {
   const folders = getFolders();
   const folder = folders.find((f) => f.id === folderId);

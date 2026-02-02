@@ -37,26 +37,6 @@ export async function verifyAuth(request: NextRequest): Promise<AuthenticatedUse
 }
 
 /**
- * Middleware wrapper to protect API routes
- * Returns 401 if not authenticated, otherwise calls handler with authenticated user
- */
-export function withAuth<T = unknown>(
-  handler: (request: NextRequest, user: AuthenticatedUser) => Promise<NextResponse<T>>,
-) {
-  return async (request: NextRequest): Promise<NextResponse<T | { error: string }>> => {
-    const user = await verifyAuth(request);
-
-    if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 }) as NextResponse<
-        T | { error: string }
-      >;
-    }
-
-    return handler(request, user);
-  };
-}
-
-/**
  * Extract user ID from authenticated request
  * Throws error if not authenticated
  */

@@ -16,7 +16,6 @@ export function useUserSync() {
       try {
         const token = await getToken();
         if (!token) {
-          console.warn("[UserSync] No access token available");
           return;
         }
 
@@ -37,7 +36,6 @@ export function useUserSync() {
         }
 
         setSynced(true);
-        console.log("[UserSync] User synced to database successfully");
       } catch (e) {
         console.error("[UserSync] Failed to sync user:", e);
         const retryDelayMs = 2000;

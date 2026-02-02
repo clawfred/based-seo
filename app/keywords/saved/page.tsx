@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { FolderPlus, ChevronLeft, Loader2, X, CloudOff, Download } from "lucide-react";
+import { FolderPlus, ChevronLeft, Loader2, X, CloudOff, Cloud, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { downloadTextFile, toCsv } from "@/lib/csv";
 import {
@@ -52,7 +52,7 @@ export default function SavedKeywordsPage() {
     localStorage.setItem(BANNER_DISMISS_KEY, "true");
   }, []);
 
-  const showSyncBanner = !bannerDismissed && !expandedFolder;
+  const showSyncBanner = !bannerDismissed && !expandedFolder && !authenticated;
   const collapseFolder = useCallback(() => {
     setExpandedFolderId(null);
     setExpandedFolder(null);
@@ -194,7 +194,7 @@ export default function SavedKeywordsPage() {
           <div className="relative flex items-center gap-3 rounded-lg border border-amber-200/60 bg-amber-50/50 px-4 py-3 dark:border-amber-900/40 dark:bg-amber-950/30">
             <CloudOff className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" />
             <p className="text-sm text-amber-800 dark:text-amber-200">
-              Local storage only for now — your saved folders live in this browser.
+              Folders saved in browser only. Sign in to sync across devices.
             </p>
             <button
               onClick={dismissBanner}

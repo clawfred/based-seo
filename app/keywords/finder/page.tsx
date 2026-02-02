@@ -108,32 +108,37 @@ export default function KeywordFinderPage() {
                 disabled={search.loading}
               />
 
-              <div className="flex items-center justify-center gap-3">
-                <Select value={location} onValueChange={handleLocationChange}>
-                  <SelectTrigger className="w-44">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {locations.map((loc) => (
-                      <SelectItem key={loc.code} value={loc.code}>
-                        {loc.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <div className="flex flex-col items-center gap-3">
+                <div className="flex items-center gap-3">
+                  <Select value={location} onValueChange={handleLocationChange}>
+                    <SelectTrigger className="w-44">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {locations.map((loc) => (
+                        <SelectItem key={loc.code} value={loc.code}>
+                          {loc.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
 
-                <Button
-                  className="gap-2"
-                  onClick={handleSearchWithHistory}
-                  disabled={search.loading}
-                >
-                  {search.loading ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    <Search className="h-4 w-4" />
-                  )}
-                  Find Keywords
-                </Button>
+                  <Button
+                    className="gap-2"
+                    onClick={handleSearchWithHistory}
+                    disabled={search.loading || !seedKeyword.trim()}
+                  >
+                    {search.loading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Search className="h-4 w-4" />
+                    )}
+                    Find Keywords
+                  </Button>
+                </div>
+                {seedKeyword.trim() && (
+                  <p className="text-xs text-muted-foreground">Cost: $0.025 USDC</p>
+                )}
               </div>
             </CardContent>
           </Card>
