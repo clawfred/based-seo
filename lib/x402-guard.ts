@@ -1,6 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { initX402HttpServerOnce, getX402HttpServer, makeNextRequestAdapter } from "@/lib/x402-http";
+import { logPaymentTransaction } from "@/lib/payment-logger";
+import { verifyAuth } from "@/lib/auth";
 
 export const runtime = "nodejs";
 
@@ -79,6 +81,22 @@ export async function requireX402Payment(
       ),
     };
   }
+
+  const user = await verifyAuth(req);
+
+  await logPaymentTransaction(
+    {
+      payer: settle.payer || "unknown",
+      transaction: settle.transaction,
+      network: settle.network,
+      requirements: {
+        amount: result.paymentRequirements.amount,
+        asset: result.paymentRequirements.asset,
+      },
+    },
+    adapter.getPath(),
+    user?.userId,
+  );
 
   return { ok: true, settleHeaders: settle.headers };
 }
