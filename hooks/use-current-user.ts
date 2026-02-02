@@ -1,16 +1,16 @@
 "use client";
 
-/**
- * Stub hook — returns unauthenticated state.
- * Will be replaced when auth is set up.
- */
+import { usePrivy } from "@privy-io/react-auth";
+
 export function useCurrentUser() {
+  const { ready, authenticated, user, login, logout } = usePrivy();
+
   return {
-    userId: null as string | null,
-    authenticated: false,
-    loading: false,
-    user: null,
-    login: () => {},
-    logout: () => {},
+    userId: user?.id || null,
+    authenticated,
+    loading: !ready,
+    user,
+    login,
+    logout,
   };
 }

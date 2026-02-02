@@ -166,7 +166,11 @@ export default function KeywordOverviewPage() {
         </Card>
       </div>
 
-      {warning && <AlertBanner variant="warning" message={warning} />}
+      {warning && (
+        <div className="mx-auto max-w-3xl">
+          <AlertBanner variant="warning" message={warning} />
+        </div>
+      )}
 
       {loading && (
         <>
@@ -246,7 +250,7 @@ export default function KeywordOverviewPage() {
 
       {/* Show errors when no results and not loading */}
       {!loading && results.length === 0 && errors.size > 0 && (
-        <div className="space-y-2">
+        <div className="mx-auto max-w-3xl space-y-2">
           {Array.from(errors.entries()).map(([kw, msg]) => (
             <AlertBanner key={kw} variant="error" message={`${kw}: ${msg}`} />
           ))}

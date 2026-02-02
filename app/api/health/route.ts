@@ -1,22 +1,11 @@
 import { NextResponse } from "next/server";
-import { hasCredentials } from "@/lib/dataforseo-server";
-
 /**
  * GET /api/health
  * Public health check endpoint.
- * Reports DataForSEO credential status and basic connectivity.
+ * Reports minimal health status.
  */
 export async function GET() {
-  const checks: Record<string, unknown> = {
-    status: "ok",
-    timestamp: new Date().toISOString(),
-    dataforseo: {
-      credentialsConfigured: hasCredentials(),
-    },
-    database: {
-      configured: !!process.env.DATABASE_URL,
-    },
-  };
+  let status: "ok" | "degraded" = "ok";
 
   if (process.env.DATABASE_URL) {
     try {
@@ -24,25 +13,16 @@ export async function GET() {
       const { apiCache } = await import("@/db/schema");
       if (db) {
         await db.select().from(apiCache).limit(1);
-        checks.database = { ...(checks.database as object), connected: true };
       } else {
-        checks.database = { ...(checks.database as object), connected: false };
-        checks.status = "degraded";
+        status = "degraded";
       }
     } catch {
-      checks.database = { ...(checks.database as object), connected: false };
-      checks.status = "degraded";
+      status = "degraded";
     }
+  } else {
+    status = "degraded";
   }
 
-  if (!hasCredentials()) {
-    checks.status = "degraded";
-    checks.dataforseo = {
-      ...(checks.dataforseo as object),
-      note: "Using mock data — DataForSEO credentials not configured",
-    };
-  }
-
-  const statusCode = checks.status === "ok" ? 200 : 503;
-  return NextResponse.json(checks, { status: statusCode });
+  const statusCode = status === "ok" ? 200 : 503;
+  return NextResponse.json({ status }, { status: statusCode });
 }

@@ -41,7 +41,7 @@ export function useFolders(userId?: string | null) {
     if (!userId) return;
     try {
       setLoading(true);
-      const apiFolders = await fetchFolders(userId);
+      const apiFolders = await fetchFolders();
       // Convert to KeywordFolder shape (keywords empty at list level)
       setFolders(
         apiFolders.map((f) => ({
@@ -112,7 +112,7 @@ export function useFolders(userId?: string | null) {
   const createFolder = useCallback(
     async (name: string) => {
       if (isDb && userId) {
-        const created = await createFolderApi(userId, name);
+        const created = await createFolderApi(name);
         await refreshDb();
         return {
           id: created.id,

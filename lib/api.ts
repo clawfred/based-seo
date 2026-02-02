@@ -2,6 +2,8 @@ import type { KeywordMetrics, SerpResult, KeywordIdea } from "./types";
 import { x402Fetch } from "./x402-client";
 import { getAccount, getWalletClient } from "wagmi/actions";
 import type { Config } from "wagmi";
+import { balanceEvents } from "./balance-events";
+import "./window-types";
 
 // Set by <ConfigCapture /> in providers.tsx
 let _wagmiConfig: Config | null = null;
@@ -20,9 +22,18 @@ async function apiFetch<T>(
   body: Record<string, unknown>,
   extraHeaders?: Record<string, string>,
 ): Promise<ApiResponse<T>> {
+  const token = await window.__privyGetAccessToken?.();
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    ...(extraHeaders ?? {}),
+  };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
   const res = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json", ...(extraHeaders ?? {}) },
+    headers,
     body: JSON.stringify(body),
   });
 
@@ -51,6 +62,7 @@ async function apiFetch<T>(
     }
 
     const json = await paidRes.json();
+    balanceEvents.emit();
     return json as ApiResponse<T>;
   }
 

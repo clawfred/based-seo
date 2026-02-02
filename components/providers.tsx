@@ -6,6 +6,8 @@ import { createConfig, http, WagmiProvider, useConfig } from "wagmi";
 import { coinbaseWallet, injected } from "wagmi/connectors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { OnchainKitProvider } from "@coinbase/onchainkit";
+import { PrivyProvider, usePrivy } from "@privy-io/react-auth";
+import { WagmiProvider as PrivyWagmiProvider } from "@privy-io/wagmi";
 import { ThemeProvider } from "@/components/theme-provider";
 import { setWagmiConfig } from "@/lib/api";
 
@@ -16,6 +18,18 @@ function ConfigCapture() {
   useEffect(() => {
     setWagmiConfig(config);
   }, [config]);
+  return null;
+}
+
+function PrivyTokenSetup() {
+  const { getAccessToken } = usePrivy();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      (window as any).__privyGetAccessToken = getAccessToken;
+    }
+  }, [getAccessToken]);
+
   return null;
 }
 
@@ -37,31 +51,76 @@ export function Providers({ children }: { children: React.ReactNode }) {
     [],
   );
 
-  return (
-    <WagmiProvider config={wagmiConfig} reconnectOnMount={false}>
-      <QueryClientProvider client={queryClient}>
-        <OnchainKitProvider
-          apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
-          chain={base}
-          config={{
-            appearance: {
-              mode: "auto",
-              name: "Based SEO",
-            },
-            wallet: { display: "modal" },
-          }}
-        >
-          <ConfigCapture />
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+  const privyAppId = process.env.NEXT_PUBLIC_PRIVY_APP_ID;
+
+  if (!privyAppId) {
+    return (
+      <WagmiProvider config={wagmiConfig} reconnectOnMount={false}>
+        <QueryClientProvider client={queryClient}>
+          <OnchainKitProvider
+            apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+            chain={base}
+            config={{
+              appearance: {
+                mode: "auto",
+                name: "Based SEO",
+              },
+              wallet: { display: "modal" },
+            }}
           >
-            {children}
-          </ThemeProvider>
-        </OnchainKitProvider>
+            <ConfigCapture />
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </OnchainKitProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
+    );
+  }
+
+  return (
+    <PrivyProvider
+      appId={privyAppId}
+      config={{
+        loginMethods: ["wallet", "email", "twitter", "google", "farcaster"],
+        appearance: {
+          theme: "light",
+          accentColor: "#676FFF",
+          logo: "/logo.png",
+        },
+      }}
+    >
+      <QueryClientProvider client={queryClient}>
+        <PrivyWagmiProvider config={wagmiConfig}>
+          <OnchainKitProvider
+            apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+            chain={base}
+            config={{
+              appearance: {
+                mode: "auto",
+                name: "Based SEO",
+              },
+              wallet: { display: "modal" },
+            }}
+          >
+            <ConfigCapture />
+            <PrivyTokenSetup />
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </OnchainKitProvider>
+        </PrivyWagmiProvider>
       </QueryClientProvider>
-    </WagmiProvider>
+    </PrivyProvider>
   );
 }

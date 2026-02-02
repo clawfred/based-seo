@@ -32,16 +32,26 @@ export function usePreferences(userId?: string | null) {
   // Fetch from DB on auth
   useEffect(() => {
     if (!userId) return;
-    fetch(`/api/users/preferences?userId=${encodeURIComponent(userId)}`)
-      .then((r) => r.json())
-      .then((res) => {
+
+    (async () => {
+      try {
+        const token = await (window as any).__privyGetAccessToken?.();
+        const headers: Record<string, string> = {};
+        if (token) headers.Authorization = `Bearer ${token}`;
+
+        const r = await fetch(`/api/users/preferences`, {
+          headers,
+        });
+        const res = await r.json();
         if (res.data) {
           setPreferences(res.data);
-          setLocalPrefs(res.data); // sync local cache
+          setLocalPrefs(res.data);
         }
-      })
-      .catch(() => {})
-      .finally(() => setLoaded(true));
+      } catch {
+      } finally {
+        setLoaded(true);
+      }
+    })();
   }, [userId]);
 
   const updatePreferences = useCallback(
@@ -51,11 +61,17 @@ export function usePreferences(userId?: string | null) {
       setLocalPrefs(merged);
 
       if (isDb && userId) {
-        fetch("/api/users/preferences", {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId, preferences: patch }),
-        }).catch(() => {});
+        try {
+          const token = await (window as any).__privyGetAccessToken?.();
+          const headers: Record<string, string> = { "Content-Type": "application/json" };
+          if (token) headers.Authorization = `Bearer ${token}`;
+
+          await fetch("/api/users/preferences", {
+            method: "PATCH",
+            headers,
+            body: JSON.stringify({ preferences: patch }),
+          });
+        } catch {}
       }
     },
     [preferences, isDb, userId],

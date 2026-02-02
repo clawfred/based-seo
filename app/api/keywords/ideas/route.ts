@@ -30,7 +30,7 @@ function mapIntent(raw: string | undefined): string {
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export async function POST(request: NextRequest) {
-  const rateLimitResponse = checkRateLimit(request);
+  const rateLimitResponse = await checkRateLimit(request);
   if (rateLimitResponse) return rateLimitResponse;
 
   const pay = await requireX402Payment(request);
@@ -41,6 +41,10 @@ export async function POST(request: NextRequest) {
 
     if (!keyword || typeof keyword !== "string") {
       return NextResponse.json({ error: "keyword is required" }, { status: 400 });
+    }
+
+    if (keyword.trim().length > 1000) {
+      return NextResponse.json({ error: "keyword is too long" }, { status: 400 });
     }
 
     if (!hasCredentials()) {
@@ -135,9 +139,6 @@ export async function POST(request: NextRequest) {
     return res;
   } catch (err: unknown) {
     console.error("Keyword ideas API error:", err);
-    return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Internal server error" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { Search, Sparkles, FolderOpen, Settings, ChevronRight } from "lucide-react";
+import { XIcon } from "@/components/icons/x-icon";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -198,7 +199,7 @@ export function ApplicationShell({ className, children }: ApplicationShellProps)
     >
       {/* Navbar: full width at top */}
       <header
-        className="flex h-[var(--navbar-height)] w-full shrink-0 items-center justify-between border-b border-border/80 bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/80 md:px-6"
+        className="sticky top-0 z-50 flex h-[var(--navbar-height)] w-full shrink-0 items-center justify-between border-b border-border/80 bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/80 md:px-6"
         role="banner"
       >
         <div className="flex items-center gap-3">
@@ -228,6 +229,15 @@ export function ApplicationShell({ className, children }: ApplicationShellProps)
         <div className="flex items-center gap-2 md:gap-3">
           <ConnectWallet />
           <div className="hidden h-6 w-px bg-border md:block" aria-hidden />
+          <Link
+            href="https://x.com/openclawfred"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            aria-label="Follow us on X"
+          >
+            <XIcon className="size-[18px]" />
+          </Link>
           <ThemeToggle />
         </div>
       </header>

@@ -1,30 +1,5 @@
-/**
- * Simple in-memory rate limiter using a sliding window.
- * Suitable for serverless (Vercel) with the caveat that each
- * instance has its own window (acceptable for basic abuse protection).
- */
-
-interface RateLimitEntry {
-  timestamps: number[];
-}
-
-const store = new Map<string, RateLimitEntry>();
-
-// Clean up stale entries every 5 minutes
-const CLEANUP_INTERVAL = 5 * 60 * 1000;
-let lastCleanup = Date.now();
-
-function cleanup(windowMs: number) {
-  const now = Date.now();
-  if (now - lastCleanup < CLEANUP_INTERVAL) return;
-  lastCleanup = now;
-
-  const cutoff = now - windowMs;
-  for (const [key, entry] of store.entries()) {
-    entry.timestamps = entry.timestamps.filter((t) => t > cutoff);
-    if (entry.timestamps.length === 0) store.delete(key);
-  }
-}
+import { Redis } from "@upstash/redis";
+import { Ratelimit } from "@upstash/ratelimit";
 
 export interface RateLimitResult {
   allowed: boolean;
@@ -32,29 +7,49 @@ export interface RateLimitResult {
   resetMs: number;
 }
 
-/**
- * Check and consume a rate limit token.
- * @param key - Unique identifier (e.g., IP address)
- * @param maxRequests - Max requests per window
- * @param windowMs - Window size in milliseconds (default: 60s)
- */
-export function rateLimit(
-  key: string,
-  maxRequests: number = 20,
-  windowMs: number = 60_000,
-): RateLimitResult {
-  cleanup(windowMs);
+let redis: Redis | null = null;
+let rateLimiter: Ratelimit | null = null;
 
+function getRateLimiter(): Ratelimit | null {
+  if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+    return null;
+  }
+
+  if (!redis) {
+    redis = new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN,
+    });
+  }
+
+  if (!rateLimiter) {
+    rateLimiter = new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(30, "1 m"),
+      analytics: true,
+      prefix: "@based-seo/ratelimit",
+    });
+  }
+
+  return rateLimiter;
+}
+
+interface InMemoryEntry {
+  timestamps: number[];
+}
+
+const inMemoryStore = new Map<string, InMemoryEntry>();
+
+function inMemoryRateLimit(key: string, maxRequests: number, windowMs: number): RateLimitResult {
   const now = Date.now();
   const cutoff = now - windowMs;
 
-  let entry = store.get(key);
+  let entry = inMemoryStore.get(key);
   if (!entry) {
     entry = { timestamps: [] };
-    store.set(key, entry);
+    inMemoryStore.set(key, entry);
   }
 
-  // Remove expired timestamps
   entry.timestamps = entry.timestamps.filter((t) => t > cutoff);
 
   if (entry.timestamps.length >= maxRequests) {
@@ -73,4 +68,29 @@ export function rateLimit(
     remaining: maxRequests - entry.timestamps.length,
     resetMs: windowMs,
   };
+}
+
+export async function rateLimit(
+  key: string,
+  maxRequests: number = 20,
+  windowMs: number = 60_000,
+): Promise<RateLimitResult> {
+  const limiter = getRateLimiter();
+
+  if (!limiter) {
+    return inMemoryRateLimit(key, maxRequests, windowMs);
+  }
+
+  try {
+    const { success, limit, remaining, reset } = await limiter.limit(key);
+
+    return {
+      allowed: success,
+      remaining: remaining,
+      resetMs: reset - Date.now(),
+    };
+  } catch (error) {
+    console.error("Redis rate limit error, falling back to in-memory:", error);
+    return inMemoryRateLimit(key, maxRequests, windowMs);
+  }
 }

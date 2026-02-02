@@ -1,17 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit } from "./rate-limit";
 
-/**
- * Apply rate limiting to a request.
- * Returns a 429 response if the limit is exceeded, or null if allowed.
- *
- * Limit: 30 requests/minute per IP
- */
-export function checkRateLimit(request: NextRequest): NextResponse | null {
+export async function checkRateLimit(request: NextRequest): Promise<NextResponse | null> {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
   const maxRequests = 30;
-  const result = rateLimit(`api:${ip}`, maxRequests, 60_000);
+  const result = await rateLimit(`api:${ip}`, maxRequests, 60_000);
 
   if (!result.allowed) {
     return NextResponse.json(
