@@ -144,11 +144,11 @@ export default function KeywordOverviewPage() {
                   Search
                 </Button>
               </div>
-              {(chips.length > 0 || inputValue.trim()) && (
-                <p className="text-xs text-muted-foreground">
-                  Cost: ${((chips.length + (inputValue.trim() ? 1 : 0)) * 0.03).toFixed(2)} USDC
-                </p>
-              )}
+              <p
+                className={`text-xs text-muted-foreground ${!(chips.length > 0 || inputValue.trim()) ? "invisible" : ""}`}
+              >
+                Cost: ${((chips.length + (inputValue.trim() ? 1 : 0)) * 0.03).toFixed(2)} USDC
+              </p>
             </div>
 
             <p className="text-xs text-muted-foreground">

@@ -136,9 +136,11 @@ export default function KeywordFinderPage() {
                     Find Keywords
                   </Button>
                 </div>
-                {seedKeyword.trim() && (
-                  <p className="text-xs text-muted-foreground">Cost: $0.025 USDC</p>
-                )}
+                <p
+                  className={`text-xs text-muted-foreground ${!seedKeyword.trim() ? "invisible" : ""}`}
+                >
+                  Cost: $0.025 USDC
+                </p>
               </div>
             </CardContent>
           </Card>
