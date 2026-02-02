@@ -77,3 +77,21 @@ export const apiCache = pgTable("api_cache", {
   fetchedAt: timestamp("fetched_at", { withTimezone: true }).notNull().defaultNow(),
   expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
 });
+
+/* ------------------------------------------------------------------ */
+/*  Payment Transactions (x402)                                        */
+/* ------------------------------------------------------------------ */
+
+export const paymentTransactions = pgTable("payment_transactions", {
+  id: text("id").primaryKey(), // nanoid
+  userId: text("user_id").references(() => users.id, { onDelete: "set null" }),
+  payerAddress: text("payer_address").notNull(),
+  transactionHash: text("transaction_hash").notNull(),
+  network: text("network").notNull(),
+  endpoint: text("endpoint").notNull(),
+  amount: text("amount").notNull(),
+  asset: text("asset").notNull(),
+  status: text("status").notNull().default("success"),
+  settledAt: timestamp("settled_at", { withTimezone: true }).notNull().defaultNow(),
+  metadata: jsonb("metadata").$type<Record<string, unknown>>(),
+});
