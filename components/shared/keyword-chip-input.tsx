@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import { X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -15,7 +15,7 @@ interface KeywordChipInputProps {
   placeholder?: string;
 }
 
-export function KeywordChipInput({
+export const KeywordChipInput = memo(function KeywordChipInput({
   chips,
   onChipsChange,
   inputValue,
@@ -125,4 +125,4 @@ export function KeywordChipInput({
       />
     </div>
   );
-}
+});

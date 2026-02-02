@@ -182,6 +182,7 @@ export default function KeywordOverviewPage() {
       {loading && (
         <>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {/* Index as key is acceptable here - skeleton items are static and never reorder */}
             {Array.from({ length: 4 }).map((_, i) => (
               <Card key={i}>
                 <CardHeader className="pb-2">
@@ -199,6 +200,7 @@ export default function KeywordOverviewPage() {
               <Skeleton className="h-5 w-32" />
             </CardHeader>
             <CardContent className="space-y-3">
+              {/* Index as key is acceptable here - skeleton items are static and never reorder */}
               {Array.from({ length: 5 }).map((_, i) => (
                 <Skeleton key={i} className="h-10 w-full" />
               ))}

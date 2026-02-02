@@ -1,13 +1,14 @@
+import { memo, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface TrendChartProps {
   trend: number[];
 }
 
-export function TrendChart({ trend }: TrendChartProps) {
+export const TrendChart = memo(function TrendChart({ trend }: TrendChartProps) {
   if (trend.length === 0) return null;
 
-  const maxValue = Math.max(...trend);
+  const maxValue = useMemo(() => Math.max(...trend), [trend]);
 
   return (
     <Card>
@@ -21,7 +22,7 @@ export function TrendChart({ trend }: TrendChartProps) {
             const height = maxValue > 0 ? (value / maxValue) * 100 : 0;
             return (
               <div
-                key={index}
+                key={`month-${index}`}
                 className="flex-1 bg-indigo-600 rounded-t"
                 style={{ height: `${height}%` }}
                 title={value.toLocaleString()}
@@ -32,4 +33,4 @@ export function TrendChart({ trend }: TrendChartProps) {
       </CardContent>
     </Card>
   );
-}
+});

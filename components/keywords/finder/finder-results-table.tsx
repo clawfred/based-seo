@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { FolderPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -35,7 +36,7 @@ interface FinderResultsTableProps {
   onOpenSaveDialog: () => void;
 }
 
-function SortableHeader({
+const SortableHeader = memo(function SortableHeader({
   field,
   sortField,
   sortDirection,
@@ -63,9 +64,9 @@ function SortableHeader({
       </div>
     </TableHead>
   );
-}
+});
 
-export function FinderResultsTable({
+export const FinderResultsTable = memo(function FinderResultsTable({
   paginatedKeywords,
   filteredCount,
   selectedKeywords,
@@ -192,4 +193,4 @@ export function FinderResultsTable({
       </CardContent>
     </Card>
   );
-}
+});
