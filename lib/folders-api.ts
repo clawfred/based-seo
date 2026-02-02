@@ -1,6 +1,5 @@
-/** Client-side wrappers for the folder API routes. */
-
 import type { KeywordData } from "@/lib/types";
+import { getAuthToken } from "@/lib/api";
 
 export interface ApiFolderWithCount {
   id: string;
@@ -31,7 +30,7 @@ export interface ApiFolderDetail {
 }
 
 async function apiFetch<T>(url: string, init?: RequestInit): Promise<T> {
-  const token = await (window as any).__privyGetAccessToken?.();
+  const token = await getAuthToken();
   const headers = new Headers(init?.headers);
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);

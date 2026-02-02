@@ -3,12 +3,24 @@ import { x402Fetch } from "./x402-client";
 import { getAccount, getWalletClient } from "wagmi/actions";
 import type { Config } from "wagmi";
 import { balanceEvents } from "./balance-events";
-import "./window-types";
 
-// Set by <ConfigCapture /> in providers.tsx
 let _wagmiConfig: Config | null = null;
 export function setWagmiConfig(config: Config) {
   _wagmiConfig = config;
+}
+
+let _authTokenGetter: (() => Promise<string | null>) | null = null;
+export function setAuthTokenGetter(getter: () => Promise<string | null>) {
+  _authTokenGetter = getter;
+}
+export function getAuthToken(): Promise<string | null> | null {
+  return _authTokenGetter?.() ?? null;
+}
+
+let _privyWalletAddress: `0x${string}` | null = null;
+export function setPrivyWalletAddress(address: `0x${string}`) {
+  _privyWalletAddress = address;
+  console.log("[API] Privy wallet address set:", address);
 }
 
 interface ApiResponse<T> {
@@ -22,7 +34,7 @@ async function apiFetch<T>(
   body: Record<string, unknown>,
   extraHeaders?: Record<string, string>,
 ): Promise<ApiResponse<T>> {
-  const token = await window.__privyGetAccessToken?.();
+  const token = await _authTokenGetter?.();
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
     ...(extraHeaders ?? {}),
@@ -43,11 +55,21 @@ async function apiFetch<T>(
     }
 
     const account = getAccount(_wagmiConfig);
+    console.log("[Payment] Active connector:", account.connector?.name);
+    console.log("[Payment] Connected address:", account.address);
+    console.log("[Payment] Connection status:", account.isConnected);
+
     if (!account.isConnected) {
       throw new Error("Payment required — connect wallet to continue");
     }
 
-    const walletClient = await getWalletClient(_wagmiConfig);
+    const walletClient = await getWalletClient(_wagmiConfig, {
+      account: _privyWalletAddress || account.address,
+    });
+
+    console.log("[Payment] WalletClient address:", walletClient?.account.address);
+    console.log("[Payment] Using Privy wallet:", _privyWalletAddress);
+
     const paidRes = await x402Fetch(url, body, walletClient, extraHeaders);
 
     if (!paidRes.ok) {

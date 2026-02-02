@@ -1,4 +1,4 @@
-/** Fire-and-forget search history recording. */
+import { getAuthToken } from "@/lib/api";
 
 export async function recordSearch(
   userId: string | null,
@@ -9,7 +9,7 @@ export async function recordSearch(
   if (!userId) return;
 
   try {
-    const token = await (window as any).__privyGetAccessToken?.();
+    const token = await getAuthToken();
     const headers: Record<string, string> = { "Content-Type": "application/json" };
     if (token) headers.Authorization = `Bearer ${token}`;
 

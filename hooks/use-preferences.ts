@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import type { UserPreferences } from "@/db/schema";
+import { useAuthToken } from "@/lib/auth-context";
 
 const LOCAL_PREFS_KEY = "betterseo_preferences";
 
@@ -26,6 +27,7 @@ function setLocalPrefs(prefs: UserPreferences) {
  */
 export function usePreferences(userId?: string | null) {
   const isDb = !!userId;
+  const getToken = useAuthToken();
   const [preferences, setPreferences] = useState<UserPreferences>(getLocalPrefs);
   const [loaded, setLoaded] = useState(!isDb); // locals are instant
 
@@ -35,7 +37,7 @@ export function usePreferences(userId?: string | null) {
 
     (async () => {
       try {
-        const token = await (window as any).__privyGetAccessToken?.();
+        const token = await getToken();
         const headers: Record<string, string> = {};
         if (token) headers.Authorization = `Bearer ${token}`;
 
@@ -52,7 +54,7 @@ export function usePreferences(userId?: string | null) {
         setLoaded(true);
       }
     })();
-  }, [userId]);
+  }, [userId, getToken]);
 
   const updatePreferences = useCallback(
     async (patch: Partial<UserPreferences>) => {
@@ -62,7 +64,7 @@ export function usePreferences(userId?: string | null) {
 
       if (isDb && userId) {
         try {
-          const token = await (window as any).__privyGetAccessToken?.();
+          const token = await getToken();
           const headers: Record<string, string> = { "Content-Type": "application/json" };
           if (token) headers.Authorization = `Bearer ${token}`;
 
@@ -74,7 +76,7 @@ export function usePreferences(userId?: string | null) {
         } catch {}
       }
     },
-    [preferences, isDb, userId],
+    [preferences, isDb, userId, getToken],
   );
 
   return { preferences, updatePreferences, loaded };
