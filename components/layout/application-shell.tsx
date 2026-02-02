@@ -1,6 +1,8 @@
 "use client";
 
 import { Search, Sparkles, FolderOpen, Settings, ChevronRight } from "lucide-react";
+import { XIcon } from "@/components/icons/x-icon";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
@@ -197,7 +199,7 @@ export function ApplicationShell({ className, children }: ApplicationShellProps)
     >
       {/* Navbar: full width at top */}
       <header
-        className="flex h-[var(--navbar-height)] w-full shrink-0 items-center justify-between border-b border-border/80 bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/80 md:px-6"
+        className="sticky top-0 z-50 flex h-[var(--navbar-height)] w-full shrink-0 items-center justify-between border-b border-border/80 bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/80 md:px-6"
         role="banner"
       >
         <div className="flex items-center gap-3">
@@ -205,9 +207,14 @@ export function ApplicationShell({ className, children }: ApplicationShellProps)
             href="/"
             className="flex items-center gap-2.5 rounded-md transition-opacity hover:opacity-90"
           >
-            <div className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
-              <Search className="size-4" />
-            </div>
+            <Image
+              src="/logo.png"
+              alt="Based SEO"
+              width={36}
+              height={36}
+              className="size-9 rounded-lg object-contain"
+              priority
+            />
             <div className="flex flex-col items-start">
               <span className="text-sm font-semibold leading-tight text-foreground md:text-base">
                 Based SEO
@@ -222,6 +229,15 @@ export function ApplicationShell({ className, children }: ApplicationShellProps)
         <div className="flex items-center gap-2 md:gap-3">
           <ConnectWallet />
           <div className="hidden h-6 w-px bg-border md:block" aria-hidden />
+          <Link
+            href="https://x.com/openclawfred"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            aria-label="Follow us on X"
+          >
+            <XIcon className="size-[18px]" />
+          </Link>
           <ThemeToggle />
         </div>
       </header>

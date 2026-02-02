@@ -202,3 +202,95 @@
     letter-spacing: var(--tracking-normal);
   }
 }
+
+@layer components {
+  /* Glass Button Styles */
+  .glass-button-wrap {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glass-button {
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      oklch(from var(--primary) l c h / 0.15) 0%,
+      oklch(from var(--primary) l c h / 0.08) 100%
+    );
+    border: 1px solid oklch(from var(--primary) l c h / 0.2);
+    box-shadow:
+      0 8px 32px 0 oklch(from var(--primary) l c h / 0.15),
+      inset 0 1px 0 0 oklch(from var(--foreground) l c h / 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .glass-button:hover {
+    background: linear-gradient(
+      135deg,
+      oklch(from var(--primary) l c h / 0.25) 0%,
+      oklch(from var(--primary) l c h / 0.15) 100%
+    );
+    border-color: oklch(from var(--primary) l c h / 0.3);
+    transform: translateY(-1px);
+  }
+
+  .glass-button:active {
+    transform: translateY(0);
+    box-shadow:
+      0 4px 16px 0 oklch(from var(--primary) l c h / 0.2),
+      inset 0 1px 0 0 oklch(from var(--foreground) l c h / 0.1);
+  }
+
+  .glass-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .glass-button-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle at center,
+      oklch(from var(--primary) l c h / 0.25) 0%,
+      transparent 70%
+    );
+    filter: blur(16px);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .glass-button-wrap:hover .glass-button-shadow {
+    opacity: 1;
+  }
+
+  .glass-button-text {
+    color: var(--foreground);
+    font-weight: 500;
+  }
+
+  .dark .glass-button {
+    background: linear-gradient(
+      135deg,
+      oklch(from var(--primary) l c h / 0.2) 0%,
+      oklch(from var(--primary) l c h / 0.12) 100%
+    );
+    border-color: oklch(from var(--primary) l c h / 0.3);
+    box-shadow:
+      0 8px 32px 0 oklch(from var(--primary) l c h / 0.25),
+      inset 0 1px 0 0 oklch(from var(--foreground) l c h / 0.15);
+  }
+
+  .dark .glass-button:hover {
+    background: linear-gradient(
+      135deg,
+      oklch(from var(--primary) l c h / 0.3) 0%,
+      oklch(from var(--primary) l c h / 0.2) 100%
+    );
+    border-color: oklch(from var(--primary) l c h / 0.4);
+  }
+}

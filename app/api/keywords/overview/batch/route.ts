@@ -11,7 +11,7 @@ import { requireX402Payment } from "@/lib/x402-guard";
 const MAX_KEYWORDS = 25;
 
 export async function POST(request: NextRequest) {
-  const rateLimitResponse = checkRateLimit(request);
+  const rateLimitResponse = await checkRateLimit(request);
   if (rateLimitResponse) return rateLimitResponse;
 
   try {
@@ -23,11 +23,30 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "keywords is required" }, { status: 400 });
     }
 
+    const headerCount = request.headers.get("x-keyword-count");
+    const parsedHeaderCount = headerCount ? Number.parseInt(headerCount, 10) : NaN;
+    if (!Number.isFinite(parsedHeaderCount) || parsedHeaderCount <= 0) {
+      return NextResponse.json({ error: "x-keyword-count header is required" }, { status: 400 });
+    }
+
+    if (parsedHeaderCount !== keywords.length) {
+      return NextResponse.json({ error: "keyword count mismatch" }, { status: 400 });
+    }
+
     if (keywords.length > MAX_KEYWORDS) {
       return NextResponse.json(
         { error: `Too many keywords (max ${MAX_KEYWORDS})` },
         { status: 400 },
       );
+    }
+
+    for (const keyword of keywords) {
+      if (typeof keyword !== "string") {
+        return NextResponse.json({ error: "keywords must be strings" }, { status: 400 });
+      }
+      if (keyword.trim().length > 1000) {
+        return NextResponse.json({ error: "keyword is too long" }, { status: 400 });
+      }
     }
 
     // Require payment once for the entire batch.
@@ -187,9 +206,6 @@ export async function POST(request: NextRequest) {
     return res;
   } catch (err: unknown) {
     console.error("Keyword overview batch API error:", err);
-    return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Internal server error" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

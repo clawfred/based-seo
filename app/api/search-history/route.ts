@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { searchHistory } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { newId } from "@/lib/id";
+import { requireAuth } from "@/lib/auth";
 
 /**
  * GET /api/search-history?userId=xxx&limit=20
@@ -13,12 +14,22 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Database not configured" }, { status: 503 });
   }
 
-  const userId = request.nextUrl.searchParams.get("userId");
-  const limit = Math.min(parseInt(request.nextUrl.searchParams.get("limit") || "20"), 100);
-
-  if (!userId) {
-    return NextResponse.json({ error: "userId is required" }, { status: 400 });
+  let userId: string;
+  try {
+    userId = await requireAuth(request);
+  } catch {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+
+  const limitRaw = request.nextUrl.searchParams.get("limit") || "20";
+  const parsedLimit = Number.parseInt(limitRaw, 10);
+  if (Number.isNaN(parsedLimit) || parsedLimit <= 0) {
+    return NextResponse.json({ error: "limit must be a positive number" }, { status: 400 });
+  }
+  if (parsedLimit > 100) {
+    return NextResponse.json({ error: "limit too large" }, { status: 400 });
+  }
+  const limit = parsedLimit;
 
   try {
     const history = await db
@@ -31,7 +42,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ data: history });
   } catch (err) {
     console.error("Search history GET error:", err);
-    return NextResponse.json({ error: "Failed to fetch search history" }, { status: 500 });
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
@@ -45,17 +56,32 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Database not configured" }, { status: 503 });
   }
 
+  let userId: string;
   try {
-    const { userId, query, tool = "overview", locationCode } = await request.json();
+    userId = await requireAuth(request);
+  } catch {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-    if (!userId || !query) {
-      return NextResponse.json({ error: "userId and query are required" }, { status: 400 });
+  try {
+    const { query, tool = "overview", locationCode } = await request.json();
+
+    if (!query || typeof query !== "string") {
+      return NextResponse.json({ error: "query is required" }, { status: 400 });
+    }
+
+    const trimmedQuery = query.trim();
+    if (!trimmedQuery) {
+      return NextResponse.json({ error: "query is required" }, { status: 400 });
+    }
+    if (trimmedQuery.length > 1000) {
+      return NextResponse.json({ error: "query is too long" }, { status: 400 });
     }
 
     await db.insert(searchHistory).values({
       id: newId(),
       userId,
-      query: query.trim(),
+      query: trimmedQuery,
       tool,
       locationCode: locationCode ?? null,
       searchedAt: new Date(),
@@ -64,6 +90,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Search history POST error:", err);
-    return NextResponse.json({ error: "Failed to record search" }, { status: 500 });
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

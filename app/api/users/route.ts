@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { requireAuth } from "@/lib/auth";
 
 /**
  * POST /api/users
@@ -13,19 +14,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Database not configured" }, { status: 503 });
   }
 
+  let userId: string;
   try {
-    const { id, email, walletAddress } = await request.json();
+    userId = await requireAuth(request);
+  } catch {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-    if (!id) {
-      return NextResponse.json({ error: "id is required" }, { status: 400 });
-    }
+  try {
+    const { email, walletAddress } = await request.json();
 
     const now = new Date();
 
     await db
       .insert(users)
       .values({
-        id,
+        id: userId,
         email: email ?? null,
         walletAddress: walletAddress ?? null,
         createdAt: now,
@@ -40,11 +44,11 @@ export async function POST(request: NextRequest) {
         },
       });
 
-    const rows = await db.select().from(users).where(eq(users.id, id)).limit(1);
+    const rows = await db.select().from(users).where(eq(users.id, userId)).limit(1);
 
     return NextResponse.json({ data: rows[0] });
   } catch (err) {
     console.error("Users POST error:", err);
-    return NextResponse.json({ error: "Failed to upsert user" }, { status: 500 });
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

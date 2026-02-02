@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { folders, savedKeywords } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { newId } from "@/lib/id";
+import { requireAuth } from "@/lib/auth";
 
 /**
  * GET /api/folders?userId=xxx
@@ -13,9 +14,11 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Database not configured" }, { status: 503 });
   }
 
-  const userId = request.nextUrl.searchParams.get("userId");
-  if (!userId) {
-    return NextResponse.json({ error: "userId is required" }, { status: 400 });
+  let userId: string;
+  try {
+    userId = await requireAuth(request);
+  } catch {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
@@ -42,7 +45,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ data: result });
   } catch (err) {
     console.error("Folders GET error:", err);
-    return NextResponse.json({ error: "Failed to fetch folders" }, { status: 500 });
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
@@ -56,11 +59,23 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Database not configured" }, { status: 503 });
   }
 
+  let userId: string;
   try {
-    const { userId, name } = await request.json();
+    userId = await requireAuth(request);
+  } catch {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-    if (!userId || !name?.trim()) {
-      return NextResponse.json({ error: "userId and name are required" }, { status: 400 });
+  try {
+    const { name } = await request.json();
+    const trimmedName = typeof name === "string" ? name.trim() : "";
+
+    if (!trimmedName) {
+      return NextResponse.json({ error: "name is required" }, { status: 400 });
+    }
+
+    if (trimmedName.length > 100) {
+      return NextResponse.json({ error: "name is too long" }, { status: 400 });
     }
 
     const id = newId();
@@ -69,16 +84,16 @@ export async function POST(request: NextRequest) {
     await db.insert(folders).values({
       id,
       userId,
-      name: name.trim(),
+      name: trimmedName,
       createdAt: now,
       updatedAt: now,
     });
 
     return NextResponse.json({
-      data: { id, userId, name: name.trim(), createdAt: now, updatedAt: now, keywordCount: 0 },
+      data: { id, userId, name: trimmedName, createdAt: now, updatedAt: now, keywordCount: 0 },
     });
   } catch (err) {
     console.error("Folders POST error:", err);
-    return NextResponse.json({ error: "Failed to create folder" }, { status: 500 });
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
