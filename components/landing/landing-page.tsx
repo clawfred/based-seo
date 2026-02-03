@@ -39,7 +39,7 @@ const features = [
 const pricing = [
   {
     feature: "Keyword Overview",
-    cost: "$0.05",
+    cost: "$0.03",
     comparison: "SEMRUSH: $129.95/mo",
   },
   {
@@ -282,7 +282,7 @@ export function LandingPage() {
               <Separator className="my-1" />
               <div className="text-xs text-muted-foreground">
                 Example: 100 keyword lookups ={" "}
-                <span className="font-medium text-foreground">$5</span>. Traditional tools charge{" "}
+                <span className="font-medium text-foreground">$3</span>. Traditional tools charge{" "}
                 <span className="font-medium text-foreground">$99–$130/month</span> whether you use
                 it or not.
               </div>
