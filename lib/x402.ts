@@ -54,4 +54,16 @@ export const routes: RoutesConfig = {
     description: "Keyword ideas and suggestions",
     mimeType: "application/json",
   },
+
+  "/api/serp": {
+    accepts: {
+      scheme: "exact",
+      network: "eip155:8453", // Base mainnet
+      payTo: evmAddress,
+      price: "$0.002",
+      maxTimeoutSeconds: 3600,
+    },
+    description: "SERP analysis",
+    mimeType: "application/json",
+  },
 };

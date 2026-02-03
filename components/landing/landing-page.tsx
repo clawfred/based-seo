@@ -40,17 +40,14 @@ const pricing = [
   {
     feature: "Keyword Overview",
     cost: "$0.03",
-    comparison: "SEMRUSH: $129.95/mo",
   },
   {
     feature: "Keyword Ideas",
-    cost: "$0.05",
-    comparison: "Ahrefs: $99/mo",
+    cost: "$0.025",
   },
   {
     feature: "SERP Analysis",
     cost: "$0.002",
-    comparison: "Moz: $99/mo",
   },
 ] as const;
 
@@ -260,22 +257,20 @@ export function LandingPage() {
 
           <Card className="border-border/70 bg-background/60 p-4 shadow-sm backdrop-blur">
             <div className="grid gap-3">
-              <div className="grid grid-cols-[1fr_auto] gap-4 border-b border-border/60 pb-2 text-xs font-medium text-muted-foreground md:grid-cols-[1.4fr_0.4fr_1.2fr]">
+              <div className="grid grid-cols-[1fr_auto] gap-4 border-b border-border/60 pb-2 text-xs font-medium text-muted-foreground md:grid-cols-[1.4fr_0.6fr]">
                 <div>Feature</div>
                 <div className="text-right md:text-left">Cost / request</div>
-                <div className="hidden md:block">Typical pricing</div>
               </div>
 
               {pricing.map((row) => (
                 <div
                   key={row.feature}
-                  className="grid grid-cols-[1fr_auto] items-center gap-4 rounded-md px-1 py-2 text-sm md:grid-cols-[1.4fr_0.4fr_1.2fr]"
+                  className="grid grid-cols-[1fr_auto] items-center gap-4 rounded-md px-1 py-2 text-sm md:grid-cols-[1.4fr_0.6fr]"
                 >
                   <div className="font-medium">{row.feature}</div>
                   <div className={cn("text-right font-semibold md:text-left", "text-primary")}>
                     {row.cost}
                   </div>
-                  <div className="hidden text-muted-foreground md:block">{row.comparison}</div>
                 </div>
               ))}
 
@@ -283,8 +278,8 @@ export function LandingPage() {
               <div className="text-xs text-muted-foreground">
                 Example: 100 keyword lookups ={" "}
                 <span className="font-medium text-foreground">$3</span>. Traditional tools charge{" "}
-                <span className="font-medium text-foreground">$99–$130/month</span> whether you use
-                it or not.
+                <span className="font-medium text-foreground">$100+/month</span> whether you use it
+                or not.
               </div>
             </div>
           </Card>
