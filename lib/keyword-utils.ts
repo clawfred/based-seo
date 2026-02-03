@@ -16,12 +16,6 @@ export function getKDColor(kd: number): string {
   return "text-red-600 dark:text-red-400";
 }
 
-export function getKDProgressColor(kd: number): string {
-  if (kd < 33) return "bg-green-600";
-  if (kd < 66) return "bg-yellow-600";
-  return "bg-red-600";
-}
-
 export function getIntentColor(intent: string): string {
   return INTENT_COLORS[intent] || INTENT_COLORS.Informational;
 }

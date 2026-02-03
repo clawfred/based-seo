@@ -9,6 +9,7 @@ export function FinderSkeleton() {
         <Skeleton className="h-4 w-60" />
       </CardHeader>
       <CardContent className="space-y-3">
+        {/* Index as key is acceptable here - skeleton items are static and never reorder */}
         {Array.from({ length: 10 }).map((_, i) => (
           <div key={i} className="flex items-center gap-4">
             <Skeleton className="h-4 w-4" />

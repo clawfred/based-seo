@@ -117,31 +117,38 @@ export default function KeywordOverviewPage() {
               placeholder="Enter or paste keywords…"
             />
 
-            <div className="flex items-center justify-center gap-3">
-              <Select value={location} onValueChange={handleLocationChange}>
-                <SelectTrigger className="w-44">
-                  <SelectValue placeholder="Select location" />
-                </SelectTrigger>
-                <SelectContent>
-                  {locations.map((loc) => (
-                    <SelectItem key={loc.code} value={loc.code}>
-                      {loc.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Button
-                onClick={handleSearch}
-                className="gap-2"
-                disabled={loading || (chips.length === 0 && !inputValue.trim())}
+            <div className="flex flex-col items-center gap-3">
+              <div className="flex items-center gap-3">
+                <Select value={location} onValueChange={handleLocationChange}>
+                  <SelectTrigger className="w-44">
+                    <SelectValue placeholder="Select location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {locations.map((loc) => (
+                      <SelectItem key={loc.code} value={loc.code}>
+                        {loc.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Button
+                  onClick={handleSearch}
+                  className="gap-2"
+                  disabled={loading || (chips.length === 0 && !inputValue.trim())}
+                >
+                  {loading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Search className="h-4 w-4" />
+                  )}
+                  Search
+                </Button>
+              </div>
+              <p
+                className={`text-xs text-muted-foreground ${!(chips.length > 0 || inputValue.trim()) ? "invisible" : ""}`}
               >
-                {loading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Search className="h-4 w-4" />
-                )}
-                Search
-              </Button>
+                Cost: ${((chips.length + (inputValue.trim() ? 1 : 0)) * 0.03).toFixed(2)} USDC
+              </p>
             </div>
 
             <p className="text-xs text-muted-foreground">
@@ -175,6 +182,7 @@ export default function KeywordOverviewPage() {
       {loading && (
         <>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {/* Index as key is acceptable here - skeleton items are static and never reorder */}
             {Array.from({ length: 4 }).map((_, i) => (
               <Card key={i}>
                 <CardHeader className="pb-2">
@@ -192,6 +200,7 @@ export default function KeywordOverviewPage() {
               <Skeleton className="h-5 w-32" />
             </CardHeader>
             <CardContent className="space-y-3">
+              {/* Index as key is acceptable here - skeleton items are static and never reorder */}
               {Array.from({ length: 5 }).map((_, i) => (
                 <Skeleton key={i} className="h-10 w-full" />
               ))}

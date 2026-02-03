@@ -597,24 +597,3 @@ export const getKeywordIdeas = (keyword: string): KeywordIdea[] => {
 
   return [...variations, ...questions];
 };
-
-export const mockFolders: KeywordFolder[] = [
-  {
-    id: "1",
-    name: "E-commerce Keywords",
-    keywords: mockKeywords.slice(0, 8),
-    createdAt: new Date("2024-01-15"),
-  },
-  {
-    id: "2",
-    name: "Blog Content Ideas",
-    keywords: mockKeywords.slice(8, 15),
-    createdAt: new Date("2024-01-20"),
-  },
-  {
-    id: "3",
-    name: "Competitor Keywords",
-    keywords: mockKeywords.slice(15, 22),
-    createdAt: new Date("2024-01-25"),
-  },
-];

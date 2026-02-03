@@ -1,4 +1,4 @@
-export function toCsvValue(value: unknown): string {
+function toCsvValue(value: unknown): string {
   const s = value === null || value === undefined ? "" : String(value);
   // Escape double quotes by doubling them.
   const escaped = s.replace(/"/g, '""');

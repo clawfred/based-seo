@@ -5,8 +5,12 @@ import { cachedDataforseoFetch } from "@/lib/dataforseo-cached";
 import { hasCredentials } from "@/lib/dataforseo-server";
 import { getKeywordIdeas, getKeywordMetrics, getSerpResults } from "@/lib/mock-data";
 import { requireX402Payment } from "@/lib/x402-guard";
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import type {
+  DataForSEOResponse,
+  KeywordOverviewResult,
+  RelatedKeywordsResult,
+  SerpOrganicResult,
+} from "@/lib/dataforseo-types";
 
 export async function POST(request: NextRequest) {
   const rateLimitResponse = await checkRateLimit(request);
@@ -52,9 +56,10 @@ export async function POST(request: NextRequest) {
       ]),
     ]);
 
-    const overviewTask = (overviewRes as any).tasks?.[0] as any;
-    const ideasTask = (ideasRes as any).tasks?.[0] as any;
-    const serpTask = (serpRes as any).tasks?.[0] as any;
+    const overviewTask = (overviewRes as unknown as DataForSEOResponse<KeywordOverviewResult>)
+      .tasks?.[0];
+    const ideasTask = (ideasRes as unknown as DataForSEOResponse<RelatedKeywordsResult>).tasks?.[0];
+    const serpTask = (serpRes as unknown as DataForSEOResponse<SerpOrganicResult>).tasks?.[0];
 
     if (overviewTask?.status_code !== 20000) {
       return NextResponse.json(
@@ -63,7 +68,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const overviewItem = overviewTask.result?.[0]?.items?.[0] as any;
+    const overviewItem = overviewTask.result?.[0];
     if (!overviewItem) {
       return NextResponse.json({ error: "No overview data found" }, { status: 404 });
     }
@@ -100,7 +105,7 @@ export async function POST(request: NextRequest) {
 
     const ideas =
       ideasTask?.status_code === 20000
-        ? (ideasTask.result?.[0]?.items || []).slice(0, 50).map((idea: any) => ({
+        ? (ideasTask.result?.[0]?.items || []).slice(0, 50).map((idea) => ({
             keyword: idea.keyword_data?.keyword || "",
             volume: idea.keyword_data?.keyword_info?.search_volume || 0,
             kd: idea.keyword_data?.keyword_properties?.keyword_difficulty || 0,
@@ -111,14 +116,23 @@ export async function POST(request: NextRequest) {
     const serp =
       serpTask?.status_code === 20000
         ? (serpTask.result?.[0]?.items || [])
-            .filter((item: any) => item.type === "organic")
+            .filter((item) => item.type === "organic")
             .slice(0, 10)
-            .map((item: any, index: number) => ({
-              position: index + 1,
-              url: item.url || "",
-              title: item.title || "",
-              description: item.description || "",
-            }))
+            .map((item, index) => {
+              let domain = "";
+              try {
+                domain = item.url ? new URL(item.url).hostname.replace(/^www\./, "") : "";
+              } catch {
+                domain = "";
+              }
+              return {
+                position: index + 1,
+                url: item.url || "",
+                domain,
+                title: item.title || "",
+                description: item.description || "",
+              };
+            })
         : [];
 
     const res = NextResponse.json({

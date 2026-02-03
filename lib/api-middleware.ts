@@ -1,11 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit } from "./rate-limit";
+import { verifyAuth } from "./auth";
 
 export async function checkRateLimit(request: NextRequest): Promise<NextResponse | null> {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  // Try to get authenticated user first (user-based rate limiting)
+  let rateLimitKey = "anonymous";
+  let maxRequests = 30; // Lower limit for anonymous
 
-  const maxRequests = 30;
-  const result = await rateLimit(`api:${ip}`, maxRequests, 60_000);
+  const user = await verifyAuth(request);
+  if (user?.userId) {
+    rateLimitKey = `user:${user.userId}`;
+    maxRequests = 100; // Higher limit for authenticated users (not aggressive since it's paid)
+  } else {
+    // Fallback to IP-based for anonymous users
+    // Use cf-connecting-ip (Cloudflare) or x-real-ip if available, otherwise x-forwarded-for
+    const ip =
+      request.headers.get("cf-connecting-ip") ||
+      request.headers.get("x-real-ip") ||
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      "unknown";
+    rateLimitKey = `ip:${ip}`;
+  }
+
+  const result = await rateLimit(rateLimitKey, maxRequests, 60_000);
 
   if (!result.allowed) {
     return NextResponse.json(
@@ -18,7 +35,7 @@ export async function checkRateLimit(request: NextRequest): Promise<NextResponse
         headers: {
           "Retry-After": String(Math.ceil(result.resetMs / 1000)),
           "X-RateLimit-Limit": String(maxRequests),
-          "X-RateLimit-Remaining": "0",
+          "X-RateLimit-Remaining": String(result.remaining),
         },
       },
     );

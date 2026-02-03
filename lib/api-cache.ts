@@ -72,17 +72,3 @@ export async function setCachedResponse(
     return;
   }
 }
-
-/**
- * Purge expired cache entries. Call periodically or on-demand.
- */
-export async function purgeExpiredCache(): Promise<number> {
-  if (!db) return 0;
-
-  try {
-    await db.delete(apiCache).where(lt(apiCache.expiresAt, new Date()));
-    return 0;
-  } catch {
-    return 0;
-  }
-}

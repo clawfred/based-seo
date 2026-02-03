@@ -1,6 +1,5 @@
-/** Client-side wrappers for the folder API routes. */
-
 import type { KeywordData } from "@/lib/types";
+import { getAuthToken } from "@/lib/api";
 
 export interface ApiFolderWithCount {
   id: string;
@@ -31,7 +30,7 @@ export interface ApiFolderDetail {
 }
 
 async function apiFetch<T>(url: string, init?: RequestInit): Promise<T> {
-  const token = await (window as any).__privyGetAccessToken?.();
+  const token = await getAuthToken();
   const headers = new Headers(init?.headers);
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
@@ -60,45 +59,65 @@ export async function createFolderApi(name: string): Promise<ApiFolderWithCount>
 }
 
 export async function renameFolderApi(folderId: string, name: string): Promise<void> {
-  const token = await (window as any).__privyGetAccessToken?.();
+  const token = await getAuthToken();
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  await fetch(`/api/folders/${folderId}`, {
+  const res = await fetch(`/api/folders/${folderId}`, {
     method: "PATCH",
     headers,
     body: JSON.stringify({ name }),
   });
+
+  if (!res.ok) {
+    const json = await res.json().catch(() => ({ error: "Unknown error" }));
+    throw new Error(json.error || `Failed to rename folder: ${res.status}`);
+  }
 }
 
 export async function deleteFolderApi(folderId: string): Promise<void> {
-  const token = await (window as any).__privyGetAccessToken?.();
+  const token = await getAuthToken();
   const headers: Record<string, string> = {};
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  await fetch(`/api/folders/${folderId}`, { method: "DELETE", headers });
+  const res = await fetch(`/api/folders/${folderId}`, { method: "DELETE", headers });
+
+  if (!res.ok) {
+    const json = await res.json().catch(() => ({ error: "Unknown error" }));
+    throw new Error(json.error || `Failed to delete folder: ${res.status}`);
+  }
 }
 
 export async function addKeywordsApi(folderId: string, keywords: KeywordData[]): Promise<void> {
-  const token = await (window as any).__privyGetAccessToken?.();
+  const token = await getAuthToken();
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  await fetch(`/api/folders/${folderId}/keywords`, {
+  const res = await fetch(`/api/folders/${folderId}/keywords`, {
     method: "POST",
     headers,
     body: JSON.stringify({ keywords }),
   });
+
+  if (!res.ok) {
+    const json = await res.json().catch(() => ({ error: "Unknown error" }));
+    throw new Error(json.error || `Failed to add keywords: ${res.status}`);
+  }
 }
 
 export async function removeKeywordApi(folderId: string, keyword: string): Promise<void> {
-  const token = await (window as any).__privyGetAccessToken?.();
+  const token = await getAuthToken();
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  await fetch(`/api/folders/${folderId}/keywords`, {
+  const res = await fetch(`/api/folders/${folderId}/keywords`, {
     method: "DELETE",
     headers,
     body: JSON.stringify({ keyword }),
   });
+
+  if (!res.ok) {
+    const json = await res.json().catch(() => ({ error: "Unknown error" }));
+    throw new Error(json.error || `Failed to remove keyword: ${res.status}`);
+  }
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -20,7 +21,7 @@ interface OverviewResultsTableProps {
   onSelectKeyword: (keyword: string) => void;
 }
 
-export function OverviewResultsTable({
+export const OverviewResultsTable = memo(function OverviewResultsTable({
   results,
   errors,
   onSelectKeyword,
@@ -85,4 +86,4 @@ export function OverviewResultsTable({
       </CardContent>
     </Card>
   );
-}
+});

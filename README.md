@@ -1,8 +1,8 @@
 # Based SEO
 
-Professional-grade SEO data at the cost it actually takes to fetch it. No $130/month subscriptions for data that costs fractions of a cent per request.
+Professional-grade SEO data at the cost it takes to fetch it. No $130/month subscriptions for data that costs fractions of a cent per request.
 
-Open source. No markup. Powered by DataForSEO and x402.
+Open source. No markup. Powered by Base, DataForSEO and x402.
 
 ## What It Does
 
@@ -12,9 +12,9 @@ Open source. No markup. Powered by DataForSEO and x402.
 
 ## Why This Exists
 
-SEO data is a commodity sold at SaaS margins. The raw data costs $0.002–$0.05 per request. The industry charges you $100+/month for a dashboard wrapper on top of it.
+SEO data is a commodity sold at SaaS margins. DataForSEO, one of the best players in this game, costs $0.002–$0.05 per request. The industry charges you $100+/month for a dashboard wrapper on top of it.
 
-Based SEO passes through the exact data cost. No accounts, no subscriptions, no minimum spend. Just the data you need, when you need it.
+Based SEO passes through the exact data cost from DataForSEO. No accounts, no subscriptions, no minimum spend. Just the data you need, when you need it.
 
 ## Tech Stack
 
@@ -23,6 +23,8 @@ Based SEO passes through the exact data cost. No accounts, no subscriptions, no 
 - [Tailwind CSS](https://tailwindcss.com/) — Utility-first styling
 - [shadcn/ui](https://ui.shadcn.com/) — UI components
 - [DataForSEO](https://dataforseo.com/) — SEO data provider
+- [x402](https://x402.org/) — Pay-per-request API protocol
+- [Base](https://base.org/) — L2 for payments (USDC)
 
 ## Getting Started
 
