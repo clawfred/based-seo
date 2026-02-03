@@ -60,7 +60,7 @@ export function ConnectWallet() {
     return (
       <GlassButton onClick={login} size="sm" contentClassName="flex items-center gap-2">
         <Wallet className="h-4 w-4" />
-        <span>Connect Wallet</span>
+        <span>Sign in</span>
       </GlassButton>
     );
   }
