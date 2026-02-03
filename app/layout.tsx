@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "@coinbase/onchainkit/styles.css";
 import "./globals.css";
 import { Providers } from "@/components/providers";
-import { ApplicationShell } from "@/components/layout/application-shell";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -81,9 +80,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
         />
-        <Providers>
-          <ApplicationShell>{children}</ApplicationShell>
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

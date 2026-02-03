@@ -294,3 +294,67 @@
     border-color: oklch(from var(--primary) l c h / 0.4);
   }
 }
+
+/* Landing page animations (lightweight, no extra deps) */
+@keyframes float-slow {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes float-slower {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -26px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+.animate-float-slower {
+  animation: float-slower 14s ease-in-out infinite;
+}
+
+.reveal {
+  will-change: transform, opacity;
+}
+
+.reveal--out {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+}
+
+.reveal--in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-float-slower {
+    animation: none !important;
+  }
+
+  .reveal--out,
+  .reveal--in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

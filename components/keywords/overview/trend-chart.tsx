@@ -6,9 +6,9 @@ interface TrendChartProps {
 }
 
 export const TrendChart = memo(function TrendChart({ trend }: TrendChartProps) {
-  if (trend.length === 0) return null;
+  const maxValue = useMemo(() => (trend.length ? Math.max(...trend) : 0), [trend]);
 
-  const maxValue = useMemo(() => Math.max(...trend), [trend]);
+  if (trend.length === 0) return null;
 
   return (
     <Card>
