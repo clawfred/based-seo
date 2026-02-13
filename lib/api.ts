@@ -162,3 +162,36 @@ export async function fetchKeywordIdeas(
 }
 
 export const fetchCompleteKeywordData = fetchKeywordOverview;
+
+// Domain Audit types
+export interface AuditIssue {
+  severity: "critical" | "high" | "medium" | "low";
+  category: string;
+  issue: string;
+  recommendation: string;
+}
+
+export interface CategoryScore {
+  score: number;
+  issues: string[];
+  passed: string[];
+}
+
+export interface AuditResult {
+  url: string;
+  score: number;
+  categories: {
+    technical: CategoryScore;
+    onPage: CategoryScore;
+    content: CategoryScore;
+    schema: CategoryScore;
+    images: CategoryScore;
+  };
+  issues: AuditIssue[];
+  recommendations: string[];
+  summary: string;
+}
+
+export async function fetchDomainAudit(url: string): Promise<ApiResponse<AuditResult>> {
+  return apiFetch<AuditResult>("/api/audit", { url });
+}

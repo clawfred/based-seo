@@ -3,11 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Sparkles, FolderOpen, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, Sparkles, FolderOpen, ChevronLeft, ChevronRight, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navigation = [
+  {
+    name: "Domain Analysis",
+    items: [
+      { name: "Domain Audit", href: "/audit", icon: Globe },
+    ],
+  },
   {
     name: "Keyword Research",
     items: [

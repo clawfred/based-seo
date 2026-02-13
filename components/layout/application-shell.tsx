@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Sparkles, FolderOpen, Settings, ChevronRight } from "lucide-react";
+import { Search, Sparkles, FolderOpen, Settings, ChevronRight, Globe } from "lucide-react";
 import { XIcon } from "@/components/icons/x-icon";
 import Image from "next/image";
 import Link from "next/link";
@@ -65,6 +65,13 @@ const sidebarData: SidebarData = {
     description: "SEO Tools",
   },
   navGroups: [
+    {
+      title: "Audit",
+      defaultOpen: true,
+      items: [
+        { label: "Domain Audit", icon: Globe, href: "/audit" },
+      ],
+    },
     {
       title: "Research",
       defaultOpen: true,

@@ -66,4 +66,16 @@ export const routes: RoutesConfig = {
     description: "SERP analysis",
     mimeType: "application/json",
   },
+
+  "/api/audit": {
+    accepts: {
+      scheme: "exact",
+      network: "eip155:8453", // Base mainnet
+      payTo: evmAddress,
+      price: "$1.50",
+      maxTimeoutSeconds: 3600,
+    },
+    description: "Full domain SEO audit with AI analysis",
+    mimeType: "application/json",
+  },
 };
