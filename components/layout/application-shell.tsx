@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Sparkles, FolderOpen, Settings, ChevronRight } from "lucide-react";
+import { Search, Sparkles, FolderOpen, Settings, ChevronRight, Bot } from "lucide-react";
 import { XIcon } from "@/components/icons/x-icon";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { ConnectWallet } from "@/components/connect-wallet";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Badge } from "@/components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   Sidebar,
@@ -36,6 +37,8 @@ type NavItem = {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   href: string;
   isActive?: boolean;
+  // Optional badge to show next to the label (e.g., "NEW")
+  badge?: string;
   // Optional children for submenus (Sidebar3+)
   children?: NavItem[];
 };
@@ -72,6 +75,7 @@ const sidebarData: SidebarData = {
         { label: "Keyword Overview", icon: Search, href: "/keywords/overview" },
         { label: "Keyword Finder", icon: Sparkles, href: "/keywords/finder" },
         { label: "Saved Keywords", icon: FolderOpen, href: "/keywords/saved" },
+        { label: "GEO Tracker", icon: Bot, href: "/geo", badge: "NEW" },
       ],
     },
   ],
@@ -92,6 +96,14 @@ const NavMenuItem = ({ item, isActive }: { item: NavItem; isActive: boolean }) =
           <Link href={item.href}>
             <Icon className="size-4" />
             <span>{item.label}</span>
+            {item.badge && (
+              <Badge
+                variant="secondary"
+                className="ml-auto h-5 px-1.5 text-[10px] font-semibold bg-primary/10 text-primary"
+              >
+                {item.badge}
+              </Badge>
+            )}
           </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
