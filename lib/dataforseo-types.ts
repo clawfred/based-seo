@@ -278,3 +278,48 @@ export interface SerpItem {
   backlinks_info: unknown | null;
   rank_info: unknown | null;
 }
+
+// Backlinks Summary
+export interface BacklinksSummaryResult {
+  target: string;
+  total_backlinks: number;
+  spammy_backlinks: number;
+  referring_domains: number;
+  referring_main_domains: number;
+  referring_ips: number;
+  referring_subnets: number;
+  referring_pages: number;
+  dofollow: number;
+  nofollow: number;
+  sponsored: number;
+  ugc: number;
+  anchors: number;
+  rank: number;
+  main_domain_rank: number;
+  first_seen: string;
+  lost_date: string | null;
+  broken_backlinks: number;
+  broken_pages: number;
+  referring_domains_nofollow: number;
+  referring_links_tld: Record<string, number>;
+  referring_links_types: Record<string, number>;
+  referring_links_attributes: Record<string, number>;
+  referring_links_platform_types: Record<string, number>;
+  referring_links_semantic_locations: Record<string, number>;
+  referring_links_countries: Record<string, number>;
+  new_backlinks: number;
+  lost_backlinks: number;
+  new_referring_domains: number;
+  lost_referring_domains: number;
+  anchors_list?: BacklinksAnchor[];
+}
+
+export interface BacklinksAnchor {
+  anchor: string;
+  backlinks: number;
+  domains: number;
+  first_seen: string;
+  last_seen: string;
+  rank: number;
+  dofollow: number;
+}
