@@ -278,3 +278,44 @@ export interface SerpItem {
   backlinks_info: unknown | null;
   rank_info: unknown | null;
 }
+
+// Google Trends Types
+export interface GoogleTrendsExploreResult {
+  keywords: string[];
+  type: string;
+  location_code: number;
+  language_code: string;
+  date_from: string;
+  date_to: string;
+  items: GoogleTrendsItem[] | null;
+}
+
+export interface GoogleTrendsItem {
+  type: string;
+  position: number;
+  keywords: string[];
+  data: GoogleTrendsDataPoint[] | null;
+  data_by_region: GoogleTrendsRegion[] | null;
+  rising_queries: GoogleTrendsQuery[] | null;
+  top_queries: GoogleTrendsQuery[] | null;
+}
+
+export interface GoogleTrendsDataPoint {
+  date_from: string;
+  date_to: string;
+  timestamp: number;
+  missing_data: boolean;
+  values: number[] | null;
+}
+
+export interface GoogleTrendsRegion {
+  geo_id: string;
+  geo_name: string;
+  values: number[] | null;
+  max_value_index: number;
+}
+
+export interface GoogleTrendsQuery {
+  query: string;
+  value: number;
+}

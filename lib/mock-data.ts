@@ -573,6 +573,76 @@ export const getSerpResults = (keyword: string): SerpResult[] => {
   }));
 };
 
+// Google Trends mock data
+export interface TrendDataPoint {
+  date: string;
+  values: Record<string, number>;
+}
+
+export interface TrendsData {
+  trendLine: TrendDataPoint[];
+  interestByRegion: { region: string; value: number }[];
+  risingQueries: { query: string; value: number }[];
+  topQueries: { query: string; value: number }[];
+}
+
+export const getGoogleTrendsData = (keywords: string[]): TrendsData => {
+  // Generate 5 years of monthly data points
+  const trendLine: TrendDataPoint[] = [];
+  const startDate = new Date("2021-01-01");
+  const endDate = new Date("2026-02-26");
+
+  let current = new Date(startDate);
+  while (current <= endDate) {
+    const month = current.toISOString().slice(0, 7);
+    const values: Record<string, number> = {};
+
+    keywords.forEach((kw, idx) => {
+      // Create somewhat realistic trend patterns with variation per keyword
+      const baseValue = 40 + idx * 10;
+      const monthNum = current.getMonth();
+      const yearProgress = (current.getFullYear() - 2021) / 5;
+
+      // Add seasonal variation and overall trend
+      const seasonal = Math.sin((monthNum / 12) * Math.PI * 2) * 15;
+      const growth = yearProgress * 20;
+      const noise = Math.random() * 10 - 5;
+
+      values[kw] = Math.max(0, Math.min(100, Math.round(baseValue + seasonal + growth + noise)));
+    });
+
+    trendLine.push({ date: month, values });
+    current.setMonth(current.getMonth() + 1);
+  }
+
+  const interestByRegion = [
+    { region: "California", value: 100 },
+    { region: "New York", value: 85 },
+    { region: "Texas", value: 72 },
+    { region: "Florida", value: 68 },
+    { region: "Illinois", value: 54 },
+  ];
+
+  const baseKeyword = keywords[0] || "seo";
+  const risingQueries = [
+    { query: `${baseKeyword} 2024`, value: 450 },
+    { query: `ai ${baseKeyword}`, value: 350 },
+    { query: `${baseKeyword} automation`, value: 200 },
+    { query: `${baseKeyword} for small business`, value: 150 },
+    { query: `free ${baseKeyword} tools`, value: 120 },
+  ];
+
+  const topQueries = [
+    { query: `best ${baseKeyword}`, value: 100 },
+    { query: `${baseKeyword} tools`, value: 95 },
+    { query: `${baseKeyword} software`, value: 82 },
+    { query: `how to ${baseKeyword}`, value: 75 },
+    { query: `${baseKeyword} strategy`, value: 68 },
+  ];
+
+  return { trendLine, interestByRegion, risingQueries, topQueries };
+};
+
 export const getKeywordIdeas = (keyword: string): KeywordIdea[] => {
   const variations: KeywordIdea[] = [
     { keyword: `${keyword} tool`, volume: 12100, kd: 68, type: "variation" },

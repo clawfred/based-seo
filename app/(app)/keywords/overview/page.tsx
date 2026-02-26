@@ -27,6 +27,7 @@ import { SerpTable } from "@/components/keywords/overview/serp-table";
 import { KeywordIdeasSection } from "@/components/keywords/overview/keyword-ideas-section";
 import { VolumeBreakdown } from "@/components/keywords/overview/volume-breakdown";
 import { TrendChart } from "@/components/keywords/overview/trend-chart";
+import { GoogleTrendsSection } from "@/components/keywords/overview/google-trends-section";
 
 const exampleKeywords = ["seo tools", "keyword research", "backlink checker", "rank tracker"];
 
@@ -251,6 +252,8 @@ export default function KeywordOverviewPage() {
               )}
             </div>
           )}
+
+          <GoogleTrendsSection keywords={[activeKeyword]} locationCode={location} />
 
           <SerpTable results={detail.serpResults} />
           <KeywordIdeasSection ideas={detail.keywordIdeas} />
