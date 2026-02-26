@@ -3,7 +3,13 @@ import { registerExactEvmScheme } from "@x402/evm/exact/server";
 import { facilitator } from "@coinbase/x402";
 import type { RoutesConfig } from "@x402/core/server";
 
-const evmAddress = process.env.EVM_ADDRESS || "";
+const evmAddress = process.env.EVM_ADDRESS;
+
+if (!evmAddress) {
+  throw new Error(
+    "Missing EVM_ADDRESS environment variable. Payment routes require a valid recipient address.",
+  );
+}
 
 const facilitatorClient = new HTTPFacilitatorClient(facilitator);
 
