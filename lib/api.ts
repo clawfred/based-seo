@@ -162,3 +162,38 @@ export async function fetchKeywordIdeas(
 }
 
 export const fetchCompleteKeywordData = fetchKeywordOverview;
+
+// Domain Overview Types
+export interface DomainOverviewData {
+  domain: string;
+  rank: number;
+  organicTraffic: number;
+  organicKeywords: number;
+  backlinks: number;
+  avgPosition: number;
+  trafficCost: number;
+  trafficHistory: Array<{
+    year: number;
+    month: number;
+    etv: number;
+    keywords?: number;
+  }>;
+  topKeywords: Array<{
+    keyword: string;
+    position: number;
+    volume: number;
+    trafficShare: number;
+    cpc?: number;
+    difficulty?: number;
+  }>;
+}
+
+export async function fetchDomainOverview(
+  domain: string,
+  locationCode: number = 2840,
+): Promise<ApiResponse<DomainOverviewData>> {
+  return apiFetch<DomainOverviewData>("/api/domain/overview", {
+    domain,
+    locationCode,
+  });
+}
