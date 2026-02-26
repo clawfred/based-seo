@@ -597,3 +597,106 @@ export const getKeywordIdeas = (keyword: string): KeywordIdea[] => {
 
   return [...variations, ...questions];
 };
+
+export interface RankedKeyword {
+  keyword: string;
+  position: number;
+  volume: number;
+  traffic: number;
+  url: string;
+  kd: number;
+  cpc: number;
+  intent: "Informational" | "Navigational" | "Commercial" | "Transactional";
+}
+
+export const getRankedKeywords = (domain: string): RankedKeyword[] => {
+  const intents: RankedKeyword["intent"][] = [
+    "Informational",
+    "Commercial",
+    "Transactional",
+    "Navigational",
+  ];
+
+  const keywords = [
+    "seo tools",
+    "keyword research tool",
+    "backlink checker",
+    "rank tracking",
+    "site audit",
+    "content optimization",
+    "competitor analysis",
+    "serp analysis",
+    "on page seo",
+    "technical seo",
+    "local seo software",
+    "seo reporting",
+    "link building",
+    "domain analysis",
+    "keyword difficulty",
+    "search volume tool",
+    "seo metrics",
+    "organic traffic",
+    "seo audit tool",
+    "keyword ranking",
+    "seo software comparison",
+    "free seo tools",
+    "seo platform",
+    "seo dashboard",
+    "keyword tracker",
+    "seo analytics",
+    "website seo checker",
+    "seo for beginners",
+    "advanced seo",
+    "seo best practices",
+    "seo strategy guide",
+    "content marketing seo",
+    "ecommerce seo tools",
+    "youtube seo",
+    "image optimization seo",
+    "meta tags optimization",
+    "schema markup tool",
+    "mobile seo",
+    "voice search optimization",
+    "google ranking factors",
+    "seo trends 2024",
+    "ai seo tools",
+    "seo automation",
+    "white label seo",
+    "seo agency tools",
+    "bulk keyword research",
+    "long tail keywords",
+    "keyword clustering",
+    "serp features",
+    "featured snippets",
+  ];
+
+  // Create 50 ranked keywords with varied positions and metrics
+  return keywords.map((keyword, index) => {
+    const position = Math.floor(Math.random() * 100) + 1;
+    const volume = Math.floor(Math.random() * 50000) + 100;
+    // CTR curve based on position
+    const ctr =
+      position <= 3
+        ? 0.3 - (position - 1) * 0.08
+        : position <= 10
+          ? 0.15 - (position - 3) * 0.015
+          : position <= 20
+            ? 0.05 - (position - 10) * 0.003
+            : 0.02;
+    const traffic = Math.floor(volume * Math.max(ctr, 0.005));
+    const kd = Math.floor(Math.random() * 80) + 10;
+    const cpc = Math.round((Math.random() * 20 + 0.5) * 100) / 100;
+    const intent = intents[index % intents.length];
+
+    return {
+      keyword,
+      position,
+      volume,
+      traffic,
+      url: `https://${domain}/${keyword.replace(/\s+/g, "-")}/`,
+      kd,
+      cpc,
+      intent,
+    };
+  });
+};

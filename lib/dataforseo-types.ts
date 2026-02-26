@@ -278,3 +278,87 @@ export interface SerpItem {
   backlinks_info: unknown | null;
   rank_info: unknown | null;
 }
+
+// Ranked Keywords (Competitor Keywords)
+export interface RankedKeywordsResult {
+  se_type: string;
+  target: string;
+  location_code: number;
+  language_code: string;
+  total_count: number;
+  items_count: number;
+  items: RankedKeywordItem[] | null;
+}
+
+export interface RankedKeywordItem {
+  se_type: string;
+  keyword_data: {
+    se_type: string;
+    keyword: string;
+    location_code: number;
+    language_code: string;
+    keyword_info: {
+      se_type: string;
+      last_updated_time: string;
+      competition: number;
+      competition_level: string;
+      cpc: number;
+      search_volume: number;
+      low_top_of_page_bid: number;
+      high_top_of_page_bid: number;
+      categories: number[];
+      monthly_searches: MonthlySearch[];
+    };
+    keyword_properties: {
+      se_type: string;
+      core_keyword: string | null;
+      synonym_clustering_algorithm: string;
+      keyword_difficulty: number;
+      detected_language: string;
+      is_another_language: boolean;
+    };
+    search_intent_info: {
+      se_type: string;
+      main_intent: string;
+      foreign_intent: string[];
+      last_updated_time: string;
+    };
+    serp_info: {
+      se_type: string;
+      check_url: string;
+      serp_item_types: string[];
+      se_results_count: number;
+      last_updated_time: string;
+      previous_updated_time: string;
+    };
+  };
+  ranked_serp_element: {
+    se_type: string;
+    serp_item: {
+      se_type: string;
+      type: string;
+      rank_group: number;
+      rank_absolute: number;
+      position: string;
+      xpath: string;
+      title: string;
+      url: string;
+      domain: string;
+      description: string;
+      breadcrumb: string;
+      is_image: boolean;
+      is_video: boolean;
+      is_featured_snippet: boolean;
+      is_malicious: boolean;
+      is_web_story: boolean;
+      highlighted: string[];
+      etv: number;
+      estimated_paid_traffic_cost: number;
+    };
+    check_url: string;
+    serp_item_types: string[];
+    se_results_count: number;
+    last_updated_time: string;
+    previous_updated_time: string;
+  };
+}
