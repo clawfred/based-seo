@@ -49,3 +49,22 @@ export interface Location {
   code: string;
   name: string;
 }
+
+// Keyword Gap Analysis types
+export interface KeywordGapItem {
+  keyword: string;
+  yourPosition: number | null;
+  competitorPositions: Record<string, number | null>;
+  volume: number;
+  kd: number;
+  cpc: number;
+  trafficPotential: number;
+  competition: number;
+}
+
+export interface KeywordGapData {
+  yourDomain: string;
+  competitors: string[];
+  keywords: KeywordGapItem[];
+  totalCount: number;
+}

@@ -162,3 +162,34 @@ export async function fetchKeywordIdeas(
 }
 
 export const fetchCompleteKeywordData = fetchKeywordOverview;
+
+// Keyword Gap Analysis
+export interface KeywordGapItem {
+  keyword: string;
+  yourPosition: number | null;
+  competitorPositions: Record<string, number | null>;
+  volume: number;
+  kd: number;
+  cpc: number;
+  trafficPotential: number;
+  competition: number;
+}
+
+export interface KeywordGapData {
+  yourDomain: string;
+  competitors: string[];
+  keywords: KeywordGapItem[];
+  totalCount: number;
+}
+
+export async function fetchKeywordGap(
+  yourDomain: string,
+  competitors: string[],
+  locationCode: number = 2840,
+): Promise<ApiResponse<KeywordGapData>> {
+  return apiFetch<KeywordGapData>("/api/domain/gap", {
+    yourDomain,
+    competitors,
+    locationCode,
+  });
+}

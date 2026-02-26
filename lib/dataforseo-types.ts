@@ -1,5 +1,70 @@
 // DataForSEO API Response Types
 
+// Domain Intersection (Keyword Gap) Types
+export interface DomainIntersectionResult {
+  se_type: string;
+  targets: string[];
+  total_count: number;
+  items_count: number;
+  items: DomainIntersectionItem[];
+}
+
+export interface DomainIntersectionItem {
+  se_type: string;
+  keyword: string;
+  keyword_data: {
+    se_type: string;
+    keyword: string;
+    location_code: number;
+    language_code: string;
+    keyword_info: {
+      se_type: string;
+      last_updated_time: string;
+      competition: number;
+      competition_level: string;
+      cpc: number;
+      search_volume: number;
+      low_top_of_page_bid: number;
+      high_top_of_page_bid: number;
+      categories: number[];
+      monthly_searches: MonthlySearch[];
+    };
+    keyword_properties: {
+      se_type: string;
+      core_keyword: string | null;
+      synonym_clustering_algorithm: string;
+      keyword_difficulty: number;
+      detected_language: string;
+      is_another_language: boolean;
+    };
+    search_intent_info: {
+      se_type: string;
+      main_intent: string;
+      foreign_intent: string[];
+      last_updated_time: string;
+    };
+  };
+  intersection_result: {
+    [key: string]: DomainIntersectionPosition | undefined;
+  };
+}
+
+export interface DomainIntersectionPosition {
+  se_type: string;
+  type: string;
+  rank_group: number;
+  rank_absolute: number;
+  position: string;
+  etv: number;
+  impressions_etv: number;
+  estimated_paid_traffic_cost: number;
+  is_featured_snippet: boolean;
+  featured_snippet_type: string | null;
+  serp_item_url: string;
+  title: string;
+  description: string;
+}
+
 export interface DataForSEOResponse<T> {
   version: string;
   status_code: number;

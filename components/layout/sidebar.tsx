@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Sparkles, FolderOpen, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, Sparkles, FolderOpen, ChevronLeft, ChevronRight, GitCompare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +14,12 @@ const navigation = [
       { name: "Keyword Overview", href: "/keywords/overview", icon: Search },
       { name: "Keyword Finder", href: "/keywords/finder", icon: Sparkles },
       { name: "Saved Keywords", href: "/keywords/saved", icon: FolderOpen },
+    ],
+  },
+  {
+    name: "Domain Analysis",
+    items: [
+      { name: "Keyword Gap", href: "/domain/gap", icon: GitCompare },
     ],
   },
 ];

@@ -597,3 +597,94 @@ export const getKeywordIdeas = (keyword: string): KeywordIdea[] => {
 
   return [...variations, ...questions];
 };
+
+export interface KeywordGapItem {
+  keyword: string;
+  yourPosition: number | null;
+  competitorPositions: Record<string, number | null>;
+  volume: number;
+  kd: number;
+  cpc: number;
+  trafficPotential: number;
+  competition: number;
+}
+
+export interface KeywordGapData {
+  yourDomain: string;
+  competitors: string[];
+  keywords: KeywordGapItem[];
+  totalCount: number;
+}
+
+export const getKeywordGapMockData = (yourDomain: string, competitors: string[]): KeywordGapData => {
+  const mockKeywordsList = [
+    "seo tools",
+    "keyword research",
+    "backlink checker",
+    "rank tracker",
+    "content marketing",
+    "on page seo",
+    "technical seo",
+    "local seo",
+    "link building",
+    "competitor analysis",
+    "serp analysis",
+    "keyword difficulty",
+    "search volume",
+    "organic traffic",
+    "domain authority",
+    "page speed",
+    "core web vitals",
+    "meta description",
+    "title tag",
+    "schema markup",
+    "internal linking",
+    "anchor text",
+    "seo audit",
+    "seo strategy",
+    "long tail keywords",
+    "ecommerce seo",
+    "youtube seo",
+    "mobile seo",
+    "voice search",
+    "featured snippets",
+  ];
+
+  const keywords: KeywordGapItem[] = mockKeywordsList.map((kw, index) => {
+    // Generate random positions - sometimes null for "missing" keywords
+    const yourPos = Math.random() > 0.3 ? Math.floor(Math.random() * 100) + 1 : null;
+    
+    const competitorPositions: Record<string, number | null> = {};
+    competitors.forEach((comp) => {
+      // Competitors more likely to have positions
+      competitorPositions[comp] = Math.random() > 0.15 
+        ? Math.floor(Math.random() * 50) + 1 
+        : null;
+    });
+
+    const volume = Math.floor(Math.random() * 50000) + 500;
+    const kd = Math.floor(Math.random() * 80) + 10;
+    const cpc = Math.round((Math.random() * 20 + 0.5) * 100) / 100;
+    const trafficPotential = yourPos 
+      ? Math.floor(volume * (1 - yourPos / 100) * 0.3) 
+      : Math.floor(volume * 0.2);
+
+    return {
+      keyword: kw,
+      yourPosition: yourPos,
+      competitorPositions,
+      volume,
+      kd,
+      cpc,
+      trafficPotential,
+      competition: Math.round(Math.random() * 100) / 100,
+    };
+  });
+
+  return {
+    yourDomain,
+    competitors,
+    keywords,
+    totalCount: keywords.length,
+  };
+};
