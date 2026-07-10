@@ -1,96 +1,100 @@
-import { Redis } from "@upstash/redis";
 import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 
-interface RateLimitResult {
-  allowed: boolean;
-  remaining: number;
-  resetMs: number;
+/**
+ * Distributed rate limiting.
+ *
+ * Two bugs shaped this file:
+ *
+ *  1. The previous Redis limiter was constructed once with a hardcoded
+ *     `slidingWindow(30, "1 m")` and never received the caller's `maxRequests`,
+ *     so authenticated users silently got the anonymous limit. Limiters are now
+ *     memoised per (limit, window).
+ *
+ *  2. On a Redis error it fell back to a module-level `Map`. Every serverless
+ *     instance has its own, so the effective limit became `limit x instances` —
+ *     it failed *open*, on the paid endpoints, precisely when limits matter.
+ *     Callers now choose: `failOpen` for cosmetic limits, fail-closed (default)
+ *     for anything that costs us money.
+ */
+
+export interface RateLimitResult {
+  readonly allowed: boolean;
+  readonly remaining: number;
+  readonly resetMs: number;
+  /** True when Redis was unreachable and we could not make a real decision. */
+  readonly degraded: boolean;
 }
 
 let redis: Redis | null = null;
-let rateLimiter: Ratelimit | null = null;
+const limiters = new Map<string, Ratelimit>();
 
-function getRateLimiter(): Ratelimit | null {
-  if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
-    return null;
-  }
+function getRedis(): Redis | null {
+  if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) return null;
+  redis ??= new Redis({
+    url: process.env.UPSTASH_REDIS_REST_URL,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN,
+  });
+  return redis;
+}
 
-  if (!redis) {
-    redis = new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN,
-    });
-  }
+function getLimiter(maxRequests: number, windowMs: number): Ratelimit | null {
+  const client = getRedis();
+  if (!client) return null;
 
-  if (!rateLimiter) {
-    rateLimiter = new Ratelimit({
-      redis,
-      limiter: Ratelimit.slidingWindow(30, "1 m"),
+  const key = `${maxRequests}:${windowMs}`;
+  let limiter = limiters.get(key);
+  if (!limiter) {
+    limiter = new Ratelimit({
+      redis: client,
+      limiter: Ratelimit.slidingWindow(maxRequests, `${windowMs} ms`),
       analytics: true,
       prefix: "@based-seo/ratelimit",
     });
+    limiters.set(key, limiter);
   }
-
-  return rateLimiter;
+  return limiter;
 }
 
-interface InMemoryEntry {
-  timestamps: number[];
-}
-
-const inMemoryStore = new Map<string, InMemoryEntry>();
-
-function inMemoryRateLimit(key: string, maxRequests: number, windowMs: number): RateLimitResult {
-  const now = Date.now();
-  const cutoff = now - windowMs;
-
-  let entry = inMemoryStore.get(key);
-  if (!entry) {
-    entry = { timestamps: [] };
-    inMemoryStore.set(key, entry);
-  }
-
-  entry.timestamps = entry.timestamps.filter((t) => t > cutoff);
-
-  if (entry.timestamps.length >= maxRequests) {
-    const oldestInWindow = entry.timestamps[0];
-    return {
-      allowed: false,
-      remaining: 0,
-      resetMs: oldestInWindow + windowMs - now,
-    };
-  }
-
-  entry.timestamps.push(now);
-
-  return {
-    allowed: true,
-    remaining: maxRequests - entry.timestamps.length,
-    resetMs: windowMs,
-  };
+export interface RateLimitOptions {
+  /**
+   * Allow the request through when Redis is unavailable. Only for limits whose
+   * purpose is politeness. Anything that spends money must fail closed.
+   */
+  readonly failOpen?: boolean;
 }
 
 export async function rateLimit(
   key: string,
-  maxRequests: number = 20,
-  windowMs: number = 60_000,
+  maxRequests = 20,
+  windowMs = 60_000,
+  options: RateLimitOptions = {},
 ): Promise<RateLimitResult> {
-  const limiter = getRateLimiter();
+  const limiter = getLimiter(maxRequests, windowMs);
 
   if (!limiter) {
-    return inMemoryRateLimit(key, maxRequests, windowMs);
+    return unavailable(maxRequests, windowMs, options.failOpen ?? false);
   }
 
   try {
     const { success, remaining, reset } = await limiter.limit(key);
-
     return {
       allowed: success,
-      remaining: remaining,
-      resetMs: reset - Date.now(),
+      remaining,
+      resetMs: Math.max(0, reset - Date.now()),
+      degraded: false,
     };
   } catch (error) {
-    console.error("Redis rate limit error, falling back to in-memory:", error);
-    return inMemoryRateLimit(key, maxRequests, windowMs);
+    console.error("[rate-limit] Redis unavailable", error);
+    return unavailable(maxRequests, windowMs, options.failOpen ?? false);
   }
+}
+
+function unavailable(maxRequests: number, windowMs: number, failOpen: boolean): RateLimitResult {
+  return {
+    allowed: failOpen,
+    remaining: failOpen ? maxRequests : 0,
+    resetMs: windowMs,
+    degraded: true,
+  };
 }

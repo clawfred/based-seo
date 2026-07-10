@@ -1,40 +1,48 @@
-import { NextRequest, NextResponse } from "next/server";
-import { rateLimit } from "./rate-limit";
+import { NextResponse, type NextRequest } from "next/server";
+
 import { verifyAuth } from "./auth";
+import { rateLimit } from "./rate-limit";
 
+const ANONYMOUS_LIMIT = 30;
+const AUTHENTICATED_LIMIT = 100;
+const WINDOW_MS = 60_000;
+
+/**
+ * Rate limit a request, returning a response when it should not proceed.
+ *
+ * Fails closed: if Redis is unreachable we return 503 rather than waving traffic
+ * through. Every request past this point can spend money — ours at DataForSEO,
+ * or the caller's on-chain — so an unmetered in-memory fallback (which on
+ * Vercel is per-instance, and therefore no limit at all) is worse than a brief
+ * outage.
+ */
 export async function checkRateLimit(request: NextRequest): Promise<NextResponse | null> {
-  // Try to get authenticated user first (user-based rate limiting)
-  let rateLimitKey = "anonymous";
-  let maxRequests = 30; // Lower limit for anonymous
-
   const user = await verifyAuth(request);
-  if (user?.userId) {
-    rateLimitKey = `user:${user.userId}`;
-    maxRequests = 100; // Higher limit for authenticated users (not aggressive since it's paid)
-  } else {
-    // Fallback to IP-based for anonymous users
-    // Use cf-connecting-ip (Cloudflare) or x-real-ip if available, otherwise x-forwarded-for
-    const ip =
-      request.headers.get("cf-connecting-ip") ||
-      request.headers.get("x-real-ip") ||
-      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      "unknown";
-    rateLimitKey = `ip:${ip}`;
-  }
 
-  const result = await rateLimit(rateLimitKey, maxRequests, 60_000);
+  const [key, limit] = user?.userId
+    ? ([`user:${user.userId}`, AUTHENTICATED_LIMIT] as const)
+    : ([`ip:${clientIp(request)}`, ANONYMOUS_LIMIT] as const);
+
+  const result = await rateLimit(key, limit, WINDOW_MS);
+
+  if (result.degraded) {
+    return NextResponse.json(
+      {
+        error: "RATE_LIMITER_UNAVAILABLE",
+        message: "Rate limiting is temporarily unavailable. Please retry shortly.",
+      },
+      { status: 503, headers: { "Retry-After": "5" } },
+    );
+  }
 
   if (!result.allowed) {
     return NextResponse.json(
-      {
-        error: "Too many requests. Please try again later.",
-        retryAfterMs: result.resetMs,
-      },
+      { error: "RATE_LIMITED", message: "Too many requests.", retryAfterMs: result.resetMs },
       {
         status: 429,
         headers: {
           "Retry-After": String(Math.ceil(result.resetMs / 1000)),
-          "X-RateLimit-Limit": String(maxRequests),
+          "X-RateLimit-Limit": String(limit),
           "X-RateLimit-Remaining": String(result.remaining),
         },
       },
@@ -42,4 +50,13 @@ export async function checkRateLimit(request: NextRequest): Promise<NextResponse
   }
 
   return null;
+}
+
+function clientIp(request: NextRequest): string {
+  return (
+    request.headers.get("cf-connecting-ip") ||
+    request.headers.get("x-real-ip") ||
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    "unknown"
+  );
 }
