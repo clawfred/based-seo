@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 
 import {
   ENDPOINTS,
+  alternatives,
+  describeRequired,
   getBySlug,
   listPublic,
   missingRequired,
@@ -149,6 +151,61 @@ describe("missingRequired", () => {
 
   it("treats explicit null as absent", () => {
     expect(missingRequired(summary, { target: null })).toEqual(["target"]);
+  });
+
+  /**
+   * DataForSEO spells an either/or requirement as "location_name|location_code".
+   * Treating that as a literal body key makes it unsatisfiable, which would 400
+   * all 60 endpoints that use one — no matter what the caller sends.
+   */
+  describe("alternation requirements", () => {
+    const ideas = getBySlug("dataforseo_labs/google/keyword_ideas/live")!;
+
+    it("is satisfied by either alternative", () => {
+      expect(ideas.required).toContain("location_name|location_code");
+      expect(missingRequired(ideas, { keywords: ["a"], location_code: 2840 })).toEqual([]);
+      expect(missingRequired(ideas, { keywords: ["a"], location_name: "United States" })).toEqual(
+        [],
+      );
+    });
+
+    it("still reports the requirement when no alternative is present", () => {
+      expect(missingRequired(ideas, { keywords: ["a"] })).toEqual(["location_name|location_code"]);
+    });
+
+    it("describes an alternation readably", () => {
+      expect(describeRequired("location_name|location_code")).toBe(
+        "one of location_name, location_code",
+      );
+      expect(describeRequired("target")).toBe("target");
+    });
+
+    it("leaves no endpoint permanently unsatisfiable", () => {
+      for (const e of ENDPOINTS) {
+        // Supplying every alternative of every requirement must satisfy it.
+        const body: Record<string, unknown> = {};
+        for (const spec of e.required) for (const name of alternatives(spec)) body[name] = "x";
+        expect(missingRequired(e, body), `${e.slug} cannot be satisfied`).toEqual([]);
+      }
+    });
+  });
+});
+
+/**
+ * The catalog spells some trailing params literally (`.../task_get/advanced/{id}`)
+ * and omits them elsewhere. A slug carrying a brace would never match a real
+ * request path.
+ */
+describe("path normalization", () => {
+  it("leaves no brace in any slug or dfsPath", () => {
+    const braced = ENDPOINTS.filter((e) => e.slug.includes("{") || e.dfsPath.includes("{"));
+    expect(braced.map((e) => e.slug)).toEqual([]);
+  });
+
+  it("records a path param for every endpoint whose upstream path took one", () => {
+    const taskGets = ENDPOINTS.filter((e) => /\/task_get(\/|$)/.test(e.dfsPath));
+    expect(taskGets.length).toBeGreaterThan(0);
+    for (const e of taskGets) expect(e.pathParams, e.slug).toEqual(["id"]);
   });
 });
 

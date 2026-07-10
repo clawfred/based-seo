@@ -17,6 +17,16 @@ const WINDOW_MS = 60_000;
  * outage.
  */
 export async function checkRateLimit(request: NextRequest): Promise<NextResponse | null> {
+  // Escape hatch for local development, where Upstash is usually not configured
+  // and fail-closed would 503 every request. Deliberately an explicit opt-in:
+  // inferring it from NODE_ENV is how a production deploy ends up unmetered.
+  if (process.env.RATE_LIMIT_DISABLED === "1") {
+    if (process.env.NODE_ENV === "production") {
+      console.warn("[rate-limit] DISABLED in production. Every paid endpoint is unmetered.");
+    }
+    return null;
+  }
+
   const user = await verifyAuth(request);
 
   const [key, limit] = user?.userId

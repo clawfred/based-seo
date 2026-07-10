@@ -101,14 +101,19 @@ export type AccountState = (typeof ACCOUNT_STATES)[number];
 export const accountBalances = pgTable("account_balances", {
   accountId: text("account_id").primaryKey(),
 
-  balanceMicros: bigint("balance_micros", { mode: "bigint" }).notNull().default(0n),
+  // `sql` literal defaults, not 0n: drizzle-kit cannot serialize a BigInt.
+  balanceMicros: bigint("balance_micros", { mode: "bigint" })
+    .notNull()
+    .default(sql`0`),
 
   /**
    * Lowest the balance may reach. Zero for prepaid credits. Negative for an
    * allowance tab, where the figure is a receivable we later pull on-chain and
    * its magnitude caps our exposure to a user who revokes their allowance.
    */
-  floorMicros: bigint("floor_micros", { mode: "bigint" }).notNull().default(0n),
+  floorMicros: bigint("floor_micros", { mode: "bigint" })
+    .notNull()
+    .default(sql`0`),
 
   /** Suspended accounts cannot hold; a reorged deposit that was already spent lands here. */
   state: text("state").$type<AccountState>().notNull().default("active"),

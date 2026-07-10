@@ -8,11 +8,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "location_name",
             "language_name",
@@ -45,9 +41,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves completed task as structured advanced SERP data."
         },
@@ -56,9 +50,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves completed task as regular organic+paid results."
         },
@@ -67,9 +59,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves completed task as raw SERP HTML."
         },
@@ -78,11 +68,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "device",
             "os",
@@ -99,18 +85,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth",
-            "se_domain",
-            "search_param"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth", "se_domain", "search_param"],
           "description": "Real-time Google organic regular results (organic + paid)."
         },
         {
@@ -118,18 +94,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth",
-            "se_domain",
-            "search_param"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth", "se_domain", "search_param"],
           "description": "Real-time raw HTML of Google organic SERP page."
         },
         {
@@ -137,20 +103,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queues a Google AI Mode SERP task."
         },
         {
@@ -167,9 +121,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Google AI Mode task as structured advanced data."
         },
@@ -178,9 +130,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Google AI Mode task as raw HTML."
         },
@@ -189,16 +139,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth"],
           "description": "Real-time Google AI Mode generative answer results (advanced)."
         },
         {
@@ -206,16 +148,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth"],
           "description": "Real-time raw HTML of Google AI Mode results."
         },
         {
@@ -223,11 +157,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "location_coordinate",
             "device",
@@ -254,9 +184,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Google Maps task as structured advanced data."
         },
@@ -265,17 +193,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "location_coordinate",
-            "device",
-            "os",
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["location_coordinate", "device", "os", "depth"],
           "description": "Real-time Google Maps advanced results (map pack listings)."
         },
         {
@@ -283,11 +202,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "location_coordinate",
             "device",
@@ -314,9 +229,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Local Finder task as structured advanced data."
         },
@@ -325,9 +238,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Local Finder task as raw HTML."
         },
@@ -336,17 +247,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "location_coordinate",
-            "device",
-            "os",
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["location_coordinate", "device", "os", "depth"],
           "description": "Real-time Google Local Finder advanced local business results."
         },
         {
@@ -354,16 +256,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth"],
           "description": "Real-time raw HTML of Google Local Finder results."
         },
         {
@@ -371,20 +265,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queues a Google News SERP task (up to top 100 news results)."
         },
         {
@@ -401,9 +283,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Google News task as structured advanced data."
         },
@@ -412,9 +292,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Google News task as raw HTML."
         },
@@ -423,16 +301,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth"],
           "description": "Real-time Google News advanced results."
         },
         {
@@ -440,16 +310,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth"],
           "description": "Real-time raw HTML of Google News results."
         },
         {
@@ -457,18 +319,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "depth",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["depth", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queues a Google Events SERP task (English/desktop only, top 10)."
         },
         {
@@ -485,9 +337,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Google Events task as structured advanced data."
         },
@@ -496,14 +346,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["depth"],
           "description": "Real-time Google Events advanced results."
         },
         {
@@ -511,19 +355,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "os",
-            "depth",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["os", "depth", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queues a Google Images SERP task (desktop only, up to 100)."
         },
         {
@@ -540,9 +373,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Google Images task as structured advanced data."
         },
@@ -551,9 +382,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Google Images task as raw HTML."
         },
@@ -562,15 +391,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "os",
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["os", "depth"],
           "description": "Real-time Google Images advanced image results."
         },
         {
@@ -578,15 +400,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "os",
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["os", "depth"],
           "description": "Real-time raw HTML of Google Images results."
         },
         {
@@ -594,9 +409,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "image_url (string)"
-          ],
+          "required": ["image_url (string)"],
           "optional": [
             "location_code",
             "language_code",
@@ -622,9 +435,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves reverse-image-search task as structured advanced data (top 100)."
         },
@@ -633,9 +444,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves reverse-image-search task as raw HTML."
         },
@@ -644,18 +453,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "depth",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["depth", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queues a Google Jobs SERP task (up to 200 job listings)."
         },
         {
@@ -672,9 +471,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Google Jobs task as structured advanced data."
         },
@@ -683,9 +480,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Google Jobs task as raw HTML."
         },
@@ -694,14 +489,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["depth"],
           "description": "Real-time Google Jobs advanced results."
         },
         {
@@ -709,14 +498,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["depth"],
           "description": "Real-time raw HTML of Google Jobs results."
         },
         {
@@ -724,9 +507,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)"
-          ],
+          "required": ["keyword (string)"],
           "optional": [
             "location_code",
             "language_code",
@@ -753,9 +534,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Autocomplete task as structured advanced data."
         },
@@ -764,9 +543,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Autocomplete task as raw HTML."
         },
@@ -775,15 +552,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "location_code",
-            "language_code",
-            "cursor_pointer",
-            "client"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["location_code", "language_code", "cursor_pointer", "client"],
           "description": "Real-time Google Autocomplete suggestions (advanced)."
         },
         {
@@ -791,15 +561,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "location_code",
-            "language_code",
-            "cursor_pointer",
-            "client"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["location_code", "language_code", "cursor_pointer", "client"],
           "description": "Real-time raw HTML of Google Autocomplete."
         },
         {
@@ -807,19 +570,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "os",
-            "depth",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["os", "depth", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queues a Google Dataset Search task (top 20 datasets, desktop only)."
         },
         {
@@ -836,9 +588,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Dataset Search task as structured advanced data."
         },
@@ -847,14 +597,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["depth"],
           "description": "Real-time Google Dataset Search advanced results."
         },
         {
@@ -862,9 +606,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "dataset_id (string)"
-          ],
+          "required": ["dataset_id (string)"],
           "optional": [
             "location_code",
             "language_code",
@@ -889,9 +631,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Dataset Info task as structured advanced data."
         },
@@ -900,13 +640,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "dataset_id (string)"
-          ],
-          "optional": [
-            "location_code",
-            "language_code"
-          ],
+          "required": ["dataset_id (string)"],
+          "optional": ["location_code", "language_code"],
           "description": "Real-time Google Dataset Info detailed metadata (advanced)."
         },
         {
@@ -914,16 +649,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)"
-          ],
-          "optional": [
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["keyword (string)", "location_code (integer)"],
+          "optional": ["priority", "tag", "postback_url", "pingback_url"],
           "description": "Queues a Google Ads Transparency advertisers-search task (desktop/windows only)."
         },
         {
@@ -940,9 +667,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Ads Advertisers task as structured advanced data."
         },
@@ -951,10 +676,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)"],
           "optional": [],
           "description": "Real-time Google Ads Transparency advertiser lookup (advanced)."
         },
@@ -963,10 +685,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "advertiser_id (string)"
-          ],
+          "required": ["keyword (string)", "advertiser_id (string)"],
           "optional": [
             "target",
             "location_code",
@@ -992,9 +711,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Ads Search task as structured advanced data."
         },
@@ -1003,14 +720,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "advertiser_id (string)"
-          ],
-          "optional": [
-            "target",
-            "depth"
-          ],
+          "required": ["keyword (string)", "advertiser_id (string)"],
+          "optional": ["target", "depth"],
           "description": "Real-time Google Ads Transparency ads listing (advanced)."
         },
         {
@@ -1018,16 +729,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["location_code (integer)", "language_code (string)"],
+          "optional": ["priority", "tag", "postback_url", "pingback_url"],
           "description": "Queues a Google Finance Explore task (market trends/news)."
         },
         {
@@ -1044,9 +747,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Finance Explore task as structured advanced data."
         },
@@ -1055,9 +756,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Finance Explore task as raw HTML."
         },
@@ -1066,10 +765,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["location_code (integer)", "language_code (string)"],
           "optional": [],
           "description": "Real-time Google Finance Explore advanced results."
         },
@@ -1078,10 +774,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["location_code (integer)", "language_code (string)"],
           "optional": [],
           "description": "Real-time raw HTML of Google Finance Explore."
         },
@@ -1090,9 +783,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)"
-          ],
+          "required": ["keyword (string)"],
           "optional": [
             "location_code",
             "language_code",
@@ -1117,9 +808,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Finance Ticker Search task as structured advanced data."
         },
@@ -1128,13 +817,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "location_code",
-            "language_code"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["location_code", "language_code"],
           "description": "Real-time Google Finance ticker/instrument lookup (advanced)."
         },
         {
@@ -1142,18 +826,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "location_code (integer)",
-            "language_code (string)",
-            "market_type (string)"
-          ],
-          "optional": [
-            "trend",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["location_code (integer)", "language_code (string)", "market_type (string)"],
+          "optional": ["trend", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queues a Google Finance Markets task (Markets tab data)."
         },
         {
@@ -1170,9 +844,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Finance Markets task as structured advanced data."
         },
@@ -1181,9 +853,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Finance Markets task as raw HTML."
         },
@@ -1192,14 +862,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "location_code (integer)",
-            "language_code (string)",
-            "market_type (string)"
-          ],
-          "optional": [
-            "trend"
-          ],
+          "required": ["location_code (integer)", "language_code (string)", "market_type (string)"],
+          "optional": ["trend"],
           "description": "Real-time Google Finance Markets advanced results."
         },
         {
@@ -1207,14 +871,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "location_code (integer)",
-            "language_code (string)",
-            "market_type (string)"
-          ],
-          "optional": [
-            "trend"
-          ],
+          "required": ["location_code (integer)", "language_code (string)", "market_type (string)"],
+          "optional": ["trend"],
           "description": "Real-time raw HTML of Google Finance Markets."
         },
         {
@@ -1222,18 +880,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "window",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["window", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queues a Google Finance Quote task for a ticker symbol."
         },
         {
@@ -1250,9 +898,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Finance Quote task as structured advanced data."
         },
@@ -1261,9 +907,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Finance Quote task as raw HTML."
         },
@@ -1272,14 +916,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "window"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["window"],
           "description": "Real-time Google Finance Quote for a ticker (advanced)."
         },
         {
@@ -1287,14 +925,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "window"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["window"],
           "description": "Real-time raw HTML of Google Finance Quote."
         },
         {
@@ -1302,11 +934,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "device",
             "os",
@@ -1333,9 +961,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Bing organic task as structured advanced data."
         },
@@ -1344,9 +970,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Bing organic task as regular organic+paid results."
         },
@@ -1355,9 +979,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Bing organic task as raw HTML."
         },
@@ -1366,17 +988,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth",
-            "search_param"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth", "search_param"],
           "description": "Real-time Bing organic advanced SERP results."
         },
         {
@@ -1384,17 +997,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth",
-            "search_param"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth", "search_param"],
           "description": "Real-time Bing organic regular results."
         },
         {
@@ -1402,16 +1006,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth"],
           "description": "Real-time raw HTML of Bing organic SERP."
         },
         {
@@ -1419,11 +1015,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "device",
             "os",
@@ -1450,9 +1042,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves YouTube organic task as structured advanced data."
         },
@@ -1461,9 +1051,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves YouTube organic task as raw HTML."
         },
@@ -1472,16 +1060,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "block_depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "block_depth"],
           "description": "Real-time YouTube organic advanced search results."
         },
         {
@@ -1489,16 +1069,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "block_depth"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "block_depth"],
           "description": "Real-time raw HTML of YouTube organic search."
         },
         {
@@ -1506,9 +1078,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0018,
-          "required": [
-            "video_id (string)"
-          ],
+          "required": ["video_id (string)"],
           "optional": [
             "location_code",
             "language_code",
@@ -1533,9 +1103,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Video Info task as structured advanced data."
         },
@@ -1544,9 +1112,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Video Info task as raw HTML."
         },
@@ -1555,13 +1121,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.006,
-          "required": [
-            "video_id (string)"
-          ],
-          "optional": [
-            "location_code",
-            "language_code"
-          ],
+          "required": ["video_id (string)"],
+          "optional": ["location_code", "language_code"],
           "description": "Real-time YouTube Video Info advanced data; live price x3."
         },
         {
@@ -1569,13 +1130,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.006,
-          "required": [
-            "video_id (string)"
-          ],
-          "optional": [
-            "location_code",
-            "language_code"
-          ],
+          "required": ["video_id (string)"],
+          "optional": ["location_code", "language_code"],
           "description": "Real-time raw HTML of YouTube watch page."
         },
         {
@@ -1583,9 +1139,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0018,
-          "required": [
-            "video_id (string)"
-          ],
+          "required": ["video_id (string)"],
           "optional": [
             "subtitles_language",
             "location_code",
@@ -1611,9 +1165,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Video Subtitles task as structured advanced data."
         },
@@ -1622,12 +1174,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.006,
-          "required": [
-            "video_id (string)"
-          ],
-          "optional": [
-            "subtitles_language"
-          ],
+          "required": ["video_id (string)"],
+          "optional": ["subtitles_language"],
           "description": "Real-time YouTube video subtitles text (advanced); live price x3."
         },
         {
@@ -1635,9 +1183,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "video_id (string)"
-          ],
+          "required": ["video_id (string)"],
           "optional": [
             "depth",
             "location_code",
@@ -1663,9 +1209,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Video Comments task as structured advanced data."
         },
@@ -1674,12 +1218,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "video_id (string)"
-          ],
-          "optional": [
-            "depth"
-          ],
+          "required": ["video_id (string)"],
+          "optional": ["depth"],
           "description": "Real-time YouTube video comments (advanced)."
         },
         {
@@ -1687,11 +1227,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "device",
             "os",
@@ -1719,9 +1255,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Baidu organic task as structured advanced data."
         },
@@ -1730,9 +1264,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Baidu organic task as regular results."
         },
@@ -1741,9 +1273,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Baidu organic task as raw HTML."
         },
@@ -1752,11 +1282,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "device",
             "os",
@@ -1786,9 +1312,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Yahoo organic task as structured advanced data."
         },
@@ -1797,9 +1321,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Yahoo organic task as regular results."
         },
@@ -1808,9 +1330,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Yahoo organic task as raw HTML."
         },
@@ -1819,18 +1339,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth",
-            "se_domain",
-            "search_param"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth", "se_domain", "search_param"],
           "description": "Real-time Yahoo organic advanced SERP results."
         },
         {
@@ -1838,17 +1348,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth",
-            "se_domain"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth", "se_domain"],
           "description": "Real-time Yahoo organic regular results."
         },
         {
@@ -1856,17 +1357,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.002,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "device",
-            "os",
-            "depth",
-            "se_domain"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["device", "os", "depth", "se_domain"],
           "description": "Real-time raw HTML of Yahoo organic SERP."
         },
         {
@@ -1874,11 +1366,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "device",
             "os",
@@ -1905,9 +1393,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Seznam organic task as structured advanced data."
         },
@@ -1916,9 +1402,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Seznam organic task as regular results."
         },
@@ -1927,9 +1411,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Seznam organic task as raw HTML."
         },
@@ -1938,9 +1420,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "keyword (string)"
-          ],
+          "required": ["keyword (string)"],
           "optional": [
             "device",
             "os",
@@ -1968,9 +1448,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Naver organic task as structured advanced data."
         },
@@ -1979,9 +1457,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Naver organic task as regular results."
         },
@@ -1990,9 +1466,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Naver organic task as raw HTML."
         }
@@ -2006,9 +1480,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.06,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_name",
             "location_code",
@@ -2039,9 +1511,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve results of a completed Google Ads search volume task."
         },
@@ -2050,9 +1520,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.09,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_name",
             "location_code",
@@ -2072,9 +1540,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.06,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2102,9 +1568,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve results of a completed keywords_for_site task."
         },
@@ -2113,9 +1577,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.09,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2132,9 +1594,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.06,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2163,9 +1623,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve results of a completed keywords_for_keywords task."
         },
@@ -2174,9 +1632,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.09,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2194,11 +1650,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.06,
-          "required": [
-            "keywords (array)",
-            "bid (float)",
-            "match (string)"
-          ],
+          "required": ["keywords (array)", "bid (float)", "match (string)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2227,9 +1679,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve results of a completed ad_traffic_by_keywords task."
         },
@@ -2238,11 +1688,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.09,
-          "required": [
-            "keywords (array)",
-            "bid (float)",
-            "match (string)"
-          ],
+          "required": ["keywords (array)", "bid (float)", "match (string)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2261,9 +1707,7 @@
           "mode": "live",
           "priceUsd": 0,
           "required": [],
-          "optional": [
-            "country"
-          ],
+          "optional": ["country"],
           "description": "List all supported geo-locations for Google Ads keyword data."
         },
         {
@@ -2289,9 +1733,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.06,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2319,9 +1761,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve results of a completed Bing search volume task."
         },
@@ -2330,9 +1770,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.09,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2349,9 +1787,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.06,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2377,9 +1813,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve results of a completed Bing search_volume_history task."
         },
@@ -2388,16 +1822,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.09,
-          "required": [
-            "keywords (array)"
-          ],
-          "optional": [
-            "location_code",
-            "language_code",
-            "search_partners",
-            "device",
-            "tag"
-          ],
+          "required": ["keywords (array)"],
+          "optional": ["location_code", "language_code", "search_partners", "device", "tag"],
           "description": "Get monthly historical Bing search volume for up to 1000 keywords in real time."
         },
         {
@@ -2405,9 +1831,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.06,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2435,9 +1859,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve results of a completed Bing keywords_for_site task."
         },
@@ -2446,9 +1868,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.09,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2465,9 +1885,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.06,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2495,9 +1913,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve results of a completed Bing keywords_for_keywords task."
         },
@@ -2506,9 +1922,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.09,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2525,9 +1939,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.06,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2552,9 +1964,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve results of a completed Bing keyword_performance task."
         },
@@ -2563,15 +1973,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.09,
-          "required": [
-            "keywords (array)"
-          ],
-          "optional": [
-            "location_code",
-            "language_code",
-            "device",
-            "tag"
-          ],
+          "required": ["keywords (array)"],
+          "optional": ["location_code", "language_code", "device", "tag"],
           "description": "Get Bing keyword performance metrics (impressions, clicks, CTR, CPC) in real time."
         },
         {
@@ -2579,9 +1982,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.06,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2606,9 +2007,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve results of a completed Bing keyword_suggestions_for_url task."
         },
@@ -2617,15 +2016,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.09,
-          "required": [
-            "target (string)"
-          ],
-          "optional": [
-            "location_code",
-            "language_code",
-            "device",
-            "tag"
-          ],
+          "required": ["target (string)"],
+          "optional": ["location_code", "language_code", "device", "tag"],
           "description": "Get Bing keyword suggestions based on a target URL's content in real time."
         },
         {
@@ -2633,9 +2025,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.06,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2664,9 +2054,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve results of a completed Bing audience_estimation task."
         },
@@ -2675,9 +2063,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.09,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2696,9 +2082,7 @@
           "mode": "live",
           "priceUsd": 0,
           "required": [],
-          "optional": [
-            "country"
-          ],
+          "optional": ["country"],
           "description": "List all supported geo-locations for Bing keyword data."
         },
         {
@@ -2733,9 +2117,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0027,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2765,9 +2147,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve results of a completed Google Trends explore task."
         },
@@ -2776,9 +2156,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.011,
-          "required": [
-            "keywords (array)"
-          ],
+          "required": ["keywords (array)"],
           "optional": [
             "location_code",
             "language_code",
@@ -2798,9 +2176,7 @@
           "mode": "live",
           "priceUsd": 0,
           "required": [],
-          "optional": [
-            "country"
-          ],
+          "optional": ["country"],
           "description": "List all supported geo-locations for Google Trends data."
         },
         {
@@ -2826,17 +2202,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "keywords (array)"
-          ],
-          "optional": [
-            "location_code",
-            "type",
-            "date_from",
-            "date_to",
-            "time_range",
-            "tag"
-          ],
+          "required": ["keywords (array)"],
+          "optional": ["location_code", "type", "date_from", "date_to", "time_range", "tag"],
           "description": "Get DataForSEO Trends keyword popularity across web/news/ecommerce with historical data (up to 5 keywords)."
         },
         {
@@ -2844,17 +2211,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "keywords (array)"
-          ],
-          "optional": [
-            "location_code",
-            "type",
-            "date_from",
-            "date_to",
-            "time_range",
-            "tag"
-          ],
+          "required": ["keywords (array)"],
+          "optional": ["location_code", "type", "date_from", "date_to", "time_range", "tag"],
           "description": "Get DataForSEO Trends keyword interest broken down by subregions for up to 5 keywords."
         },
         {
@@ -2862,17 +2220,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "keywords (array)"
-          ],
-          "optional": [
-            "location_code",
-            "type",
-            "date_from",
-            "date_to",
-            "time_range",
-            "tag"
-          ],
+          "required": ["keywords (array)"],
+          "optional": ["location_code", "type", "date_from", "date_to", "time_range", "tag"],
           "description": "Get DataForSEO Trends keyword interest segmented by demographic attributes (age, gender)."
         },
         {
@@ -2880,17 +2229,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "keywords (array)"
-          ],
-          "optional": [
-            "location_code",
-            "type",
-            "date_from",
-            "date_to",
-            "time_range",
-            "tag"
-          ],
+          "required": ["keywords (array)"],
+          "optional": ["location_code", "type", "date_from", "date_to", "time_range", "tag"],
           "description": "Get merged DataForSEO Trends data (interest over time, subregions, demography) in one call."
         },
         {
@@ -2907,15 +2247,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.18,
-          "required": [
-            "keywords (array)",
-            "language_code (string)",
-            "location_code (integer)"
-          ],
-          "optional": [
-            "use_clickstream",
-            "tag"
-          ],
+          "required": ["keywords (array)", "language_code (string)", "location_code (integer)"],
+          "optional": ["use_clickstream", "tag"],
           "description": "Get clickstream-based (or Bing) search volume for up to 1000 keywords in a single location."
         },
         {
@@ -2923,13 +2256,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.18,
-          "required": [
-            "keywords (array)"
-          ],
-          "optional": [
-            "language_code",
-            "tag"
-          ],
+          "required": ["keywords (array)"],
+          "optional": ["language_code", "tag"],
           "description": "Get clickstream-based worldwide search volume with per-country distribution for up to 1000 keywords."
         },
         {
@@ -2937,15 +2265,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.012,
-          "required": [
-            "keywords (array)",
-            "language_code (string)",
-            "location_code (integer)"
-          ],
-          "optional": [
-            "use_clickstream",
-            "tag"
-          ],
+          "required": ["keywords (array)", "language_code (string)", "location_code (integer)"],
+          "optional": ["use_clickstream", "tag"],
           "description": "Get clickstream search volume for up to 1000 keywords with up to 12 months of history (also ~$0.00012 per keyword)."
         },
         {
@@ -2967,10 +2288,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.012,
-          "required": [
-            "keywords (array, max 200)",
-            "location_name|location_code (string|integer)"
-          ],
+          "required": ["keywords (array, max 200)", "location_name|location_code (string|integer)"],
           "optional": [
             "language_name",
             "language_code",
@@ -2992,9 +2310,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.012,
-          "required": [
-            "keyword (string)"
-          ],
+          "required": ["keyword (string)"],
           "optional": [
             "location_name",
             "location_code",
@@ -3044,10 +2360,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.012,
-          "required": [
-            "target (string)",
-            "location_name|location_code (string|integer)"
-          ],
+          "required": ["target (string)", "location_name|location_code (string|integer)"],
           "optional": [
             "language_name",
             "language_code",
@@ -3073,11 +2386,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "include_serp_info",
-            "include_clickstream_data",
-            "tag"
-          ],
+          "optional": ["include_serp_info", "include_clickstream_data", "tag"],
           "description": "Returns comprehensive overview metrics (search volume, difficulty, intent, SERP info) for the specified keywords."
         },
         {
@@ -3090,9 +2399,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "tag"
-          ],
+          "optional": ["tag"],
           "description": "Returns historical Google Ads search volume, CPC and competition trends for the specified keywords."
         },
         {
@@ -3105,9 +2412,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "tag"
-          ],
+          "optional": ["tag"],
           "description": "Returns the keyword difficulty score (0-100) for up to 1000 keywords in a single request."
         },
         {
@@ -3115,13 +2420,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.012,
-          "required": [
-            "keywords (array, max 1000)",
-            "language_name|language_code (string)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "required": ["keywords (array, max 1000)", "language_name|language_code (string)"],
+          "optional": ["tag"],
           "description": "Returns the search intent (informational, navigational, commercial, transactional) for the specified keywords."
         },
         {
@@ -3129,9 +2429,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.012,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_name",
             "location_code",
@@ -3226,9 +2524,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.012,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_name",
             "location_code",
@@ -3251,9 +2547,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.012,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_name",
             "location_code",
@@ -3276,9 +2570,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.012,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_name",
             "location_code",
@@ -3392,13 +2684,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.012,
-          "required": [
-            "keywords (array, max 1000)",
-            "language_name|language_code (string)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "required": ["keywords (array, max 1000)", "language_name|language_code (string)"],
+          "optional": ["tag"],
           "description": "Returns the product/service category codes associated with the specified keywords."
         },
         {
@@ -3457,11 +2744,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "date_from",
-            "date_to",
-            "tag"
-          ],
+          "optional": ["date_from", "date_to", "tag"],
           "description": "Returns historical Google SERP snapshots for a keyword over a specified date range."
         },
         {
@@ -3469,9 +2752,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.012,
-          "required": [
-            "targets (array, max 1000)"
-          ],
+          "required": ["targets (array, max 1000)"],
           "optional": [
             "location_name",
             "location_code",
@@ -3488,9 +2769,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.12,
-          "required": [
-            "targets (array, max 1000)"
-          ],
+          "required": ["targets (array, max 1000)"],
           "optional": [
             "location_name",
             "location_code",
@@ -3523,13 +2802,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "filters",
-            "order_by",
-            "limit",
-            "offset",
-            "tag"
-          ],
+          "optional": ["filters", "order_by", "limit", "offset", "tag"],
           "description": "Returns keywords that a specified Google Play app ranks for, with search metrics."
         },
         {
@@ -3542,13 +2815,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "filters",
-            "order_by",
-            "limit",
-            "offset",
-            "tag"
-          ],
+          "optional": ["filters", "order_by", "limit", "offset", "tag"],
           "description": "Returns Google Play apps competing with the target app for the same keywords, with intersection metrics."
         },
         {
@@ -3561,13 +2828,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "filters",
-            "order_by",
-            "limit",
-            "offset",
-            "tag"
-          ],
+          "optional": ["filters", "order_by", "limit", "offset", "tag"],
           "description": "Returns keywords for which the specified Google Play apps intersect (rank together) in SERPs."
         },
         {
@@ -3580,9 +2841,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "tag"
-          ],
+          "optional": ["tag"],
           "description": "Returns aggregated ranking metrics (rank distribution, keyword count, search volume) for up to 1000 Google Play apps."
         },
         {
@@ -3615,9 +2874,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.01,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_name",
             "location_code",
@@ -3641,9 +2898,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.01,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_name",
             "location_code",
@@ -3758,9 +3013,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.01,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_name",
             "location_code",
@@ -3783,9 +3036,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.01,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "location_name",
             "location_code",
@@ -3813,9 +3064,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "tag"
-          ],
+          "optional": ["tag"],
           "description": "Returns the keyword difficulty score for the specified keywords based on Bing SERPs."
         },
         {
@@ -3823,9 +3072,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.01,
-          "required": [
-            "targets (array)"
-          ],
+          "required": ["targets (array)"],
           "optional": [
             "location_name",
             "location_code",
@@ -3847,9 +3094,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "tag"
-          ],
+          "optional": ["tag"],
           "description": "Returns approximate monthly Amazon search volume for up to 1000 keywords."
         },
         {
@@ -3882,14 +3127,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "limit",
-            "ignore_synonyms",
-            "filters",
-            "order_by",
-            "offset",
-            "tag"
-          ],
+          "optional": ["limit", "ignore_synonyms", "filters", "order_by", "offset", "tag"],
           "description": "Returns keywords that a specified Amazon product (ASIN) ranks for, with search metrics."
         },
         {
@@ -3902,9 +3140,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "tag"
-          ],
+          "optional": ["tag"],
           "description": "Returns rank distribution and keyword/search-volume overview for up to 1000 Amazon products (ASINs)."
         },
         {
@@ -3917,13 +3153,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "limit",
-            "filters",
-            "order_by",
-            "offset",
-            "tag"
-          ],
+          "optional": ["limit", "filters", "order_by", "offset", "tag"],
           "description": "Returns competitor Amazon products ranking for the same keywords as the target ASIN, with intersection metrics."
         },
         {
@@ -3936,14 +3166,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "limit",
-            "intersection_mode",
-            "filters",
-            "order_by",
-            "offset",
-            "tag"
-          ],
+          "optional": ["limit", "intersection_mode", "filters", "order_by", "offset", "tag"],
           "description": "Returns keywords for which the specified Amazon products intersect (rank together) in Amazon SERPs."
         },
         {
@@ -3956,13 +3179,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "filters",
-            "order_by",
-            "limit",
-            "offset",
-            "tag"
-          ],
+          "optional": ["filters", "order_by", "limit", "offset", "tag"],
           "description": "Returns keywords that a specified Apple App Store app ranks for, with search metrics."
         },
         {
@@ -3975,13 +3192,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "filters",
-            "order_by",
-            "limit",
-            "offset",
-            "tag"
-          ],
+          "optional": ["filters", "order_by", "limit", "offset", "tag"],
           "description": "Returns App Store apps competing with the target app for the same keywords, with intersection metrics."
         },
         {
@@ -3994,13 +3205,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "filters",
-            "order_by",
-            "limit",
-            "offset",
-            "tag"
-          ],
+          "optional": ["filters", "order_by", "limit", "offset", "tag"],
           "description": "Returns keywords for which the specified App Store apps intersect (rank together) in SERPs."
         },
         {
@@ -4013,9 +3218,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "tag"
-          ],
+          "optional": ["tag"],
           "description": "Returns aggregated ranking metrics for up to 1000 Apple App Store apps."
         },
         {
@@ -4059,16 +3262,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0,
-          "required": [
-            "datetime_from (string, UTC)",
-            "datetime_to (string, UTC)"
-          ],
-          "optional": [
-            "limit",
-            "offset",
-            "sort",
-            "include_metadata"
-          ],
+          "required": ["datetime_from (string, UTC)", "datetime_to (string, UTC)"],
+          "optional": ["limit", "offset", "sort", "include_metadata"],
           "description": "Returns IDs and metadata for all Labs tasks created within a specified time period; free."
         },
         {
@@ -4077,13 +3272,7 @@
           "mode": "live",
           "priceUsd": 0,
           "required": [],
-          "optional": [
-            "limit",
-            "offset",
-            "filtered_function",
-            "datetime_from",
-            "datetime_to"
-          ],
+          "optional": ["limit", "offset", "filtered_function", "datetime_from", "datetime_to"],
           "description": "Returns information about Labs tasks that returned errors within the past 7 days; free."
         }
       ]
@@ -4096,9 +3285,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "include_subdomains (boolean)",
             "include_indirect_links (boolean)",
@@ -4116,15 +3303,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "target (string)"
-          ],
-          "optional": [
-            "date_from",
-            "date_to",
-            "rank_scale",
-            "tag"
-          ],
+          "required": ["target (string)"],
+          "optional": ["date_from", "date_to", "rank_scale", "tag"],
           "description": "Month-by-month historical backlink and referring domain metrics for a domain from January 2019 onward."
         },
         {
@@ -4132,9 +3312,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "mode",
             "custom_mode",
@@ -4157,9 +3335,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "limit",
             "offset",
@@ -4180,9 +3356,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "limit",
             "offset",
@@ -4203,9 +3377,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "limit",
             "offset",
@@ -4226,9 +3398,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "limit",
             "offset",
@@ -4249,9 +3419,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "network_address_type",
             "limit",
@@ -4273,9 +3441,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "limit",
             "offset",
@@ -4294,9 +3460,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "targets (object)"
-          ],
+          "required": ["targets (object)"],
           "optional": [
             "exclude_targets",
             "limit",
@@ -4318,9 +3482,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "targets (object)"
-          ],
+          "required": ["targets (object)"],
           "optional": [
             "exclude_targets",
             "limit",
@@ -4343,9 +3505,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [
             "date_from",
             "date_to",
@@ -4361,16 +3521,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "target (string)"
-          ],
-          "optional": [
-            "date_from",
-            "date_to",
-            "group_range",
-            "include_subdomains",
-            "tag"
-          ],
+          "required": ["target (string)"],
+          "optional": ["date_from", "date_to", "group_range", "include_subdomains", "tag"],
           "description": "Counts of new and lost backlinks and referring domains for a target grouped over a chosen time range."
         },
         {
@@ -4378,13 +3530,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "targets (array)"
-          ],
-          "optional": [
-            "rank_scale",
-            "tag"
-          ],
+          "required": ["targets (array)"],
+          "optional": ["rank_scale", "tag"],
           "description": "Backlink rank scores (0-1000 or 0-100) for up to 1,000 domains, subdomains or pages in one request."
         },
         {
@@ -4392,12 +3539,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "targets (array)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "required": ["targets (array)"],
+          "optional": ["tag"],
           "description": "Total number of live backlinks pointing to up to 1,000 targets."
         },
         {
@@ -4405,12 +3548,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "targets (array)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "required": ["targets (array)"],
+          "optional": ["tag"],
           "description": "Spam scores (0-100) for up to 1,000 domains, subdomains or pages."
         },
         {
@@ -4418,12 +3557,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "targets (array)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "required": ["targets (array)"],
+          "optional": ["tag"],
           "description": "Count of referring domains pointing to up to 1,000 targets."
         },
         {
@@ -4431,13 +3566,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "targets (array)"
-          ],
-          "optional": [
-            "date_from",
-            "tag"
-          ],
+          "required": ["targets (array)"],
+          "optional": ["date_from", "tag"],
           "description": "Counts of new and lost backlinks for up to 1,000 targets over a period (up to 365 days)."
         },
         {
@@ -4445,13 +3575,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "targets (array)"
-          ],
-          "optional": [
-            "date_from",
-            "tag"
-          ],
+          "required": ["targets (array)"],
+          "optional": ["date_from", "tag"],
           "description": "Counts of new and lost referring domains for up to 1,000 targets over a period (up to 365 days)."
         },
         {
@@ -4459,14 +3584,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.02,
-          "required": [
-            "targets (array)"
-          ],
-          "optional": [
-            "include_subdomains",
-            "rank_scale",
-            "tag"
-          ],
+          "required": ["targets (array)"],
+          "optional": ["include_subdomains", "rank_scale", "tag"],
           "description": "Summary backlink metrics for up to 1,000 pages/domains (max 100 distinct domains) in one request."
         },
         {
@@ -4474,16 +3593,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0,
-          "required": [
-            "datetime_from (string)",
-            "datetime_to (string)"
-          ],
-          "optional": [
-            "limit",
-            "offset",
-            "sort",
-            "include_metadata"
-          ],
+          "required": ["datetime_from (string)", "datetime_to (string)"],
+          "optional": ["limit", "offset", "sort", "include_metadata"],
           "description": "Free list of task IDs and metadata for previously set Backlinks API tasks within a datetime range."
         },
         {
@@ -4492,13 +3603,7 @@
           "mode": "live",
           "priceUsd": 0,
           "required": [],
-          "optional": [
-            "limit",
-            "offset",
-            "filtered_function",
-            "datetime_from",
-            "datetime_to"
-          ],
+          "optional": ["limit", "offset", "filtered_function", "datetime_from", "datetime_to"],
           "description": "Free list of Backlinks API tasks that returned errors within the past 7 days."
         },
         {
@@ -4529,10 +3634,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.000125,
-          "required": [
-            "target (string)",
-            "max_crawl_pages (int)"
-          ],
+          "required": ["target (string)", "max_crawl_pages (int)"],
           "optional": [
             "start_url",
             "force_sitewide_checks",
@@ -4566,9 +3668,7 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Stops an active crawl for the specified task id; data collected before stopping stays available."
         },
@@ -4586,9 +3686,7 @@
           "method": "GET",
           "mode": "get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Returns overall crawl progress and aggregated on-page metrics for a task (SSL, checks, scores)."
         },
@@ -4597,17 +3695,8 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
-          "optional": [
-            "limit",
-            "offset",
-            "filters",
-            "order_by",
-            "search_after_token",
-            "tag"
-          ],
+          "required": ["id (string)"],
+          "optional": ["limit", "offset", "filters", "order_by", "search_after_token", "tag"],
           "description": "Returns a list of crawled pages with on-page optimization metrics and performance data."
         },
         {
@@ -4615,17 +3704,8 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)",
-            "url (string)"
-          ],
-          "optional": [
-            "limit",
-            "offset",
-            "filters",
-            "order_by",
-            "tag"
-          ],
+          "required": ["id (string)", "url (string)"],
+          "optional": ["limit", "offset", "filters", "order_by", "tag"],
           "description": "Returns pages that contain a specified resource, with page metrics and optimization data."
         },
         {
@@ -4633,9 +3713,7 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [
             "url",
             "limit",
@@ -4652,16 +3730,8 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)",
-            "type (string)"
-          ],
-          "optional": [
-            "accumulator",
-            "limit",
-            "offset",
-            "tag"
-          ],
+          "required": ["id (string)", "type (string)"],
+          "optional": ["accumulator", "limit", "offset", "tag"],
           "description": "Returns pages that share duplicate title or description tags along with page metrics."
         },
         {
@@ -4669,16 +3739,8 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)",
-            "url (string)"
-          ],
-          "optional": [
-            "similarity",
-            "limit",
-            "offset",
-            "tag"
-          ],
+          "required": ["id (string)", "url (string)"],
+          "optional": ["similarity", "limit", "offset", "tag"],
           "description": "Returns pages with content similar to a specified page using the SimHash algorithm."
         },
         {
@@ -4686,9 +3748,7 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [
             "page_from",
             "page_to",
@@ -4705,16 +3765,8 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
-          "optional": [
-            "url",
-            "limit",
-            "offset",
-            "filters",
-            "tag"
-          ],
+          "required": ["id (string)"],
+          "optional": ["url", "limit", "offset", "filters", "tag"],
           "description": "Returns redirect chains (sequences of 2+ redirects) and detects redirect loops on crawled pages."
         },
         {
@@ -4722,15 +3774,8 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
-          "optional": [
-            "limit",
-            "offset",
-            "filters",
-            "tag"
-          ],
+          "required": ["id (string)"],
+          "optional": ["limit", "offset", "filters", "tag"],
           "description": "Returns pages blocked from indexing via robots.txt, HTTP headers, or meta tags, with reasons."
         },
         {
@@ -4738,13 +3783,8 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)",
-            "url (string)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "required": ["id (string)", "url (string)"],
+          "optional": ["tag"],
           "description": "Returns detailed page speed and resource timing (waterfall) metrics for a specified page."
         },
         {
@@ -4752,17 +3792,8 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)",
-            "keyword_length (int)"
-          ],
-          "optional": [
-            "url",
-            "limit",
-            "filters",
-            "order_by",
-            "tag"
-          ],
+          "required": ["id (string)", "keyword_length (int)"],
+          "optional": ["url", "limit", "filters", "order_by", "tag"],
           "description": "Returns keyword frequency and density metrics (requires calculate_keyword_density in Task POST)."
         },
         {
@@ -4770,13 +3801,8 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)",
-            "url (string)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "required": ["id (string)", "url (string)"],
+          "optional": ["tag"],
           "description": "Validates JSON-LD and Microdata structured data on a page, returning elements and validation results."
         },
         {
@@ -4784,13 +3810,8 @@
           "method": "POST",
           "mode": "post",
           "priceUsd": 0,
-          "required": [
-            "id (string)",
-            "url (string)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "required": ["id (string)", "url (string)"],
+          "optional": ["tag"],
           "description": "Returns the stored raw HTML of a crawled page (requires store_raw_html in Task POST)."
         },
         {
@@ -4798,9 +3819,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "url (string)"
-          ],
+          "required": ["url (string)"],
           "optional": [
             "full_page_screenshot",
             "browser_preset",
@@ -4818,9 +3837,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.000125,
-          "required": [
-            "url (string)"
-          ],
+          "required": ["url (string)"],
           "optional": [
             "enable_javascript",
             "enable_browser_rendering",
@@ -4840,9 +3857,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.000125,
-          "required": [
-            "url (string)"
-          ],
+          "required": ["url (string)"],
           "optional": [
             "custom_user_agent",
             "browser_preset",
@@ -4865,9 +3880,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.005,
-          "required": [
-            "url (string)"
-          ],
+          "required": ["url (string)"],
           "optional": [
             "for_mobile",
             "categories",
@@ -4895,9 +3908,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves Lighthouse audit results for a previously submitted task by id."
         },
@@ -4906,9 +3917,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.005,
-          "required": [
-            "url (string)"
-          ],
+          "required": ["url (string)"],
           "optional": [
             "for_mobile",
             "categories",
@@ -4958,9 +3967,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.024,
-          "required": [
-            "keyword (string)"
-          ],
+          "required": ["keyword (string)"],
           "optional": [
             "keyword_fields",
             "page_type",
@@ -4979,9 +3986,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.024,
-          "required": [
-            "keyword (string)"
-          ],
+          "required": ["keyword (string)"],
           "optional": [
             "page_type",
             "internal_list_limit",
@@ -4995,9 +4000,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.024,
-          "required": [
-            "keyword (string)"
-          ],
+          "required": ["keyword (string)"],
           "optional": [
             "page_type",
             "positive_connotation_threshold",
@@ -5011,9 +4014,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.024,
-          "required": [
-            "keyword (string)"
-          ],
+          "required": ["keyword (string)"],
           "optional": [
             "page_type",
             "rating_type",
@@ -5027,10 +4028,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.024,
-          "required": [
-            "keyword (string)",
-            "date_from (string)"
-          ],
+          "required": ["keyword (string)", "date_from (string)"],
           "optional": [
             "date_to",
             "date_group",
@@ -5046,9 +4044,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.024,
-          "required": [
-            "category_code (integer)"
-          ],
+          "required": ["category_code (integer)"],
           "optional": [
             "date_from",
             "date_to",
@@ -5073,15 +4069,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0,
-          "required": [
-            "datetime_from (string)",
-            "datetime_to (string)"
-          ],
-          "optional": [
-            "limit",
-            "offset",
-            "include_metadata"
-          ],
+          "required": ["datetime_from (string)", "datetime_to (string)"],
+          "optional": ["limit", "offset", "include_metadata"],
           "description": "Returns task IDs and metadata for Content Analysis tasks created in a time range (free helper)."
         },
         {
@@ -5117,10 +4106,7 @@
           "mode": "live",
           "priceUsd": 0,
           "required": [],
-          "optional": [
-            "limit",
-            "offset"
-          ],
+          "optional": ["limit", "offset"],
           "description": "Returns the list of errors that occurred during Content Analysis task processing (free helper)."
         }
       ]
@@ -5132,11 +4118,8 @@
           "path": "/v3/content_generation/generate/live",
           "method": "POST",
           "mode": "live",
-          "priceUsd": 5e-05,
-          "required": [
-            "text (string)",
-            "max_new_tokens|max_tokens (integer)"
-          ],
+          "priceUsd": 5e-5,
+          "required": ["text (string)", "max_new_tokens|max_tokens (integer)"],
           "optional": [
             "creativity_index",
             "token_repetition_penalty",
@@ -5153,11 +4136,8 @@
           "path": "/v3/content_generation/generate_text/live",
           "method": "POST",
           "mode": "live",
-          "priceUsd": 5e-05,
-          "required": [
-            "topic (string)",
-            "word_count (integer)"
-          ],
+          "priceUsd": 5e-5,
+          "required": ["topic (string)", "word_count (integer)"],
           "optional": [
             "sub_topics",
             "description",
@@ -5174,13 +4154,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.001,
-          "required": [
-            "text (string)"
-          ],
-          "optional": [
-            "creativity_index",
-            "tag"
-          ],
+          "required": ["text (string)"],
+          "optional": ["creativity_index", "tag"],
           "description": "Generates title and description meta tags for a text (1-500 tokens); $0.001 per task. DEPRECATED/removed from current docs."
         },
         {
@@ -5188,13 +4163,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.0001,
-          "required": [
-            "topic (string)"
-          ],
-          "optional": [
-            "creativity_index",
-            "tag"
-          ],
+          "required": ["topic (string)"],
+          "optional": ["creativity_index", "tag"],
           "description": "Generates 10 subtopics for a specified topic (1-50 tokens); $0.0001 per task. DEPRECATED/removed from current docs."
         },
         {
@@ -5202,27 +4172,17 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.00015,
-          "required": [
-            "text (string)",
-            "creativity_index (float)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "required": ["text (string)", "creativity_index (float)"],
+          "optional": ["tag"],
           "description": "Rewrites (paraphrases) the specified text (1-500 tokens); $0.00015 per request token. DEPRECATED/removed from current docs."
         },
         {
           "path": "/v3/content_generation/check_grammar/live",
           "method": "POST",
           "mode": "live",
-          "priceUsd": 1e-05,
-          "required": [
-            "text (string)",
-            "language_code|language_name (string)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "priceUsd": 1e-5,
+          "required": ["text (string)", "language_code|language_name (string)"],
+          "optional": ["tag"],
           "description": "Provides grammar and spelling corrections for the text (1-10000 tokens); $0.00001 per request token. DEPRECATED/removed from current docs."
         },
         {
@@ -5248,14 +4208,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.001,
-          "required": [
-            "text (string)",
-            "language_name|language_code (string)"
-          ],
-          "optional": [
-            "internal_list_limit",
-            "tag"
-          ],
+          "required": ["text (string)", "language_name|language_code (string)"],
+          "optional": ["internal_list_limit", "tag"],
           "description": "Analyzes text (1-10000 tokens) returning word/sentence counts, vocabulary density, readability and keyword-density metrics; $0.001 per task. Only Content Generation endpoint still in current docs."
         },
         {
@@ -5277,11 +4231,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0015,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "depth",
             "max_crawl_pages",
@@ -5311,9 +4261,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Amazon product results by task id."
         },
@@ -5322,9 +4270,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve raw HTML Amazon product results by task id."
         },
@@ -5333,19 +4279,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.005,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "depth",
-            "sort_by",
-            "price_min",
-            "price_max",
-            "department",
-            "se_domain"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["depth", "sort_by", "price_min", "price_max", "department", "se_domain"],
           "description": "Return advanced Amazon product results in real time."
         },
         {
@@ -5353,15 +4288,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.005,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "depth",
-            "se_domain"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["depth", "se_domain"],
           "description": "Return raw HTML Amazon product results in real time."
         },
         {
@@ -5369,18 +4297,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0015,
-          "required": [
-            "asin (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "se_domain",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["asin (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["se_domain", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queue a task to retrieve Amazon product details by ASIN."
         },
         {
@@ -5397,9 +4315,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Amazon ASIN results by task id."
         },
@@ -5408,9 +4324,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve raw HTML Amazon ASIN results by task id."
         },
@@ -5419,14 +4333,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.005,
-          "required": [
-            "asin (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "se_domain"
-          ],
+          "required": ["asin (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["se_domain"],
           "description": "Return advanced Amazon ASIN product details in real time."
         },
         {
@@ -5434,14 +4342,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.005,
-          "required": [
-            "asin (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "se_domain"
-          ],
+          "required": ["asin (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["se_domain"],
           "description": "Return raw HTML Amazon ASIN product page in real time."
         },
         {
@@ -5449,18 +4351,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0015,
-          "required": [
-            "asin (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "se_domain",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["asin (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["se_domain", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queue a task to list sellers of a specified Amazon product (by ASIN)."
         },
         {
@@ -5477,9 +4369,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Amazon sellers results by task id."
         },
@@ -5488,9 +4378,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve raw HTML Amazon sellers results by task id."
         },
@@ -5499,14 +4387,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.005,
-          "required": [
-            "asin (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "se_domain"
-          ],
+          "required": ["asin (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["se_domain"],
           "description": "Return advanced Amazon sellers list in real time."
         },
         {
@@ -5514,14 +4396,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.005,
-          "required": [
-            "asin (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "se_domain"
-          ],
+          "required": ["asin (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["se_domain"],
           "description": "Return raw HTML Amazon sellers page in real time."
         },
         {
@@ -5529,11 +4405,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0015,
-          "required": [
-            "asin (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["asin (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "depth",
             "sort_by",
@@ -5563,9 +4435,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Amazon reviews results by task id."
         },
@@ -5574,9 +4444,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve raw HTML Amazon reviews results by task id."
         },
@@ -5603,11 +4471,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.001,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "price_min",
             "price_max",
@@ -5638,9 +4502,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Google Shopping product results by task id."
         },
@@ -5649,9 +4511,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve raw HTML Google Shopping product results by task id."
         },
@@ -5660,18 +4520,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.001,
-          "required": [
-            "product_id (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "se_domain",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["product_id (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["se_domain", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queue a task to retrieve details/specifications of a Google Shopping product page."
         },
         {
@@ -5688,9 +4538,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Google Shopping product_info results by task id."
         },
@@ -5699,11 +4547,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.001,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["keyword (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "price_min",
             "price_max",
@@ -5731,9 +4575,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Google Shopping sellers results by task id."
         },
@@ -5741,10 +4583,8 @@
           "path": "/v3/merchant/google/sellers/ad_url",
           "method": "GET",
           "mode": "live",
-          "priceUsd": 1e-06,
-          "required": [
-            "url (string)"
-          ],
+          "priceUsd": 1e-6,
+          "required": ["url (string)"],
           "optional": [],
           "description": "Resolve a Google Shopping seller ad redirect to its destination URL in real time."
         },
@@ -5753,11 +4593,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.00075,
-          "required": [
-            "product_id (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["product_id (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "depth",
             "sort_by",
@@ -5783,9 +4619,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Google Shopping reviews results by task id."
         },
@@ -5817,18 +4651,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0012,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)"
-          ],
-          "optional": [
-            "language_code",
-            "depth",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["keyword (string)", "location_code (integer)"],
+          "optional": ["language_code", "depth", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queue a task to search Google Play apps by keyword."
         },
         {
@@ -5845,9 +4669,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Google Play app search results by task id."
         },
@@ -5856,9 +4678,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve raw HTML Google Play app search results by task id."
         },
@@ -5867,11 +4687,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0012,
-          "required": [
-            "category (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["category (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "app_collection",
             "depth",
@@ -5896,9 +4712,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Google Play top-chart results by task id."
         },
@@ -5907,9 +4721,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve raw HTML Google Play top-chart results by task id."
         },
@@ -5918,17 +4730,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "app_id (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["app_id (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["priority", "tag", "postback_url", "pingback_url"],
           "description": "Queue a task to retrieve detailed Google Play app info by app_id."
         },
         {
@@ -5945,9 +4748,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Google Play app info by task id."
         },
@@ -5956,9 +4757,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve raw HTML Google Play app info by task id."
         },
@@ -5967,11 +4766,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.00075,
-          "required": [
-            "app_id (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["app_id (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "depth",
             "rating",
@@ -5997,9 +4792,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Google Play reviews by task id."
         },
@@ -6063,18 +4856,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0012,
-          "required": [
-            "keyword (string)",
-            "location_code (integer)"
-          ],
-          "optional": [
-            "language_code",
-            "depth",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["keyword (string)", "location_code (integer)"],
+          "optional": ["language_code", "depth", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queue a task to search Apple App Store apps by keyword."
         },
         {
@@ -6091,9 +4874,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Apple App Store app search results by task id."
         },
@@ -6102,11 +4883,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0012,
-          "required": [
-            "category (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
+          "required": ["category (string)", "location_code (integer)", "language_code (string)"],
           "optional": [
             "app_collection",
             "depth",
@@ -6131,9 +4908,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Apple App Store top-chart results by task id."
         },
@@ -6142,17 +4917,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.0006,
-          "required": [
-            "app_id (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["app_id (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["priority", "tag", "postback_url", "pingback_url"],
           "description": "Queue a task to retrieve detailed Apple App Store app info by app_id."
         },
         {
@@ -6169,9 +4935,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Apple App Store app info by task id."
         },
@@ -6180,19 +4944,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.00075,
-          "required": [
-            "app_id (string)",
-            "location_code (integer)",
-            "language_code (string)"
-          ],
-          "optional": [
-            "depth",
-            "sort_by",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["app_id (string)", "location_code (integer)", "language_code (string)"],
+          "optional": ["depth", "sort_by", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Queue a task to retrieve Apple App Store user reviews by app_id."
         },
         {
@@ -6209,9 +4962,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieve structured (advanced) Apple App Store reviews by task id."
         },
@@ -6285,12 +5036,7 @@
             "location_name|location_code|location_coordinate (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "optional": ["priority", "tag", "postback_url", "pingback_url"],
           "description": "Sets a task to retrieve Google Business Profile info (rating, address, hours, attributes) for a business."
         },
         {
@@ -6307,9 +5053,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves results of a completed My Business Info task by task id."
         },
@@ -6323,9 +5067,7 @@
             "location_name|location_code|location_coordinate (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "tag"
-          ],
+          "optional": ["tag"],
           "description": "Returns Google Business Profile info immediately without separate POST/GET."
         },
         {
@@ -6338,13 +5080,7 @@
             "location_name|location_code|location_coordinate (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "priority",
-            "depth",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "optional": ["priority", "depth", "tag", "postback_url", "pingback_url"],
           "description": "Sets a task to fetch posts/updates published on a Google Business Profile."
         },
         {
@@ -6361,9 +5097,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves results of a completed My Business Updates task by task id."
         },
@@ -6377,14 +5111,7 @@
             "location_name|location_code|location_coordinate (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "depth",
-            "sort_by",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "optional": ["depth", "sort_by", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Sets a task to collect Google reviews (up to depth 4490) for a business; billed per 10 reviews."
         },
         {
@@ -6401,9 +5128,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves results of a completed Google Reviews task by task id."
         },
@@ -6417,13 +5142,7 @@
             "location_name|location_code|location_coordinate (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "depth",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "optional": ["depth", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Sets a task to collect Google reviews plus third-party reviews (Tripadvisor, Yelp); billed per 20 reviews."
         },
         {
@@ -6440,9 +5159,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves results of a completed Extended Reviews task by task id."
         },
@@ -6456,13 +5173,7 @@
             "location_name|location_code|location_coordinate (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "depth",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "optional": ["depth", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Sets a task to collect questions and answers from a Google Business Profile; billed per SERP of 20."
         },
         {
@@ -6479,9 +5190,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves results of a completed Questions and Answers task by task id."
         },
@@ -6495,10 +5204,7 @@
             "location_name|location_code|location_coordinate (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "depth",
-            "tag"
-          ],
+          "optional": ["depth", "tag"],
           "description": "Returns questions and answers for a Google Business Profile immediately."
         },
         {
@@ -6546,9 +5252,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves results of a completed Hotel Searches task by task id."
         },
@@ -6621,9 +5325,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves structured (advanced) results of a completed Hotel Info task by task id."
         },
@@ -6632,9 +5334,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves raw HTML of a completed Hotel Info task by task id."
         },
@@ -6672,14 +5372,7 @@
             "location_name|location_code|location_coordinate (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "check_in",
-            "check_out",
-            "currency",
-            "adults",
-            "children",
-            "tag"
-          ],
+          "optional": ["check_in", "check_out", "currency", "adults", "children", "tag"],
           "description": "Returns raw HTML of a Google Hotels entity page immediately."
         },
         {
@@ -6687,16 +5380,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": null,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "priority",
-            "depth",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["priority", "depth", "tag", "postback_url", "pingback_url"],
           "description": "Sets a task to search Trustpilot for business profiles by name/category; billed per 10 results."
         },
         {
@@ -6713,9 +5398,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves results of a completed Trustpilot Search task by task id."
         },
@@ -6724,17 +5407,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": null,
-          "required": [
-            "domain (string)"
-          ],
-          "optional": [
-            "depth",
-            "sort_by",
-            "priority",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["domain (string)"],
+          "optional": ["depth", "sort_by", "priority", "tag", "postback_url", "pingback_url"],
           "description": "Sets a task to collect Trustpilot reviews for a business domain; billed per 20 reviews."
         },
         {
@@ -6751,9 +5425,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves results of a completed Trustpilot Reviews task by task id."
         },
@@ -6762,17 +5434,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": null,
-          "required": [
-            "keyword (string)",
-            "location_name|location_code (string|integer)"
-          ],
-          "optional": [
-            "priority",
-            "depth",
-            "tag",
-            "postback_url",
-            "pingback_url"
-          ],
+          "required": ["keyword (string)", "location_name|location_code (string|integer)"],
+          "optional": ["priority", "depth", "tag", "postback_url", "pingback_url"],
           "description": "Sets a task to search Tripadvisor for businesses/places by keyword; billed per 30 results."
         },
         {
@@ -6789,9 +5452,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves results of a completed Tripadvisor Search task by task id."
         },
@@ -6800,10 +5461,7 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": null,
-          "required": [
-            "url_path|keyword (string)",
-            "location_name|location_code (string|integer)"
-          ],
+          "required": ["url_path|keyword (string)", "location_name|location_code (string|integer)"],
           "optional": [
             "depth",
             "sort_by",
@@ -6835,9 +5493,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves results of a completed Tripadvisor Reviews task by task id."
         },
@@ -6845,39 +5501,27 @@
           "path": "/v3/business_data/social_media/pinterest/live",
           "method": "POST",
           "mode": "live",
-          "priceUsd": 4e-05,
-          "required": [
-            "targets (array)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "priceUsd": 4e-5,
+          "required": ["targets (array)"],
+          "optional": ["tag"],
           "description": "Returns Pinterest pin (save) counts for up to 10 target page URLs; billed per URL."
         },
         {
           "path": "/v3/business_data/social_media/facebook/live",
           "method": "POST",
           "mode": "live",
-          "priceUsd": 4e-05,
-          "required": [
-            "targets (array)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "priceUsd": 4e-5,
+          "required": ["targets (array)"],
+          "optional": ["tag"],
           "description": "Returns Facebook like/share counts for target page URLs (deprecated; no longer listed in current docs)."
         },
         {
           "path": "/v3/business_data/social_media/reddit/live",
           "method": "POST",
           "mode": "live",
-          "priceUsd": 4e-05,
-          "required": [
-            "targets (array)"
-          ],
-          "optional": [
-            "tag"
-          ],
+          "priceUsd": 4e-5,
+          "required": ["targets (array)"],
+          "optional": ["tag"],
           "description": "Returns Reddit share/interaction counts for target page URLs (deprecated; no longer listed in current docs)."
         },
         {
@@ -6938,9 +5582,7 @@
           "mode": "live",
           "priceUsd": 0,
           "required": [],
-          "optional": [
-            "country"
-          ],
+          "optional": ["country"],
           "description": "Reference endpoint returning locations supported by the Business Listings database."
         },
         {
@@ -6949,9 +5591,7 @@
           "mode": "live",
           "priceUsd": 0,
           "required": [],
-          "optional": [
-            "country"
-          ],
+          "optional": ["country"],
           "description": "Reference endpoint returning locations supported by the Google business data endpoints."
         },
         {
@@ -7010,12 +5650,7 @@
           "mode": "live",
           "priceUsd": 0.01,
           "required": [],
-          "optional": [
-            "filters",
-            "internal_list_limit",
-            "limit",
-            "offset"
-          ],
+          "optional": ["filters", "internal_list_limit", "limit", "offset"],
           "description": "Returns aggregated counts of domains grouped by technology, category, or group across the database."
         },
         {
@@ -7024,10 +5659,7 @@
           "mode": "live",
           "priceUsd": 0.01,
           "required": [],
-          "optional": [
-            "filters",
-            "group_by"
-          ],
+          "optional": ["filters", "group_by"],
           "description": "Returns a summary of the number of domains matching the specified technology filters."
         },
         {
@@ -7035,14 +5667,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.01,
-          "required": [
-            "date_from (string)"
-          ],
-          "optional": [
-            "date_to",
-            "technologies",
-            "categories"
-          ],
+          "required": ["date_from (string)"],
+          "optional": ["date_to", "technologies", "categories"],
           "description": "Returns historical statistics on the spread and adoption of specified technologies over time."
         },
         {
@@ -7053,13 +5679,7 @@
           "required": [
             "technology_paths|groups|categories|technologies|keywords (array, at least one)"
           ],
-          "optional": [
-            "filters",
-            "order_by",
-            "limit",
-            "offset",
-            "offset_token"
-          ],
+          "optional": ["filters", "order_by", "limit", "offset", "offset_token"],
           "description": "Returns domains using specified technologies with tech profiles, metadata, country/language, and contacts (+$0.001 per returned domain)."
         },
         {
@@ -7067,16 +5687,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.01,
-          "required": [
-            "search_terms (array)"
-          ],
-          "optional": [
-            "filters",
-            "order_by",
-            "limit",
-            "offset",
-            "offset_token"
-          ],
+          "required": ["search_terms (array)"],
+          "optional": ["filters", "order_by", "limit", "offset", "offset_token"],
           "description": "Returns domains whose HTML source contains the specified terms/snippets (+$0.001 per returned domain)."
         },
         {
@@ -7084,9 +5696,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.01,
-          "required": [
-            "target (string)"
-          ],
+          "required": ["target (string)"],
           "optional": [],
           "description": "Returns the full technology stack (CMS, frameworks, servers, libraries, etc.) detected for a single domain."
         },
@@ -7105,13 +5715,7 @@
           "mode": "live",
           "priceUsd": 0.01,
           "required": [],
-          "optional": [
-            "limit",
-            "offset",
-            "filters",
-            "order_by",
-            "offset_token"
-          ],
+          "optional": ["limit", "offset", "filters", "order_by", "offset_token"],
           "description": "Returns WHOIS registration data enriched with organic/paid ranking, traffic, and backlink metrics for domains matching filters (+$0.001 per returned domain)."
         }
       ]
@@ -7133,10 +5737,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.0006,
-          "required": [
-            "user_prompt (string)",
-            "model_name (string)"
-          ],
+          "required": ["user_prompt (string)", "model_name (string)"],
           "optional": [
             "max_output_tokens",
             "web_search",
@@ -7151,17 +5752,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.01,
-          "required": [
-            "user_prompt (string)",
-            "model_name (string)"
-          ],
-          "optional": [
-            "web_search",
-            "max_output_tokens",
-            "tag",
-            "pingback_url",
-            "postback_url"
-          ],
+          "required": ["user_prompt (string)", "model_name (string)"],
+          "optional": ["web_search", "max_output_tokens", "tag", "pingback_url", "postback_url"],
           "description": "Queues a ChatGPT LLM response task ($0.01 prepayment, refunded to actual cost)."
         },
         {
@@ -7178,9 +5770,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves the result of a previously posted ChatGPT LLM response task."
         },
@@ -7198,10 +5788,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.0006,
-          "required": [
-            "user_prompt (string)",
-            "model_name (string)"
-          ],
+          "required": ["user_prompt (string)", "model_name (string)"],
           "optional": [
             "max_output_tokens",
             "web_search",
@@ -7216,16 +5803,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.01,
-          "required": [
-            "user_prompt (string)",
-            "model_name (string)"
-          ],
-          "optional": [
-            "web_search",
-            "max_output_tokens",
-            "tag",
-            "postback_url"
-          ],
+          "required": ["user_prompt (string)", "model_name (string)"],
+          "optional": ["web_search", "max_output_tokens", "tag", "postback_url"],
           "description": "Queues a Claude LLM response task ($0.01 prepayment, refunded to actual cost)."
         },
         {
@@ -7242,9 +5821,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves the result of a previously posted Claude LLM response task."
         },
@@ -7262,10 +5839,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.0006,
-          "required": [
-            "user_prompt (string)",
-            "model_name (string)"
-          ],
+          "required": ["user_prompt (string)", "model_name (string)"],
           "optional": [
             "max_output_tokens",
             "web_search",
@@ -7280,16 +5854,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": 0.01,
-          "required": [
-            "user_prompt (string)",
-            "model_name (string)"
-          ],
-          "optional": [
-            "web_search",
-            "max_output_tokens",
-            "tag",
-            "postback_url"
-          ],
+          "required": ["user_prompt (string)", "model_name (string)"],
+          "optional": ["web_search", "max_output_tokens", "tag", "postback_url"],
           "description": "Queues a Gemini LLM response task ($0.01 prepayment, refunded to actual cost)."
         },
         {
@@ -7306,9 +5872,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves the result of a previously posted Gemini LLM response task."
         },
@@ -7326,10 +5890,7 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.0006,
-          "required": [
-            "user_prompt (string)",
-            "model_name (string)"
-          ],
+          "required": ["user_prompt (string)", "model_name (string)"],
           "optional": [
             "max_output_tokens",
             "web_search",
@@ -7362,15 +5923,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": null,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "location_name",
-            "language_name",
-            "web_search",
-            "priority"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["location_name", "language_name", "web_search", "priority"],
           "description": "Queues a task to scrape ChatGPT search results for a keyword (price varies by method/priority)."
         },
         {
@@ -7387,9 +5941,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves structured (advanced) results of a ChatGPT LLM Scraper task."
         },
@@ -7398,9 +5950,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves the raw HTML result of a ChatGPT LLM Scraper task."
         },
@@ -7409,14 +5959,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "location_name",
-            "language_name",
-            "web_search"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["location_name", "language_name", "web_search"],
           "description": "Returns real-time structured ChatGPT search results for a keyword (price varies by method/priority)."
         },
         {
@@ -7424,13 +5968,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "location_name",
-            "language_name"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["location_name", "language_name"],
           "description": "Returns real-time raw HTML of ChatGPT search results for a keyword (price varies by method/priority)."
         },
         {
@@ -7456,15 +5995,8 @@
           "method": "POST",
           "mode": "task_post",
           "priceUsd": null,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "location_name",
-            "language_name",
-            "web_search",
-            "priority"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["location_name", "language_name", "web_search", "priority"],
           "description": "Queues a task to scrape Gemini search results for a keyword (price varies by method/priority)."
         },
         {
@@ -7481,9 +6013,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves structured (advanced) results of a Gemini LLM Scraper task."
         },
@@ -7492,9 +6022,7 @@
           "method": "GET",
           "mode": "task_get",
           "priceUsd": 0,
-          "required": [
-            "id (string)"
-          ],
+          "required": ["id (string)"],
           "optional": [],
           "description": "Retrieves the raw HTML result of a Gemini LLM Scraper task."
         },
@@ -7503,14 +6031,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "location_name",
-            "language_name",
-            "web_search"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["location_name", "language_name", "web_search"],
           "description": "Returns real-time structured Gemini search results for a keyword (price varies by method/priority)."
         },
         {
@@ -7518,13 +6040,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "location_name",
-            "language_name"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["location_name", "language_name"],
           "description": "Returns real-time raw HTML of Gemini search results for a keyword (price varies by method/priority)."
         },
         {
@@ -7546,9 +6063,7 @@
             "location_name|location_code (string|integer)",
             "language_name|language_code (string)"
           ],
-          "optional": [
-            "tag"
-          ],
+          "optional": ["tag"],
           "description": "Returns AI-tool search volume for last month plus 12-month trend for up to 1000 keywords ($0.01/task + $0.0001/keyword)."
         },
         {
@@ -7574,16 +6089,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.1,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "llm_models",
-            "filters",
-            "location_name",
-            "language_name",
-            "limit"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["llm_models", "filters", "location_name", "language_name", "limit"],
           "description": "Returns individual keyword/brand/website mentions found in LLM answers ($0.10/request + $0.001/row; pay-as-you-go, no monthly commitment)."
         },
         {
@@ -7591,14 +6098,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.1,
-          "required": [
-            "target (string)"
-          ],
-          "optional": [
-            "llm_models",
-            "location_name",
-            "language_name"
-          ],
+          "required": ["target (string)"],
+          "optional": ["llm_models", "location_name", "language_name"],
           "description": "Returns aggregated mention metrics for a single target brand/domain across LLMs ($0.10/request + $0.001/row)."
         },
         {
@@ -7606,14 +6107,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.1,
-          "required": [
-            "targets (array)"
-          ],
-          "optional": [
-            "llm_models",
-            "location_name",
-            "language_name"
-          ],
+          "required": ["targets (array)"],
+          "optional": ["llm_models", "location_name", "language_name"],
           "description": "Returns and compares aggregated mention metrics for multiple targets across LLMs ($0.10/request + $0.001/row)."
         },
         {
@@ -7621,14 +6116,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.1,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "llm_models",
-            "filters",
-            "limit"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["llm_models", "filters", "limit"],
           "description": "Returns the pages most frequently cited/mentioned by LLMs for a keyword ($0.10/request + $0.001/row)."
         },
         {
@@ -7636,14 +6125,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.1,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "llm_models",
-            "filters",
-            "limit"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["llm_models", "filters", "limit"],
           "description": "Returns the domains most frequently cited/mentioned by LLMs for a keyword ($0.10/request + $0.001/row)."
         },
         {
@@ -7651,14 +6134,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.1,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "llm_models",
-            "filters",
-            "limit"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["llm_models", "filters", "limit"],
           "description": "Returns the brands most frequently mentioned by LLMs for a keyword ($0.10/request + $0.001/row)."
         },
         {
@@ -7666,14 +6143,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.1,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "llm_models",
-            "filters",
-            "limit"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["llm_models", "filters", "limit"],
           "description": "Returns the brand categories most frequently mentioned by LLMs for a keyword ($0.10/request + $0.001/row)."
         },
         {
@@ -7681,14 +6152,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.1,
-          "required": [
-            "target|keyword (string)"
-          ],
-          "optional": [
-            "date_from",
-            "date_to",
-            "llm_models"
-          ],
+          "required": ["target|keyword (string)"],
+          "optional": ["date_from", "date_to", "llm_models"],
           "description": "Returns historical mention data over time for a target or keyword ($0.10/request + $0.001/row)."
         },
         {
@@ -7696,14 +6161,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.1,
-          "required": [
-            "target|keyword (string)"
-          ],
-          "optional": [
-            "date_from",
-            "date_to",
-            "llm_models"
-          ],
+          "required": ["target|keyword (string)"],
+          "optional": ["date_from", "date_to", "llm_models"],
           "description": "Returns the change (delta) in mention metrics between two periods ($0.10/request + $0.001/row)."
         },
         {
@@ -7711,14 +6170,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": 0.1,
-          "required": [
-            "target|keyword (string)"
-          ],
-          "optional": [
-            "date_from",
-            "date_to",
-            "llm_models"
-          ],
+          "required": ["target|keyword (string)"],
+          "optional": ["date_from", "date_to", "llm_models"],
           "description": "Returns newly gained and lost mentions between two periods ($0.10/request + $0.001/row)."
         },
         {
@@ -7726,12 +6179,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "target (string)"
-          ],
-          "optional": [
-            "llm_models"
-          ],
+          "required": ["target (string)"],
+          "optional": ["llm_models"],
           "description": "Reduced-cost variant of target_metrics returning core mention metrics for a target."
         },
         {
@@ -7739,13 +6188,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "llm_models",
-            "limit"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["llm_models", "limit"],
           "description": "Reduced-cost variant returning top mentioned domains for a keyword."
         },
         {
@@ -7753,13 +6197,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "llm_models",
-            "limit"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["llm_models", "limit"],
           "description": "Reduced-cost variant returning top mentioned pages for a keyword."
         },
         {
@@ -7767,13 +6206,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "llm_models",
-            "limit"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["llm_models", "limit"],
           "description": "Reduced-cost variant returning top mentioned brands for a keyword."
         },
         {
@@ -7781,13 +6215,8 @@
           "method": "POST",
           "mode": "live",
           "priceUsd": null,
-          "required": [
-            "keyword (string)"
-          ],
-          "optional": [
-            "llm_models",
-            "limit"
-          ],
+          "required": ["keyword (string)"],
+          "optional": ["llm_models", "limit"],
           "description": "Reduced-cost variant returning top mentioned brand categories for a keyword."
         }
       ]

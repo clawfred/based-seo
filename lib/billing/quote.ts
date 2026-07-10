@@ -11,7 +11,12 @@
 
 import type { Chargeable } from "@/lib/billing/charge";
 import { API_PREFIX } from "@/lib/x402/constants";
-import { missingRequired, resolvePublicPath, type EndpointDef } from "@/lib/registry";
+import {
+  describeRequired,
+  missingRequired,
+  resolvePublicPath,
+  type EndpointDef,
+} from "@/lib/registry";
 import { quoteBatch, type PriceQuote } from "@/lib/registry/pricing";
 
 /** DataForSEO caps a queued POST at 100 tasks and a live POST at 1. */
@@ -90,7 +95,8 @@ export function quoteFor(segments: readonly string[], body: unknown): RequestQuo
     const missing = missingRequired(endpoint, task);
     if (missing.length) {
       throw new QuoteError(
-        `Task ${i} is missing required param${missing.length === 1 ? "" : "s"}: ${missing.join(", ")}`,
+        `Task ${i} is missing required param${missing.length === 1 ? "" : "s"}: ` +
+          missing.map(describeRequired).join("; "),
         400,
       );
     }

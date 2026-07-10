@@ -108,7 +108,22 @@ const TASK_GET = /\/task_get(\/|$)/;
 // live, billable GET whose id is a Google ad id from a sellers result -- not a
 // DataForSEO task id. It is not part of the task-retrieval family.
 const AD_URL = /\/ad_url$/;
-const pathParamsFor = (path) => (TASK_GET.test(path) || AD_URL.test(path) ? ["id"] : []);
+
+// Some catalogued paths spell the trailing parameter literally, e.g.
+// `.../task_get/advanced/{id}`, while others omit it. Normalize: strip any
+// `{name}` segments off the path and record them as path params, so a slug is
+// always the bare route and never contains a brace.
+const BRACE_SEGMENT = /\/\{([a-z_][a-z_0-9]*)\}/gi;
+
+function normalizePath(rawPath) {
+  const params = [];
+  const path = rawPath.replace(BRACE_SEGMENT, (_, name) => {
+    params.push(name);
+    return "";
+  });
+  if (params.length === 0 && (TASK_GET.test(path) || AD_URL.test(path))) params.push("id");
+  return { path, pathParams: params };
+}
 
 // Group max price, used as a conservative floor for unpriced endpoints so we
 // never under-charge relative to what DataForSEO bills us.
@@ -125,6 +140,7 @@ const idOf = (p) =>
     .toLowerCase();
 
 const out = [];
+const emitted = new Set();
 const skipped = [];
 const estimated = [];
 
@@ -135,7 +151,7 @@ for (const g of catalog.groups) {
       continue;
     }
     const v = vByPath.get(e.path);
-    const pathParams = pathParamsFor(e.path);
+    const { path: dfsPath, pathParams } = normalizePath(e.path);
     // Anything that 404'd and is NOT a path-param template is suspect, unless we
     // re-probed it with the corrected method and it came back 200.
     const reprobed = e.path in METHOD_FIX;
@@ -160,8 +176,8 @@ for (const g of catalog.groups) {
 
     // task_get / tasks_ready are free from DataForSEO: they retrieve results
     // already paid for at task_post time.
-    const isTaskGet = TASK_GET.test(e.path);
-    const isTasksReady = /\/tasks_ready$/.test(e.path);
+    const isTaskGet = TASK_GET.test(dfsPath);
+    const isTasksReady = /\/tasks_ready$/.test(dfsPath);
     const freeRetrieval = isTaskGet || isTasksReady;
 
     // CROSS-TENANT IDOR GUARD. Every endpoint here runs against our SINGLE
@@ -174,10 +190,17 @@ for (const g of catalog.groups) {
     // Enforced by a test, because someone will regenerate this file.
     const exposure = isTaskGet || isTasksReady ? "internal" : "public";
 
+    const collapsedSlug = slugOf(dfsPath);
+    if (emitted.has(collapsedSlug)) {
+      skipped.push({ path: e.path, reason: `collapses onto ${collapsedSlug}` });
+      continue;
+    }
+    emitted.add(collapsedSlug);
+
     out.push({
-      id: idOf(e.path),
-      slug: slugOf(e.path),
-      dfsPath: e.path,
+      id: idOf(dfsPath),
+      slug: slugOf(dfsPath),
+      dfsPath,
       method,
       mode,
       group: g.name,

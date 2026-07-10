@@ -96,9 +96,30 @@ export function searchEndpoints(query: string, limit = 50): EndpointDef[] {
 /**
  * Missing required params, checked *before* any payment is taken so a malformed
  * request is rejected free of charge.
+ *
+ * DataForSEO documents some requirements as alternations: `location_name` OR
+ * `location_code`, spelled `"location_name|location_code"`. Treating that string
+ * as a literal body key makes it impossible to satisfy, which silently 400s all
+ * 60 endpoints that use one. Each entry is satisfied when ANY of its
+ * alternatives is present.
+ *
+ * Returns the unsatisfied specs verbatim, so the error names the real choice.
  */
 export function missingRequired(endpoint: EndpointDef, body: Record<string, unknown>): string[] {
-  return endpoint.required.filter((name) => body[name] === undefined || body[name] === null);
+  return endpoint.required.filter(
+    (spec) => !alternatives(spec).some((name) => body[name] !== undefined && body[name] !== null),
+  );
+}
+
+/** `"location_name|location_code"` -> `["location_name", "location_code"]`. */
+export function alternatives(spec: string): string[] {
+  return spec.split("|").map((s) => s.trim());
+}
+
+/** Human-readable form of a required spec, for error messages. */
+export function describeRequired(spec: string): string {
+  const alts = alternatives(spec);
+  return alts.length === 1 ? alts[0] : `one of ${alts.join(", ")}`;
 }
 
 function stripSlashes(s: string): string {

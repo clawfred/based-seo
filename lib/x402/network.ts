@@ -43,7 +43,10 @@ const CONFIGS: Record<X402Network, NetworkConfig> = {
     chainId: 84532,
     // Circle's testnet USDC on Base Sepolia.
     usdcAddress: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-    facilitatorUrl: "https://facilitator.x402.org",
+    // The public facilitator. Note the path, not a subdomain:
+    // `facilitator.x402.org` does not resolve. Verified against
+    // GET /supported, which advertises exact on eip155:84532.
+    facilitatorUrl: "https://x402.org/facilitator",
     requiresCdpAuth: false,
     isMainnet: false,
   },
