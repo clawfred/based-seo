@@ -23,31 +23,79 @@ const METHOD_FIX = { "/v3/content_analysis/errors": "POST" };
 
 // Param name -> type, seeded from the annotated entries in the catalog.
 const PARAM_TYPES = {
-  advertiser_id: "string", app_id: "string", asin: "string",
-  backlinks_filters: "array", backlinks_status_type: "string", bid: "number",
-  category: "string", category_code: "integer", creativity_index: "number",
-  dataset_id: "string", date_from: "string", datetime_from: "string",
-  datetime_to: "string", domain: "string", exclude_internal_backlinks: "boolean",
-  first_date: "string", id: "string", image_url: "string",
-  include_indirect_links: "boolean", include_subdomains: "boolean",
-  internal_list_limit: "integer", keyword: "string", keyword_length: "integer",
-  keywords: "array", language_code: "string", location_code: "integer",
-  market_type: "string", match: "string", model_name: "string",
-  pages: "object", product_id: "string", rank_scale: "string",
-  search_terms: "array", second_date: "string", tag: "string",
-  target: "string", target1: "string", target2: "string",
-  targets: "array", text: "string", topic: "string", type: "string",
-  url: "string", user_prompt: "string", video_id: "string", word_count: "integer",
+  advertiser_id: "string",
+  app_id: "string",
+  asin: "string",
+  backlinks_filters: "array",
+  backlinks_status_type: "string",
+  bid: "number",
+  category: "string",
+  category_code: "integer",
+  creativity_index: "number",
+  dataset_id: "string",
+  date_from: "string",
+  datetime_from: "string",
+  datetime_to: "string",
+  domain: "string",
+  exclude_internal_backlinks: "boolean",
+  first_date: "string",
+  id: "string",
+  image_url: "string",
+  include_indirect_links: "boolean",
+  include_subdomains: "boolean",
+  internal_list_limit: "integer",
+  keyword: "string",
+  keyword_length: "integer",
+  keywords: "array",
+  language_code: "string",
+  location_code: "integer",
+  market_type: "string",
+  match: "string",
+  model_name: "string",
+  pages: "object",
+  product_id: "string",
+  rank_scale: "string",
+  search_terms: "array",
+  second_date: "string",
+  tag: "string",
+  target: "string",
+  target1: "string",
+  target2: "string",
+  targets: "array",
+  text: "string",
+  topic: "string",
+  type: "string",
+  url: "string",
+  user_prompt: "string",
+  video_id: "string",
+  word_count: "integer",
   // common DFS params the catalog left untyped
-  location_name: "string", language_name: "string", device: "string",
-  os: "string", depth: "integer", se_domain: "string", search_param: "string",
-  max_crawl_pages: "integer", group_organic_results: "boolean",
-  calculate_rectangles: "boolean", priority: "integer",
-  postback_url: "string", pingback_url: "string", postback_data: "string",
-  location_coordinate: "string", cursor_pointer: "string", client: "string",
-  limit: "integer", offset: "integer", order_by: "array", filters: "array",
-  date_to: "string", include_serp_info: "boolean", ignore_synonyms: "boolean",
-  include_clickstream_data: "boolean", load_rank_absolute: "boolean",
+  location_name: "string",
+  language_name: "string",
+  device: "string",
+  os: "string",
+  depth: "integer",
+  se_domain: "string",
+  search_param: "string",
+  max_crawl_pages: "integer",
+  group_organic_results: "boolean",
+  calculate_rectangles: "boolean",
+  priority: "integer",
+  postback_url: "string",
+  pingback_url: "string",
+  postback_data: "string",
+  location_coordinate: "string",
+  cursor_pointer: "string",
+  client: "string",
+  limit: "integer",
+  offset: "integer",
+  order_by: "array",
+  filters: "array",
+  date_to: "string",
+  include_serp_info: "boolean",
+  ignore_synonyms: "boolean",
+  include_clickstream_data: "boolean",
+  load_rank_absolute: "boolean",
 };
 
 const stripType = (p) => p.replace(/\s*\(.*\)\s*$/, "").trim();
@@ -56,7 +104,11 @@ const stripType = (p) => p.replace(/\s*\(.*\)\s*$/, "").trim();
 // as `.../task_get/advanced` (SERP) and bare `.../task_get` (Business Data);
 // both take a trailing task id. Verified against the sandbox.
 const TASK_GET = /\/task_get(\/|$)/;
-const pathParamsFor = (path) => (TASK_GET.test(path) || /\/ad_url$/.test(path) ? ["id"] : []);
+// `merchant/google/sellers/ad_url/{id}` also takes a trailing id, but it is a
+// live, billable GET whose id is a Google ad id from a sellers result -- not a
+// DataForSEO task id. It is not part of the task-retrieval family.
+const AD_URL = /\/ad_url$/;
+const pathParamsFor = (path) => (TASK_GET.test(path) || AD_URL.test(path) ? ["id"] : []);
 
 // Group max price, used as a conservative floor for unpriced endpoints so we
 // never under-charge relative to what DataForSEO bills us.
@@ -67,7 +119,10 @@ for (const g of catalog.groups) {
 }
 
 const slugOf = (p) => p.replace(/^\/v3\//, "");
-const idOf = (p) => slugOf(p).replace(/[^a-z0-9]+/gi, "_").toLowerCase();
+const idOf = (p) =>
+  slugOf(p)
+    .replace(/[^a-z0-9]+/gi, "_")
+    .toLowerCase();
 
 const out = [];
 const skipped = [];
@@ -105,7 +160,19 @@ for (const g of catalog.groups) {
 
     // task_get / tasks_ready are free from DataForSEO: they retrieve results
     // already paid for at task_post time.
-    const freeRetrieval = TASK_GET.test(e.path) || /\/tasks_ready$/.test(e.path);
+    const isTaskGet = TASK_GET.test(e.path);
+    const isTasksReady = /\/tasks_ready$/.test(e.path);
+    const freeRetrieval = isTaskGet || isTasksReady;
+
+    // CROSS-TENANT IDOR GUARD. Every endpoint here runs against our SINGLE
+    // DataForSEO account. `task_get/{id}` returns the result for ANY valid id
+    // on that account, and `tasks_ready` ENUMERATES every customer's pending
+    // task ids. Proxying either one publicly would let any caller read other
+    // customers' paid results. They are reachable only from server-side code
+    // (the webhook handler and the fallback poller); customers use our own
+    // tenant-scoped /api/v3/tasks/{ourId}, which checks ownership.
+    // Enforced by a test, because someone will regenerate this file.
+    const exposure = isTaskGet || isTasksReady ? "internal" : "public";
 
     out.push({
       id: idOf(e.path),
@@ -118,8 +185,10 @@ for (const g of catalog.groups) {
       priceConfidence: confidence,
       billable: !freeRetrieval && cost > 0,
       freeRetrieval,
+      exposure,
       // task_get returns results for ANY id -> must verify the caller owns it.
-      requiresTaskOwnership: TASK_GET.test(e.path) || /\/ad_url$/.test(e.path),
+      requiresTaskOwnership: isTaskGet,
+      // ad_url resolves a Google ad id, not one of our task ids: public + paid.
       pathParams,
       required,
       optional,
@@ -162,15 +231,33 @@ console.log("\nbillable          :", out.filter((e) => e.billable).length);
 console.log("free retrieval    :", out.filter((e) => e.freeRetrieval).length);
 console.log("free reference    :", out.filter((e) => !e.billable && !e.freeRetrieval).length);
 console.log("needs ownership   :", out.filter((e) => e.requiresTaskOwnership).length);
+console.log("public passthrough:", out.filter((e) => e.exposure === "public").length);
+console.log(
+  "internal only     :",
+  out.filter((e) => e.exposure === "internal").length,
+  "(IDOR guard)",
+);
 console.log("estimated price   :", estimated.length);
 console.log("\nby mode:");
 const modes = {};
 out.forEach((e) => (modes[e.mode] = (modes[e.mode] || 0) + 1));
-Object.entries(modes).sort((a,b)=>b[1]-a[1]).forEach(([k, v]) => console.log(`  ${String(v).padStart(4)} ${k}`));
+Object.entries(modes)
+  .sort((a, b) => b[1] - a[1])
+  .forEach(([k, v]) => console.log(`  ${String(v).padStart(4)} ${k}`));
 console.log("\nby group:");
 const groups = {};
 out.forEach((e) => (groups[e.group] = (groups[e.group] || 0) + 1));
-Object.entries(groups).sort((a,b)=>b[1]-a[1]).forEach(([k, v]) => console.log(`  ${String(v).padStart(4)} ${k}`));
-console.log("\ncost range: $" + Math.min(...out.map(e=>e.dfsCostUsd)) + " - $" + Math.max(...out.map(e=>e.dfsCostUsd)));
+Object.entries(groups)
+  .sort((a, b) => b[1] - a[1])
+  .forEach(([k, v]) => console.log(`  ${String(v).padStart(4)} ${k}`));
+console.log(
+  "\ncost range: $" +
+    Math.min(...out.map((e) => e.dfsCostUsd)) +
+    " - $" +
+    Math.max(...out.map((e) => e.dfsCostUsd)),
+);
 
-writeFileSync(join(HERE, "registry-report.json"), JSON.stringify({ skipped, estimated, count: out.length }, null, 2));
+writeFileSync(
+  join(HERE, "registry-report.json"),
+  JSON.stringify({ skipped, estimated, count: out.length }, null, 2),
+);

@@ -19,7 +19,13 @@ const env = Object.fromEntries(
     .filter((l) => l && !l.startsWith("#") && l.includes("="))
     .map((l) => {
       const i = l.indexOf("=");
-      return [l.slice(0, i).trim(), l.slice(i + 1).trim().replace(/^["']|["']$/g, "")];
+      return [
+        l.slice(0, i).trim(),
+        l
+          .slice(i + 1)
+          .trim()
+          .replace(/^["']|["']$/g, ""),
+      ];
     }),
 );
 const user = env.DATAFORSEO_USERNAME;
@@ -31,9 +37,7 @@ if (!user || !pass) {
 const AUTH = "Basic " + Buffer.from(`${user}:${pass}`).toString("base64");
 
 const catalog = JSON.parse(readFileSync(CATALOG, "utf8"));
-const endpoints = catalog.groups.flatMap((g) =>
-  g.endpoints.map((e) => ({ ...e, group: g.name })),
-);
+const endpoints = catalog.groups.flatMap((g) => g.endpoints.map((e) => ({ ...e, group: g.name })));
 
 console.error(`validating ${endpoints.length} paths against sandbox...`);
 

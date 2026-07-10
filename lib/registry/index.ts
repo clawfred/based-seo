@@ -5,8 +5,13 @@
 import { ENDPOINTS } from "./endpoints.generated";
 import type { EndpointDef } from "./types";
 
-export type { EndpointDef, EndpointMode, PriceConfidence } from "./types";
+export type { EndpointDef, EndpointMode, Exposure, PriceConfidence } from "./types";
 export { ENDPOINTS, PARAM_TYPES } from "./endpoints.generated";
+
+/** Endpoints an external caller may reach. Excludes the task-retrieval family. */
+export function listPublic(): EndpointDef[] {
+  return ENDPOINTS.filter((e) => e.exposure === "public");
+}
 
 const BY_SLUG: ReadonlyMap<string, EndpointDef> = new Map(ENDPOINTS.map((e) => [e.slug, e]));
 const BY_ID: ReadonlyMap<string, EndpointDef> = new Map(ENDPOINTS.map((e) => [e.id, e]));
@@ -55,6 +60,18 @@ export function resolvePath(
   return undefined;
 }
 
+/**
+ * Resolve a path reachable by an external caller. Internal endpoints resolve to
+ * undefined here so the public route 404s them rather than proxying a
+ * cross-tenant read. Server-side callers use {@link resolvePath} directly.
+ */
+export function resolvePublicPath(
+  segments: readonly string[],
+): { endpoint: EndpointDef; pathParams: Record<string, string> } | undefined {
+  const hit = resolvePath(segments);
+  return hit && hit.endpoint.exposure === "public" ? hit : undefined;
+}
+
 export function listGroups(): string[] {
   return [...new Set(ENDPOINTS.map((e) => e.group))].sort();
 }
@@ -80,10 +97,7 @@ export function searchEndpoints(query: string, limit = 50): EndpointDef[] {
  * Missing required params, checked *before* any payment is taken so a malformed
  * request is rejected free of charge.
  */
-export function missingRequired(
-  endpoint: EndpointDef,
-  body: Record<string, unknown>,
-): string[] {
+export function missingRequired(endpoint: EndpointDef, body: Record<string, unknown>): string[] {
   return endpoint.required.filter((name) => body[name] === undefined || body[name] === null);
 }
 

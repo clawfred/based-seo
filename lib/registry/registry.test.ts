@@ -1,7 +1,14 @@
 import { describe, expect, it } from "vitest";
 
-import { ENDPOINTS, getBySlug, missingRequired, resolvePath } from "./index";
-import { quote, quoteBatch } from "./pricing";
+import {
+  ENDPOINTS,
+  getBySlug,
+  listPublic,
+  missingRequired,
+  resolvePath,
+  resolvePublicPath,
+} from "./index";
+import { formatMicros, quote, quoteBatch, usdToMicros } from "./pricing";
 
 describe("registry integrity", () => {
   it("carries every verified endpoint", () => {
@@ -40,6 +47,50 @@ describe("registry integrity", () => {
   it("never lists a path param as a required body param", () => {
     const leaked = ENDPOINTS.filter((e) => e.required.some((r) => e.pathParams.includes(r)));
     expect(leaked).toEqual([]);
+  });
+
+  it("keeps ad_url public and billable — its id is a Google ad id, not a task id", () => {
+    const adUrl = getBySlug("merchant/google/sellers/ad_url")!;
+    expect(adUrl.exposure).toBe("public");
+    expect(adUrl.billable).toBe(true);
+    expect(adUrl.requiresTaskOwnership).toBe(false);
+    expect(adUrl.pathParams).toEqual(["id"]);
+  });
+});
+
+/**
+ * These guard a cross-tenant data leak. All 531 endpoints run against one
+ * DataForSEO account, so a public `task_get` lets any caller read any
+ * customer's paid results, and `tasks_ready` hands them the id list. If the
+ * registry is ever regenerated without the exposure rule, these fail.
+ */
+describe("IDOR guard: task retrieval is never publicly reachable", () => {
+  it("marks every task_get and tasks_ready endpoint internal", () => {
+    const leaked = ENDPOINTS.filter(
+      (e) => /\/task_get(\/|$)|\/tasks_ready$/.test(e.dfsPath) && e.exposure !== "internal",
+    );
+    expect(leaked.map((e) => e.slug)).toEqual([]);
+  });
+
+  it("exposes no internal endpoint through the public resolver", () => {
+    for (const e of ENDPOINTS.filter((x) => x.exposure === "internal")) {
+      const segments = [...e.slug.split("/"), ...e.pathParams.map(() => "someid")];
+      expect(resolvePublicPath(segments), `${e.slug} is publicly reachable`).toBeUndefined();
+      // ...but server-side code can still reach it.
+      expect(resolvePath(segments)).toBeDefined();
+    }
+  });
+
+  it("still resolves every public endpoint publicly", () => {
+    for (const e of listPublic()) {
+      const segments = [...e.slug.split("/"), ...e.pathParams.map(() => "someid")];
+      expect(resolvePublicPath(segments), `${e.slug} unreachable`).toBeDefined();
+    }
+  });
+
+  it("leaves no billable endpoint hidden behind the internal flag", () => {
+    const stranded = ENDPOINTS.filter((e) => e.billable && e.exposure === "internal");
+    expect(stranded.map((e) => e.slug)).toEqual([]);
   });
 });
 
@@ -104,31 +155,69 @@ describe("missingRequired", () => {
 describe("pricing", () => {
   it("never quotes below what DataForSEO charges us", () => {
     for (const e of ENDPOINTS.filter((x) => x.billable)) {
-      expect(quote(e).usd, `${e.slug} priced under upstream cost`).toBeGreaterThanOrEqual(
-        e.dfsCostUsd,
+      expect(quote(e).micros, `${e.slug} priced under upstream cost`).toBeGreaterThanOrEqual(
+        usdToMicros(e.dfsCostUsd),
       );
     }
   });
 
   it("quotes zero for non-billable endpoints", () => {
     for (const e of ENDPOINTS.filter((x) => !x.billable)) {
-      expect(quote(e).usd).toBe(0);
+      expect(quote(e).micros).toBe(0);
     }
   });
 
   it("scales a batch quote by task count", () => {
     const e = getBySlug("backlinks/summary/live")!;
-    expect(quoteBatch(e, 5).usd).toBeGreaterThan(quote(e).usd);
-    expect(quoteBatch(e, 1).usd).toBe(quote(e).usd);
+    expect(quoteBatch(e, 5).micros).toBeGreaterThan(quote(e).micros);
+    expect(quoteBatch(e, 1).micros).toBe(quote(e).micros);
   });
 
   it("does not scale a batch quote for a free endpoint", () => {
     const free = ENDPOINTS.find((x) => !x.billable)!;
-    expect(quoteBatch(free, 10).usd).toBe(0);
+    expect(quoteBatch(free, 10).micros).toBe(0);
   });
 
-  it("rounds up to the cent so settlement never lands under cost", () => {
-    const e = getBySlug("backlinks/summary/live")!;
-    expect(Number.isInteger(Math.round(quote(e).usd * 100))).toBe(true);
+  it("always quotes a positive amount for a billable endpoint", () => {
+    for (const e of ENDPOINTS.filter((x) => x.billable)) {
+      expect(quote(e).micros, `${e.slug} quoted zero`).toBeGreaterThan(0);
+    }
+  });
+
+  /**
+   * x402 prices a request by `parseFloat(formatted.replace(/^\$/, ""))` and
+   * multiplies by 10^6 for USDC. Formatting a $0.0006 endpoint as "$0.00" would
+   * settle zero atomic units and serve it free. Cent-rounding is a revenue bug.
+   */
+  describe("sub-cent precision", () => {
+    const parseAsX402Would = (formatted: string) => parseFloat(formatted.replace(/^\$/, ""));
+
+    it("never formats a billable endpoint down to zero", () => {
+      for (const e of ENDPOINTS.filter((x) => x.billable)) {
+        const q = quote(e);
+        expect(parseAsX402Would(q.formatted), `${e.slug} formats to zero`).toBeGreaterThan(0);
+      }
+    });
+
+    it("round-trips the formatted price back to the exact micro amount", () => {
+      for (const e of ENDPOINTS.filter((x) => x.billable)) {
+        const q = quote(e);
+        const atomicUnits = Math.round(parseAsX402Would(q.formatted) * 1e6);
+        expect(atomicUnits, `${e.slug} loses precision in formatting`).toBe(q.micros);
+      }
+    });
+
+    it("renders sub-cent amounts with their significant digits", () => {
+      expect(formatMicros(600)).toBe("$0.0006");
+      expect(formatMicros(1)).toBe("$0.000001");
+      expect(formatMicros(30_000)).toBe("$0.03");
+      expect(formatMicros(0)).toBe("$0");
+    });
+
+    it("keeps every quote an integer number of micro-USD", () => {
+      for (const e of ENDPOINTS) {
+        expect(Number.isInteger(quote(e).micros), `${e.slug} has fractional micros`).toBe(true);
+      }
+    });
   });
 });

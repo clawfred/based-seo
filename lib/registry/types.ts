@@ -22,6 +22,17 @@ export type EndpointMode =
  */
 export type PriceConfidence = "published" | "estimated";
 
+/**
+ * Whether an endpoint may be reached by an external caller.
+ *
+ * `internal` endpoints are reachable only from server-side code. Every endpoint
+ * runs against our single DataForSEO account, so `task_get/{id}` returns results
+ * for ANY id on that account and `tasks_ready` enumerates every customer's
+ * pending task ids. Proxying either publicly is a cross-tenant IDOR. Customers
+ * use our own tenant-scoped task endpoint instead.
+ */
+export type Exposure = "public" | "internal";
+
 export interface EndpointDef {
   /** Stable snake_case identifier, e.g. `backlinks_summary_live`. */
   readonly id: string;
@@ -42,6 +53,8 @@ export interface EndpointDef {
   readonly billable: boolean;
   /** True for task_get / tasks_ready: the work was already paid for at task_post. */
   readonly freeRetrieval: boolean;
+  /** Public passthrough, or server-side only. See {@link Exposure}. */
+  readonly exposure: Exposure;
   /**
    * task_get returns results for ANY well-formed task id, including tasks paid
    * for by other customers. Endpoints flagged here MUST verify the caller owns
