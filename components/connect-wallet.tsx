@@ -5,14 +5,13 @@ import { GlassButton } from "@/components/ui/glass-button";
 import { Wallet, Plus, LogOut, ChevronDown } from "lucide-react";
 import { formatUnits } from "viem";
 import { useBalance } from "wagmi";
-import { base } from "wagmi/chains";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { USDC_TOKEN_ADDRESS_BASE } from "@/lib/wallet-constants";
+import { activeChain, usdcAddress } from "@/lib/wallet-network";
 
 export function ConnectWallet() {
   const { ready, authenticated, user, logout } = usePrivy();
@@ -28,8 +27,8 @@ export function ConnectWallet() {
 
   const { data: usdcBalance } = useBalance({
     address: fullAddress,
-    chainId: base.id,
-    token: USDC_TOKEN_ADDRESS_BASE,
+    chainId: activeChain().id,
+    token: usdcAddress(),
   });
 
   const handleFundWallet = async () => {
@@ -38,7 +37,7 @@ export function ConnectWallet() {
       await fundWallet({
         address: fullAddress,
         options: {
-          chain: base,
+          chain: activeChain(),
           asset: "USDC",
         },
       });

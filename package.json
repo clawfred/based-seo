@@ -18,7 +18,6 @@
     "registry:generate": "node scripts/gen-registry.mjs"
   },
   "dependencies": {
-    "@coinbase/onchainkit": "^1.1.2",
     "@coinbase/x402": "^2.1.0",
     "@neondatabase/serverless": "^1.0.2",
     "@privy-io/node": "^0.8.0",
