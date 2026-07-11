@@ -133,6 +133,26 @@ for (const g of catalog.groups) {
   groupMax[g.name] = prices.length ? Math.max(...prices) : 0.05;
 }
 
+// OnPage result endpoints that take a crawl `id`. Free from DataForSEO (the
+// crawl itself is what's billed at task_post), but they read a crawl by id on
+// our shared account — a cross-tenant IDOR unless reached tenant-scoped.
+const ONPAGE_CRAWL_SCOPED = new Set([
+  "on_page/summary",
+  "on_page/pages",
+  "on_page/links",
+  "on_page/resources",
+  "on_page/duplicate_content",
+  "on_page/duplicate_tags",
+  "on_page/keyword_density",
+  "on_page/microdata",
+  "on_page/non_indexable",
+  "on_page/pages_by_resource",
+  "on_page/raw_html",
+  "on_page/redirect_chains",
+  "on_page/waterfall",
+  "on_page/force_stop",
+]);
+
 const slugOf = (p) => p.replace(/^\/v3\//, "");
 const idOf = (p) =>
   slugOf(p)
@@ -187,8 +207,16 @@ for (const g of catalog.groups) {
     // customers' paid results. They are reachable only from server-side code
     // (the webhook handler and the fallback poller); customers use our own
     // tenant-scoped /api/v3/tasks/{ourId}, which checks ownership.
+    //
+    // The same hazard applies to OnPage's result endpoints: an OnPage crawl is
+    // queried by its `id` through on_page/summary, on_page/pages, etc. That id
+    // is a DataForSEO id on our shared account, so a public passthrough would
+    // let any caller read another user's crawl. These are reached only through
+    // the tenant-scoped /api/v3/audits/{ourId}/{resource} route, which injects
+    // the caller's OWN verified crawl id.
     // Enforced by a test, because someone will regenerate this file.
-    const exposure = isTaskGet || isTasksReady ? "internal" : "public";
+    const isOnPageCrawlScoped = ONPAGE_CRAWL_SCOPED.has(slugOf(dfsPath));
+    const exposure = isTaskGet || isTasksReady || isOnPageCrawlScoped ? "internal" : "public";
 
     const collapsedSlug = slugOf(dfsPath);
     if (emitted.has(collapsedSlug)) {

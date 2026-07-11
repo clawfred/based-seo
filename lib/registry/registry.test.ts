@@ -94,6 +94,33 @@ describe("IDOR guard: task retrieval is never publicly reachable", () => {
     const stranded = ENDPOINTS.filter((e) => e.billable && e.exposure === "internal");
     expect(stranded.map((e) => e.slug)).toEqual([]);
   });
+
+  /**
+   * OnPage result endpoints take a crawl id on our shared account, so a public
+   * passthrough would let any caller read another user's site audit. They must
+   * stay internal, reached only through the tenant-scoped audits route.
+   */
+  it("keeps every OnPage crawl-scoped result endpoint internal", () => {
+    const crawlScoped = [
+      "on_page/summary",
+      "on_page/pages",
+      "on_page/links",
+      "on_page/resources",
+      "on_page/duplicate_tags",
+      "on_page/duplicate_content",
+      "on_page/non_indexable",
+      "on_page/redirect_chains",
+    ];
+    for (const slug of crawlScoped) {
+      expect(getBySlug(slug)?.exposure, slug).toBe("internal");
+    }
+  });
+
+  it("keeps on_page/task_post public and billable — it takes a target, not a crawl id", () => {
+    const post = getBySlug("on_page/task_post")!;
+    expect(post.exposure).toBe("public");
+    expect(post.billable).toBe(true);
+  });
 });
 
 describe("resolvePath", () => {

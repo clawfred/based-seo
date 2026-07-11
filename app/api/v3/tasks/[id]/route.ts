@@ -35,7 +35,13 @@ export async function GET(
 
   if (!db) return NextResponse.json({ error: "DB_UNAVAILABLE" }, { status: 503 });
 
-  const task = await getTask(db, id);
+  let task;
+  try {
+    task = await getTask(db, id);
+  } catch (err) {
+    console.error("[api/v3/tasks] task lookup failed", err);
+    return NextResponse.json({ error: "STORAGE_UNAVAILABLE" }, { status: 503 });
+  }
   if (!task) return NextResponse.json({ error: "NOT_FOUND" }, { status: 404 });
 
   // Authorize by session account or capability token — never leak across tenants.

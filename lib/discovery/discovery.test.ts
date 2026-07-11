@@ -17,7 +17,10 @@ const llmsTxt = buildLlmsTxt();
 
 describe("discovery: internal endpoints never leak", () => {
   it("has internal endpoints to guard against", () => {
-    expect(internalEndpoints.length).toBe(180);
+    // task_get + tasks_ready + OnPage crawl-scoped result endpoints. Asserted as
+    // a floor, not an exact count, so adding a guarded endpoint doesn't fail this
+    // sanity check — the leak tests below are what actually matter.
+    expect(internalEndpoints.length).toBeGreaterThanOrEqual(180);
   });
 
   it("excludes every internal slug from the manifest, OpenAPI, and llms.txt", () => {
