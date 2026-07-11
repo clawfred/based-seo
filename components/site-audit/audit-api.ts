@@ -61,7 +61,10 @@ export async function startCrawl(
     }
     return { status: "started", crawl: { taskId, capabilityToken } };
   } catch (err) {
-    return { status: "error", message: err instanceof Error ? err.message : "Failed to start the crawl." };
+    return {
+      status: "error",
+      message: err instanceof Error ? err.message : "Failed to start the crawl.",
+    };
   }
 }
 
@@ -77,10 +80,7 @@ export interface SummaryPoll {
 }
 
 /** Poll the free summary. `data` is an array; the crawl summary is `data[0]`. */
-export async function fetchSummary(
-  taskId: string,
-  capabilityToken: string,
-): Promise<SummaryPoll> {
+export async function fetchSummary(taskId: string, capabilityToken: string): Promise<SummaryPoll> {
   const json = await getResource<AuditSummary[]>(taskId, "summary", capabilityToken);
   const summary = Array.isArray(json.data) ? (json.data[0] ?? null) : null;
   const crawlProgress = json.crawlProgress ?? summary?.crawl_progress ?? "in_progress";

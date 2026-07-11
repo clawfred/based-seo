@@ -77,12 +77,17 @@ const sidebarData: SidebarData = {
   },
   navGroups: [
     {
-      title: "Research",
+      // The hand-built flagship surfaces. Each has a dedicated, deep UI; the
+      // rest of the API is under "All APIs" below.
+      title: "Tools",
       defaultOpen: true,
       items: [
         { label: "Keyword Overview", icon: Search, href: "/keywords/overview" },
         { label: "Keyword Finder", icon: Sparkles, href: "/keywords/finder" },
         { label: "Backlinks", icon: navIcon("Link2"), href: "/backlinks" },
+        { label: "Site Audit", icon: navIcon("Gauge"), href: "/site-audit" },
+        { label: "Domain Overview", icon: navIcon("Globe"), href: "/domain" },
+        { label: "AI Visibility", icon: navIcon("Sparkles"), href: "/geo" },
         { label: "Saved Keywords", icon: FolderOpen, href: "/keywords/saved" },
       ],
     },

@@ -13,7 +13,10 @@ export function prettyUrl(url: string | undefined | null): string {
 
 /** Best-effort hostname from a raw target the user typed. */
 export function hostOf(raw: string): string {
-  const trimmed = raw.trim().replace(/^https?:\/\//, "").replace(/\/.*$/, "");
+  const trimmed = raw
+    .trim()
+    .replace(/^https?:\/\//, "")
+    .replace(/\/.*$/, "");
   return trimmed || raw.trim();
 }
 
