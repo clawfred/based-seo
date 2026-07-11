@@ -24,7 +24,12 @@ export function OverviewStatsCards({ stats }: OverviewStatsProps) {
       hint: "est. monthly visits",
       icon: TrendingUp,
     },
-    { label: "Traffic Value", value: formatMoney(stats.trafficValue), hint: "per month", icon: DollarSign },
+    {
+      label: "Traffic Value",
+      value: formatMoney(stats.trafficValue),
+      hint: "per month",
+      icon: DollarSign,
+    },
     { label: "Referring Domains", value: formatCompact(stats.referringDomains), icon: Globe },
     { label: "Backlinks", value: formatCompact(stats.backlinks), icon: Link2 },
     {

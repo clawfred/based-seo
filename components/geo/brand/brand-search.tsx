@@ -64,7 +64,11 @@ export function BrandSearch({
             />
           </div>
           <Button onClick={onSubmit} disabled={disabled} className="h-12 gap-2 px-6">
-            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
+            {loading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Search className="h-4 w-4" />
+            )}
             Analyze
           </Button>
         </div>
@@ -85,8 +89,8 @@ export function BrandSearch({
           </div>
           {!pricesLoading && totalUsd > 0 && (
             <span className="text-xs text-muted-foreground">
-              This run:{" "}
-              <span className="font-medium text-foreground">${totalUsd.toFixed(2)}</span> USDC
+              This run: <span className="font-medium text-foreground">${totalUsd.toFixed(2)}</span>{" "}
+              USDC
             </span>
           )}
         </div>

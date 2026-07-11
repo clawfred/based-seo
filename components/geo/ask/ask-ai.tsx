@@ -78,9 +78,7 @@ export function AskAi() {
       {state.status === "error" && (
         <AlertBanner
           variant="error"
-          message={
-            state.httpStatus ? `${state.message} (HTTP ${state.httpStatus})` : state.message
-          }
+          message={state.httpStatus ? `${state.message} (HTTP ${state.httpStatus})` : state.message}
         />
       )}
 

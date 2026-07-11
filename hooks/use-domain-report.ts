@@ -52,8 +52,16 @@ export function useDomainReport(): DomainReportQuery {
       setTarget(trimmed);
 
       const geo = { location_code: DEFAULT_LOCATION_CODE, language_code: DEFAULT_LANGUAGE_CODE };
-      rank.run({ slug: DOMAIN_SLUGS.rankOverview, method: "POST", body: { target: trimmed, ...geo } });
-      summary.run({ slug: DOMAIN_SLUGS.backlinksSummary, method: "POST", body: { target: trimmed } });
+      rank.run({
+        slug: DOMAIN_SLUGS.rankOverview,
+        method: "POST",
+        body: { target: trimmed, ...geo },
+      });
+      summary.run({
+        slug: DOMAIN_SLUGS.backlinksSummary,
+        method: "POST",
+        body: { target: trimmed },
+      });
       keywords.run({
         slug: DOMAIN_SLUGS.rankedKeywords,
         method: "POST",

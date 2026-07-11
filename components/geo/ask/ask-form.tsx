@@ -105,7 +105,11 @@ export function AskForm({
           <div className="flex flex-1 items-center justify-end gap-3">
             {priceLabel && <span className="text-xs text-muted-foreground">{priceLabel}</span>}
             <Button onClick={onSubmit} disabled={disabled} className="h-11 gap-2 px-6">
-              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+              {loading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Send className="h-4 w-4" />
+              )}
               Ask
             </Button>
           </div>

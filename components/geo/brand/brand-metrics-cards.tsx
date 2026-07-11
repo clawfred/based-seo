@@ -21,10 +21,30 @@ interface MetricDef {
  * resolves — topping up with any other numeric fields so the grid is never bare.
  */
 const METRICS: MetricDef[] = [
-  { label: "Mentions", keys: ["mentions_count", "mentions", "total_mentions"], kind: "count", icon: MessageSquareQuote },
-  { label: "Citations", keys: ["citations_count", "citations", "total_citations"], kind: "count", icon: Quote },
-  { label: "Prompts", keys: ["prompts_count", "prompts", "total_prompts", "queries_count"], kind: "count", icon: Hash },
-  { label: "Mention Rate", keys: ["mention_rate", "visibility", "share_of_voice", "visibility_score"], kind: "percent", icon: Percent },
+  {
+    label: "Mentions",
+    keys: ["mentions_count", "mentions", "total_mentions"],
+    kind: "count",
+    icon: MessageSquareQuote,
+  },
+  {
+    label: "Citations",
+    keys: ["citations_count", "citations", "total_citations"],
+    kind: "count",
+    icon: Quote,
+  },
+  {
+    label: "Prompts",
+    keys: ["prompts_count", "prompts", "total_prompts", "queries_count"],
+    kind: "count",
+    icon: Hash,
+  },
+  {
+    label: "Mention Rate",
+    keys: ["mention_rate", "visibility", "share_of_voice", "visibility_score"],
+    kind: "percent",
+    icon: Percent,
+  },
   { label: "Avg. Rank", keys: ["average_rank", "avg_rank", "rank"], kind: "count", icon: Gauge },
   { label: "Models", keys: ["models_count", "llm_models_count"], kind: "count", icon: Bot },
 ];
@@ -65,7 +85,9 @@ export function BrandMetricsCards({ metrics }: BrandMetricsCardsProps) {
       {stats.map((stat) => (
         <Card key={stat.label}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs font-medium text-muted-foreground">{stat.label}</CardTitle>
+            <CardTitle className="text-xs font-medium text-muted-foreground">
+              {stat.label}
+            </CardTitle>
             <stat.icon className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>

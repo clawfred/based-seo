@@ -47,7 +47,11 @@ export function GeoPaywall({
 
         {canPay ? (
           <Button onClick={onPay} disabled={loading} className="h-11 gap-2 px-6">
-            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <CreditCard className="h-4 w-4" />}
+            {loading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <CreditCard className="h-4 w-4" />
+            )}
             Pay {priceLabel} &amp; run
           </Button>
         ) : (

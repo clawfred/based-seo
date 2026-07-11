@@ -64,16 +64,14 @@ export function useBrandVisibility(): BrandVisibilityQuery {
       ];
       if (keyword) {
         calls.push(
-          paidPost<unknown>(
-            BRAND_SLUGS.topBrands,
-            { keyword, limit: BRAND_LIMIT },
-            walletClient,
-          ),
+          paidPost<unknown>(BRAND_SLUGS.topBrands, { keyword, limit: BRAND_LIMIT }, walletClient),
         );
       }
 
       const [metricsRes, timeseriesRes, brandsRes] = await Promise.all(calls);
-      const results = [metricsRes, timeseriesRes, brandsRes].filter(Boolean) as PaidPostResult<unknown>[];
+      const results = [metricsRes, timeseriesRes, brandsRes].filter(
+        Boolean,
+      ) as PaidPostResult<unknown>[];
 
       // No wallet (or every call bounced): the user must pay first.
       if (results.every((r) => r.status === "payment_required")) {

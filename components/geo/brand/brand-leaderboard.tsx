@@ -22,7 +22,10 @@ const COUNT_KEYS = ["mentions_count", "mentions", "count", "total_mentions"];
 const SHARE_KEYS = ["mention_rate", "share", "share_of_voice", "percentage", "visibility"];
 
 export function BrandLeaderboard({ keyword, target, brands }: BrandLeaderboardProps) {
-  const targetKey = target.toLowerCase().replace(/^https?:\/\//, "").replace(/\/$/, "");
+  const targetKey = target
+    .toLowerCase()
+    .replace(/^https?:\/\//, "")
+    .replace(/\/$/, "");
 
   return (
     <Card>
@@ -53,7 +56,10 @@ export function BrandLeaderboard({ keyword, target, brands }: BrandLeaderboardPr
                   const name = str(row, NAME_KEYS) ?? "—";
                   const isYou = name.toLowerCase().includes(targetKey) && targetKey.length > 0;
                   return (
-                    <TableRow key={`${name}-${i}`} className={isYou ? "bg-indigo-500/5" : undefined}>
+                    <TableRow
+                      key={`${name}-${i}`}
+                      className={isYou ? "bg-indigo-500/5" : undefined}
+                    >
                       <TableCell className="text-right text-muted-foreground">{i + 1}</TableCell>
                       <TableCell className="max-w-xs truncate font-medium">
                         {name}
@@ -63,7 +69,9 @@ export function BrandLeaderboard({ keyword, target, brands }: BrandLeaderboardPr
                           </Badge>
                         )}
                       </TableCell>
-                      <TableCell className="text-right">{formatCount(num(row, COUNT_KEYS))}</TableCell>
+                      <TableCell className="text-right">
+                        {formatCount(num(row, COUNT_KEYS))}
+                      </TableCell>
                       <TableCell className="hidden text-right md:table-cell">
                         {formatPercent(num(row, SHARE_KEYS))}
                       </TableCell>
