@@ -1,12 +1,22 @@
 "use client";
 
-import { Search, Sparkles, FolderOpen, Settings, ChevronRight } from "lucide-react";
+import {
+  Compass,
+  FolderOpen,
+  Search,
+  Settings,
+  Sparkles,
+  Terminal,
+  ChevronRight,
+} from "lucide-react";
 import { XIcon } from "@/components/icons/x-icon";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 
+import { navIcon } from "@/components/layout/nav-icons";
+import { FAMILIES } from "@/lib/registry/taxonomy";
 import { cn } from "@/lib/utils";
 import { ConnectWallet } from "@/components/connect-wallet";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -71,13 +81,31 @@ const sidebarData: SidebarData = {
       items: [
         { label: "Keyword Overview", icon: Search, href: "/keywords/overview" },
         { label: "Keyword Finder", icon: Sparkles, href: "/keywords/finder" },
+        { label: "Backlinks", icon: navIcon("Link2"), href: "/backlinks" },
         { label: "Saved Keywords", icon: FolderOpen, href: "/keywords/saved" },
+      ],
+    },
+    {
+      // Every DataForSEO family, generated from the registry taxonomy so the nav
+      // can never drift from what the API actually serves.
+      title: "All APIs",
+      defaultOpen: false,
+      items: [
+        { label: "Explore all", icon: Compass, href: "/explore" },
+        ...FAMILIES.map((f) => ({
+          label: f.label,
+          icon: navIcon(f.icon),
+          href: `/explore/${f.id}`,
+        })),
       ],
     },
   ],
   footerGroup: {
-    title: "Support",
-    items: [{ label: "Settings", icon: Settings, href: "/settings" }],
+    title: "Developers",
+    items: [
+      { label: "API & Agents", icon: Terminal, href: "/developers" },
+      { label: "Settings", icon: Settings, href: "/settings" },
+    ],
   },
 };
 
