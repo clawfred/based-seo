@@ -53,7 +53,7 @@ export function BrandLeaderboard({ keyword, target, brands }: BrandLeaderboardPr
               </TableHeader>
               <TableBody>
                 {brands.map((row, i) => {
-                  const name = str(row, NAME_KEYS) ?? "—";
+                  const name = str(row, NAME_KEYS) ?? "-";
                   const isYou = name.toLowerCase().includes(targetKey) && targetKey.length > 0;
                   return (
                     <TableRow

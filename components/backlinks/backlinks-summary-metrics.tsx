@@ -21,14 +21,14 @@ export function BacklinksSummaryMetrics({ summary }: BacklinksSummaryMetricsProp
     { label: "Referring Domains", value: formatCount(summary.referring_domains), icon: Globe },
     {
       label: "Domain Rank",
-      value: summary.rank !== undefined ? String(summary.rank) : "—",
+      value: summary.rank !== undefined ? String(summary.rank) : "-",
       hint: "0–1000",
       icon: Gauge,
     },
     { label: "Broken Backlinks", value: formatCount(summary.broken_backlinks), icon: Unlink },
     {
       label: "Spam Score",
-      value: summary.backlinks_spam_score !== undefined ? `${summary.backlinks_spam_score}%` : "—",
+      value: summary.backlinks_spam_score !== undefined ? `${summary.backlinks_spam_score}%` : "-",
       icon: ShieldAlert,
     },
     { label: "Referring Pages", value: formatCount(summary.referring_pages), icon: FileText },

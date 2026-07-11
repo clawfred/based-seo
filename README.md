@@ -8,13 +8,13 @@ Open source. No markup. Powered by Base, DataForSEO and x402.
 
 Every one of DataForSEO's **531 endpoints**, reachable two ways.
 
-**For agents** — `POST /api/v3/{endpoint}` mirrors DataForSEO's own paths 1:1 and
+**For agents** - `POST /api/v3/{endpoint}` mirrors DataForSEO's own paths 1:1 and
 is paid per request with [x402](https://x402.org) on Base. No account, no API key:
 an agent that speaks x402 discovers endpoints at `/api/v3/manifest`, gets a `402`
 with the price, signs a USDC payment, and retries. Machine-readable descriptions
 live at `/openapi.json` and `/llms.txt`.
 
-**For humans** — a dashboard over the endpoints worth a real UI: keyword research,
+**For humans** - a dashboard over the endpoints worth a real UI: keyword research,
 SERP analysis, backlinks, site audit, and AI-search visibility (GEO).
 
 Covered API families: SERP, Keywords Data, DataForSEO Labs, Backlinks, OnPage,
@@ -29,13 +29,13 @@ Based SEO passes through the exact data cost from DataForSEO. No accounts, no su
 
 ## Tech Stack
 
-- [Next.js 16](https://nextjs.org/) — React framework with App Router
-- [TypeScript](https://www.typescriptlang.org/) — Type safety
-- [Tailwind CSS](https://tailwindcss.com/) — Utility-first styling
-- [shadcn/ui](https://ui.shadcn.com/) — UI components
-- [DataForSEO](https://dataforseo.com/) — SEO data provider
-- [x402](https://x402.org/) — Pay-per-request API protocol
-- [Base](https://base.org/) — L2 for payments (USDC)
+- [Next.js 16](https://nextjs.org/) - React framework with App Router
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first styling
+- [shadcn/ui](https://ui.shadcn.com/) - UI components
+- [DataForSEO](https://dataforseo.com/) - SEO data provider
+- [x402](https://x402.org/) - Pay-per-request API protocol
+- [Base](https://base.org/) - L2 for payments (USDC)
 
 ## Getting Started
 
@@ -118,11 +118,11 @@ the OpenAPI document.
 
 ## Data Provider
 
-SEO data powered by [DataForSEO](https://dataforseo.com/). Based SEO is an open source wrapper — we don't compete with DataForSEO, we make their data more accessible. You need your own API credentials to self-host.
+SEO data powered by [DataForSEO](https://dataforseo.com/). Based SEO is an open source wrapper - we don't compete with DataForSEO, we make their data more accessible. You need your own API credentials to self-host.
 
 ## Contributing
 
-Contributions welcome — from humans and AI agents alike. Open an issue or submit a PR.
+Contributions welcome - from humans and AI agents alike. Open an issue or submit a PR.
 
 ## License
 

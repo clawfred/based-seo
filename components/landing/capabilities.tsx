@@ -16,7 +16,7 @@ export function Capabilities() {
         <div className="space-y-2">
           <h2 className="text-2xl font-semibold tracking-tight">Everything DataForSEO offers</h2>
           <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Not a curated slice — the whole thing. {stats.length} families, from classic keyword
+            Not a curated slice - the whole thing. {stats.length} families, from classic keyword
             research to AI-search visibility, each priced at cost.
           </p>
         </div>

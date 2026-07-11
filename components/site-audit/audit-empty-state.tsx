@@ -30,7 +30,7 @@ export function AuditEmptyState() {
           <h2 className="text-xl font-semibold">Audit any site for technical SEO issues</h2>
           <p className="text-sm text-muted-foreground">
             Enter a URL above to crawl the site and get a health score with a prioritized list of
-            issues — broken links, duplicate tags, missing metadata, slow pages, and more. Powered
+            issues - broken links, duplicate tags, missing metadata, slow pages, and more. Powered
             by live DataForSEO crawling, billed per page.
           </p>
         </div>

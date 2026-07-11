@@ -31,7 +31,7 @@ export default function BacklinksPage() {
       <div className="space-y-1">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Site Explorer</h1>
         <p className="text-muted-foreground">
-          Inspect any site's backlink profile — referring domains, individual links, and authority.
+          Inspect any site's backlink profile - referring domains, individual links, and authority.
         </p>
       </div>
 

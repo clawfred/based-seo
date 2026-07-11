@@ -29,7 +29,7 @@ export default function DomainPage() {
       <div className="space-y-1">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Domain Overview</h1>
         <p className="text-muted-foreground">
-          A one-stop snapshot of any domain — its keyword footprint, backlink authority, and
+          A one-stop snapshot of any domain - its keyword footprint, backlink authority, and
           technology stack.
         </p>
       </div>

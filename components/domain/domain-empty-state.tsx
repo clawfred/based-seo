@@ -30,7 +30,7 @@ export function DomainEmptyState() {
           <h2 className="text-xl font-semibold">One snapshot of any domain</h2>
           <p className="text-sm text-muted-foreground">
             Enter a domain above to pull its keyword footprint, backlink authority, and technology
-            stack in a single view — powered by live DataForSEO data, billed per request.
+            stack in a single view - powered by live DataForSEO data, billed per request.
           </p>
         </div>
 

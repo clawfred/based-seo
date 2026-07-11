@@ -1,5 +1,5 @@
 {
-  "//": "Bankr catalog wrapper. Schema recovered from a real BankrBot/skills catalog.json (research doc §1.3); catalog.json is undocumented on the docs site. HIGH confidence: schemaVersion, slug, provider, providerUrl, logo, demo{title,language,code}, setup[], install{type:'bankr',repoPath,command}. LOWER confidence: exact install.command wording and that repoPath must equal slug — adjust when opening the PR to github.com/BankrBot/skills.",
+  "//": "Bankr catalog wrapper. Schema recovered from a real BankrBot/skills catalog.json (research doc §1.3); catalog.json is undocumented on the docs site. HIGH confidence: schemaVersion, slug, provider, providerUrl, logo, demo{title,language,code}, setup[], install{type:'bankr',repoPath,command}. LOWER confidence: exact install.command wording and that repoPath must equal slug - adjust when opening the PR to github.com/BankrBot/skills.",
   "schemaVersion": 1,
   "slug": "based-seo",
   "provider": "based-seo",
@@ -11,7 +11,7 @@
     "code": "# 1. Discover endpoints (free, no auth)\ncurl https://based-seo.com/api/v3/manifest | jq '.endpoints[] | select(.slug|test(\"serp/google/organic\"))'\n\n# 2. Call + pay per request with an x402 wallet client (auto 402 -> pay -> retry)\n#    body is an ARRAY of task objects; you are billed per task\ncurl -X POST https://based-seo.com/api/v3/serp/google/organic/live/advanced \\\n  -H 'content-type: application/json' \\\n  -d '[{\"keyword\":\"best running shoes\",\"location_code\":2840,\"language_code\":\"en\"}]'\n# -> HTTP 402 + PAYMENT-REQUIRED; retry with PAYMENT-SIGNATURE to settle in USDC on Base"
   },
   "setup": [
-    "Option A (no signup): pay per request with x402 — USDC on Base, no account or API key.",
+    "Option A (no signup): pay per request with x402 - USDC on Base, no account or API key.",
     "Fund an EVM wallet with USDC on Base and wrap fetch with an x402 client (e.g. `npm i x402-fetch`).",
     "Discover endpoints + prices at https://based-seo.com/api/v3/manifest (OpenAPI at /openapi.json).",
     "Call `POST https://based-seo.com/api/v3/{slug}`; on 402 retry with a PAYMENT-SIGNATURE header."

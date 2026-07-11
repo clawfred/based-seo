@@ -13,7 +13,7 @@ export function AskEmpty() {
           </div>
           <h2 className="text-xl font-semibold">See exactly what the AI says</h2>
           <p className="text-sm text-muted-foreground">
-            Ask a real customer question and capture the live answer from any major engine — the
+            Ask a real customer question and capture the live answer from any major engine - the
             same response your buyers see when they ask AI for a recommendation.
           </p>
         </div>

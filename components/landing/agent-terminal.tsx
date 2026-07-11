@@ -15,7 +15,7 @@ export function AgentTerminal() {
       </div>
       <pre className="overflow-x-auto p-4 text-xs leading-relaxed text-white/80">
         <code>
-          <span className="text-white/40"># no account — discovery is free</span>
+          <span className="text-white/40"># no account - discovery is free</span>
           {"\n"}
           <span className="text-emerald-400">GET</span> /api/v3/manifest
           {"\n\n"}

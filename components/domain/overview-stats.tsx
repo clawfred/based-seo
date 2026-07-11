@@ -34,7 +34,7 @@ export function OverviewStatsCards({ stats }: OverviewStatsProps) {
     { label: "Backlinks", value: formatCompact(stats.backlinks), icon: Link2 },
     {
       label: "Domain Rank",
-      value: stats.domainRank !== undefined ? formatInt(stats.domainRank) : "—",
+      value: stats.domainRank !== undefined ? formatInt(stats.domainRank) : "-",
       hint: "0–1000",
       icon: Gauge,
     },

@@ -147,7 +147,7 @@ export function FolderGrid({
                           Local only
                         </Badge>
                       </TooltipTrigger>
-                      <TooltipContent>Saved in this browser only — sign in to sync</TooltipContent>
+                      <TooltipContent>Saved in this browser only - sign in to sync</TooltipContent>
                     </Tooltip>
                   )}
                 </div>

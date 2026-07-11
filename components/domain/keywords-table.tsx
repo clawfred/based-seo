@@ -53,18 +53,18 @@ export function KeywordsTable({ keywords }: KeywordsTableProps) {
                 {keywords.map((k, i) => (
                   <TableRow key={`${k.keyword ?? "kw"}-${i}`}>
                     <TableCell className="max-w-xs truncate font-medium">
-                      {k.keyword ?? "—"}
+                      {k.keyword ?? "-"}
                     </TableCell>
                     <TableCell className="text-right">
                       {k.position !== undefined ? (
                         <Badge variant={positionVariant(k.position)}>{k.position}</Badge>
                       ) : (
-                        "—"
+                        "-"
                       )}
                     </TableCell>
                     <TableCell className="text-right">{formatInt(k.volume)}</TableCell>
                     <TableCell className="hidden text-right md:table-cell">
-                      {k.cpc ? formatMoney(k.cpc) : "—"}
+                      {k.cpc ? formatMoney(k.cpc) : "-"}
                     </TableCell>
                     <TableCell className="hidden text-right md:table-cell">
                       {formatCompact(k.traffic)}

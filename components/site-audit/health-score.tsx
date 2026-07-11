@@ -60,7 +60,7 @@ export function HealthScore({ score, caption }: HealthScoreProps) {
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className={`text-4xl font-bold ${band ? band.color : "text-muted-foreground"}`}>
-              {value !== null ? value : "—"}
+              {value !== null ? value : "-"}
             </span>
             <span className="text-xs text-muted-foreground">/ 100</span>
           </div>

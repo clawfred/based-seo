@@ -170,7 +170,7 @@ export function buildOpenApi(): Json {
       version: "1.0.0",
       description:
         "Pay-per-call SEO/GEO API. Each billable operation is paid per request in " +
-        "USDC via x402 on Base — no account required. Send the request; on a 402, " +
+        "USDC via x402 on Base - no account required. Send the request; on a 402, " +
         "read the PAYMENT-REQUIRED header and retry with PAYMENT-SIGNATURE. " +
         `Network: ${pay.network ?? "set via X402_NETWORK"}. ` +
         "Prices are exposed per operation as x-price-usd / x-price-confidence.",

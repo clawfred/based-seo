@@ -67,11 +67,11 @@ export function LinksTab({ links }: LinksTabProps) {
                             {prettyUrl(to)}
                           </a>
                         ) : (
-                          "—"
+                          "-"
                         )}
                       </TableCell>
                       <TableCell className="hidden max-w-[12rem] truncate text-muted-foreground md:table-cell">
-                        {link.text || "—"}
+                        {link.text || "-"}
                       </TableCell>
                       <TableCell>
                         <Badge variant={kind === "external" ? "secondary" : "outline"}>

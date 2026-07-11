@@ -45,7 +45,7 @@ export function AskResponse({ engineId, data, amount, source }: AskResponseProps
           ) : (
             <details open>
               <summary className="cursor-pointer text-sm text-muted-foreground">
-                No plain-text answer was parsed — show raw response
+                No plain-text answer was parsed - show raw response
               </summary>
               <pre className="mt-3 max-h-[28rem] overflow-auto rounded-lg border bg-muted/40 p-4 text-xs leading-relaxed">
                 {JSON.stringify(answer?.raw ?? data, null, 2)}

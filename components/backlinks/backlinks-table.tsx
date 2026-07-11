@@ -56,11 +56,11 @@ export function BacklinksTable({ backlinks }: BacklinksTableProps) {
                           {prettyUrl(b.url_from)}
                         </a>
                       ) : (
-                        (b.domain_from ?? "—")
+                        (b.domain_from ?? "-")
                       )}
                     </TableCell>
                     <TableCell className="max-w-[12rem] truncate text-muted-foreground">
-                      {b.anchor || "—"}
+                      {b.anchor || "-"}
                     </TableCell>
                     <TableCell>
                       <div className="flex flex-wrap gap-1">
@@ -74,7 +74,7 @@ export function BacklinksTable({ backlinks }: BacklinksTableProps) {
                       {prettyUrl(b.url_to)}
                     </TableCell>
                     <TableCell className="hidden text-right md:table-cell">
-                      {b.rank ?? "—"}
+                      {b.rank ?? "-"}
                     </TableCell>
                     <TableCell className="hidden text-muted-foreground md:table-cell">
                       {formatDate(b.first_seen)}

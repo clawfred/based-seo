@@ -84,19 +84,19 @@ export function PagesTab({ pages }: PagesTabProps) {
                             {prettyUrl(page.url)}
                           </a>
                         ) : (
-                          "—"
+                          "-"
                         )}
                       </TableCell>
                       <TableCell className="hidden max-w-xs truncate text-muted-foreground md:table-cell">
-                        {page.meta?.title || "—"}
+                        {page.meta?.title || "-"}
                       </TableCell>
                       <TableCell className="text-center">
                         <Badge variant={statusVariant(page.status_code)}>
-                          {page.status_code ?? "—"}
+                          {page.status_code ?? "-"}
                         </Badge>
                       </TableCell>
                       <TableCell className={`text-right font-semibold ${scoreClass(score)}`}>
-                        {score ?? "—"}
+                        {score ?? "-"}
                       </TableCell>
                       <TableCell className="hidden text-right tabular-nums sm:table-cell">
                         {issues > 0 ? (

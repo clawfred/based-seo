@@ -16,7 +16,7 @@ export function ResultView({ state, priceUsd }: { state: RunState; priceUsd: num
   if (state.status === "needs-payment") {
     return (
       <Panel tone="amber" icon={<Wallet className="size-4" />}>
-        <p className="font-medium">Payment required — ${state.priceUsd || priceUsd}</p>
+        <p className="font-medium">Payment required - ${state.priceUsd || priceUsd}</p>
         <p className="text-sm text-muted-foreground">
           Connect a wallet in the header to pay per request with USDC on Base. No subscription; you
           pay only for this call.

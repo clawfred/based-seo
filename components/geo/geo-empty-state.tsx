@@ -36,7 +36,7 @@ export function GeoEmptyState() {
           </h2>
           <p className="text-sm text-muted-foreground">
             Generative Engine Optimization measures how AI models see, mention, and cite your brand.
-            Enter a brand or domain above to see your share of AI answers — powered by live
+            Enter a brand or domain above to see your share of AI answers - powered by live
             DataForSEO data, billed per request.
           </p>
         </div>

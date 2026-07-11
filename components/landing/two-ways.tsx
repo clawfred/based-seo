@@ -19,7 +19,7 @@ export function TwoWays() {
           <div>
             <h3 className="text-lg font-semibold">For people</h3>
             <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-              A fast, minimal dashboard — keyword research, backlinks, site audits, domain
+              A fast, minimal dashboard - keyword research, backlinks, site audits, domain
               overviews, and AI-search visibility. Connect a wallet, top up once, and stop signing
               every request.
             </p>
@@ -40,7 +40,7 @@ export function TwoWays() {
             <h3 className="text-lg font-semibold">For AI agents</h3>
             <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
               Agents discover endpoints from a machine-readable manifest, get a price in a standard
-              402, and pay per call in USDC — no account, no API key to store. Drop in the{" "}
+              402, and pay per call in USDC - no account, no API key to store. Drop in the{" "}
               <span className="font-medium text-foreground">based-seo skill</span> and your agent
               knows how to use it.
             </p>

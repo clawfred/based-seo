@@ -22,7 +22,7 @@ export function FundingPanel() {
         <Empty
           icon={<Wallet className="size-5" />}
           title="Connect a wallet to load up"
-          body="Your balance is a spending allowance — USDC stays in your wallet and we draw from it only as you use the API."
+          body="Your balance is a spending allowance - USDC stays in your wallet and we draw from it only as you use the API."
         />
       </Card>
     );

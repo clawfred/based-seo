@@ -30,7 +30,7 @@ export function BacklinksEmptyState() {
           <h2 className="text-xl font-semibold">Explore any site's backlink profile</h2>
           <p className="text-sm text-muted-foreground">
             Enter a domain or URL above to pull its backlinks, referring domains, and overall
-            authority — powered by live DataForSEO data, billed per request.
+            authority - powered by live DataForSEO data, billed per request.
           </p>
         </div>
 

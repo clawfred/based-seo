@@ -21,7 +21,7 @@ const EXAMPLES: { slug: string; label: string; vs: string }[] = [
 export function PricingSection() {
   const rows = EXAMPLES.map((ex) => {
     const endpoint = ENDPOINTS.find((e) => e.slug === ex.slug);
-    return { ...ex, price: endpoint ? quote(endpoint).formatted : "—" };
+    return { ...ex, price: endpoint ? quote(endpoint).formatted : "-" };
   });
 
   return (
@@ -31,7 +31,7 @@ export function PricingSection() {
           <h2 className="text-2xl font-semibold tracking-tight">Pay for data, not dashboards</h2>
           <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
             The exact DataForSEO cost, passed through. No subscription, no seat, no minimum. A
-            hundred keyword lookups costs a few dollars — not a monthly bill you forget to cancel.
+            hundred keyword lookups costs a few dollars - not a monthly bill you forget to cancel.
           </p>
         </div>
 

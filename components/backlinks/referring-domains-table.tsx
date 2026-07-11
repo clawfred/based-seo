@@ -55,14 +55,14 @@ export function ReferringDomainsTable({ domains }: ReferringDomainsTableProps) {
                           {d.domain}
                         </a>
                       ) : (
-                        "—"
+                        "-"
                       )}
                     </TableCell>
-                    <TableCell className="text-right">{d.rank ?? "—"}</TableCell>
+                    <TableCell className="text-right">{d.rank ?? "-"}</TableCell>
                     <TableCell className="text-right">{formatCount(d.backlinks)}</TableCell>
                     <TableCell className="text-right">{formatCount(d.dofollow)}</TableCell>
                     <TableCell className="hidden text-right md:table-cell">
-                      {d.backlinks_spam_score !== undefined ? `${d.backlinks_spam_score}%` : "—"}
+                      {d.backlinks_spam_score !== undefined ? `${d.backlinks_spam_score}%` : "-"}
                     </TableCell>
                     <TableCell className="hidden text-muted-foreground md:table-cell">
                       {formatDate(d.first_seen)}

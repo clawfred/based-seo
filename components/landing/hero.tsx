@@ -30,8 +30,8 @@ export function Hero({ endpointCount }: { endpointCount: number }) {
               themselves.
             </h1>
             <p className="max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-              Every DataForSEO endpoint — keywords, backlinks, site audits, SERPs, and AI-search
-              visibility — behind one API. A human uses the dashboard; an agent hits the same
+              Every DataForSEO endpoint - keywords, backlinks, site audits, SERPs, and AI-search
+              visibility - behind one API. A human uses the dashboard; an agent hits the same
               endpoints and pays per call in USDC over x402. No subscription. No markup. No key to
               leak.
             </p>

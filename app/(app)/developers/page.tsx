@@ -5,7 +5,7 @@ import { ENDPOINTS } from "@/lib/registry";
 
 export const metadata = {
   title: "API & Agents",
-  description: "Hit the API directly and pay per request with x402 — no account required.",
+  description: "Hit the API directly and pay per request with x402 - no account required.",
 };
 
 const RESOURCES = [
@@ -46,7 +46,7 @@ export default function DevelopersPage() {
           >
             x402
           </a>{" "}
-          on Base. No account, no API key — an agent that speaks x402 discovers the {publicCount}{" "}
+          on Base. No account, no API key - an agent that speaks x402 discovers the {publicCount}{" "}
           endpoints, gets a price, signs a USDC payment, and retries.
         </p>
       </div>

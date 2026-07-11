@@ -54,7 +54,7 @@ export function CompetitorsTable({ competitors }: CompetitorsTableProps) {
                           {c.domain}
                         </a>
                       ) : (
-                        "—"
+                        "-"
                       )}
                     </TableCell>
                     <TableCell className="text-right">{formatInt(c.commonKeywords)}</TableCell>
@@ -63,7 +63,7 @@ export function CompetitorsTable({ competitors }: CompetitorsTableProps) {
                       {formatCompact(c.organicTraffic)}
                     </TableCell>
                     <TableCell className="hidden text-right md:table-cell">
-                      {c.avgPosition !== undefined ? c.avgPosition.toFixed(1) : "—"}
+                      {c.avgPosition !== undefined ? c.avgPosition.toFixed(1) : "-"}
                     </TableCell>
                   </TableRow>
                 ))}

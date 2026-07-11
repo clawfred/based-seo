@@ -25,7 +25,7 @@ export function buildLlmsTxt(): string {
 
   return `# based-seo DataForSEO Gateway
 
-> Pay-per-call access to ${publicCount} DataForSEO SEO/GEO endpoints. Agents pay per request in USDC via x402 on Base — no account, no API key. Discovery is public; only execution is paid.
+> Pay-per-call access to ${publicCount} DataForSEO SEO/GEO endpoints. Agents pay per request in USDC via x402 on Base - no account, no API key. Discovery is public; only execution is paid.
 
 ## How to pay (x402)
 

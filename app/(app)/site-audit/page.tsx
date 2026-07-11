@@ -36,7 +36,7 @@ export default function SiteAuditPage() {
       <div className="space-y-1">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Site Audit</h1>
         <p className="text-muted-foreground">
-          Crawl any website and surface its technical SEO issues — broken links, duplicate tags,
+          Crawl any website and surface its technical SEO issues - broken links, duplicate tags,
           missing metadata, slow pages, and more.
         </p>
       </div>

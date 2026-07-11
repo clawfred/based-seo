@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     icon: "/logo.png",
   },
   title: {
-    default: "Based SEO — Pay‑per‑search keyword research",
+    default: "Based SEO: the SEO & GEO API your AI agents can pay for themselves",
     template: "%s | Based SEO",
   },
   description:
-    "Pay‑per‑search SEO research: keyword volume, difficulty, CPC, competition, SERP analysis, and more — without subscriptions. Powered by DataForSEO.",
+    "Every DataForSEO endpoint - keywords, backlinks, site audits, SERPs, and AI-search visibility - behind one API. A human uses the dashboard; an agent pays per call in USDC over x402. No subscription, no account, no API key.",
   alternates: {
     canonical: "/",
   },
@@ -25,23 +25,24 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     siteName: "Based SEO",
-    title: "Based SEO — Pay‑per‑search SEO tools",
+    title: "Based SEO: the SEO & GEO API your AI agents can pay for themselves",
     description:
-      "Keyword research + SERP insights without subscriptions. Pay per request (x402). Powered by DataForSEO.",
+      "531 SEO & GEO endpoints, paid per request in USDC via x402. For people and their AI agents. No subscription. Powered by DataForSEO.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Based SEO — SEO data without markup, pay per use via x402",
+        alt: "Based SEO: SEO & GEO data, paid per request via x402",
       },
     ],
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Based SEO — Pay‑per‑search SEO tools",
-    description: "Keyword research + SERP insights without subscriptions. Pay per request (x402).",
+    title: "Based SEO: the SEO & GEO API your AI agents can pay for themselves",
+    description:
+      "531 SEO & GEO endpoints, paid per request in USDC via x402. Powered by DataForSEO.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -60,7 +61,7 @@ export default function RootLayout({
     "@type": "WebSite",
     name: "Based SEO",
     description:
-      "Pay‑per‑search SEO research: keyword volume, difficulty, CPC, competition, SERP analysis, and more — without subscriptions. Powered by DataForSEO.",
+      "531 SEO & GEO endpoints - keywords, backlinks, site audits, SERPs, and AI-search visibility - paid per request in USDC via x402. For people and their AI agents. Powered by DataForSEO.",
     url: SITE_URL,
     potentialAction: {
       "@type": "SearchAction",
