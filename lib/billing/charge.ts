@@ -21,7 +21,7 @@ import type { NextRequest } from "next/server";
 import { hasCredentials } from "@/lib/dataforseo/client";
 import { HEADER_PAYMENT_SIGNATURE } from "@/lib/x402/constants";
 import { getX402Server, initX402Once } from "@/lib/x402/server";
-import { captureHold, holdFunds, releaseHold, type LedgerDb } from "./ledger";
+import { captureHold, holdFunds, releaseHold, sweepExpiredHolds, type LedgerDb } from "./ledger";
 
 /**
  * The minimum a thing must know about itself to be charged for. Both a registry
@@ -136,6 +136,11 @@ async function chargeFromBalance<T>(
 ): Promise<{ charge: ChargeOutcome; value?: T } | null> {
   const { db, accountId, quote } = ctx;
   if (!db || !accountId) return null;
+
+  // Self-heal: reclaim this account's own stranded holds before we try to place
+  // a new one, so a crash on a prior request can't lock a user out of their own
+  // balance until the daily cron runs. Scoped to one account and best-effort.
+  await sweepExpiredHolds(db, new Date(), accountId).catch(() => {});
 
   const ttl = quote.isTaskPost ? TASK_HOLD_TTL_MS : LIVE_HOLD_TTL_MS;
   const held = await holdFunds(db, {

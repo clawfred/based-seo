@@ -350,6 +350,34 @@ describe("sweepExpiredHolds", () => {
     expect(await sweepExpiredHolds(db)).toBe(0);
     expect(await getBalance(db, ACCOUNT)).toBe(10_000n);
   });
+
+  it("scopes to one account when given an accountId", async () => {
+    // Two accounts, each with an expired hold.
+    await seed(10_000n);
+    await pg.query(
+      `INSERT INTO account_balances (account_id, balance_micros, floor_micros, state)
+       VALUES ('other', 10000, 0, 'active')`,
+    );
+    await holdFunds(db, {
+      accountId: ACCOUNT,
+      priceMicros: 3_000n,
+      endpoint: "e",
+      requestId: "mine",
+      expiresAt: past(),
+    });
+    await holdFunds(db, {
+      accountId: "other",
+      priceMicros: 3_000n,
+      endpoint: "e",
+      requestId: "theirs",
+      expiresAt: past(),
+    });
+
+    // Sweeping only ACCOUNT touches exactly one hold and restores only its balance.
+    expect(await sweepExpiredHolds(db, new Date(), ACCOUNT)).toBe(1);
+    expect(await getBalance(db, ACCOUNT)).toBe(10_000n);
+    expect(await getBalance(db, "other")).toBe(7_000n);
+  });
 });
 
 describe("reconcile", () => {

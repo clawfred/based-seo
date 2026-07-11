@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node server.mjs",
-    "build": "next build",
+    "build": "node scripts/vercel-build.mjs",
     "start": "NODE_OPTIONS='--max-http-header-size=32768' node server.mjs",
     "lint": "eslint",
     "format": "prettier --write .",
@@ -15,7 +15,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "registry:validate": "node scripts/validate-catalog.mjs",
-    "registry:generate": "node scripts/gen-registry.mjs"
+    "registry:generate": "node scripts/gen-registry.mjs",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
     "@coinbase/x402": "^2.1.0",

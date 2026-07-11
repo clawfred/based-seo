@@ -192,12 +192,20 @@ export async function releaseHold(db: LedgerDb, holdId: string): Promise<boolean
  * a crash between hold and capture would otherwise strand a user's funds.
  * Safe to run concurrently with a slow success — the status guard picks a winner.
  */
-export async function sweepExpiredHolds(db: LedgerDb, now: Date = new Date()): Promise<number> {
+export async function sweepExpiredHolds(
+  db: LedgerDb,
+  now: Date = new Date(),
+  accountId?: string,
+): Promise<number> {
+  // When scoped to an account, only that account's expired holds are swept —
+  // this is the opportunistic path the balance rail runs so a user reclaims
+  // their own stranded funds on their next request, independent of the cron.
+  const scope = accountId ? sql`AND account_id = ${accountId}` : sql``;
   const result = await db.execute(sql`
     WITH expired AS (
       UPDATE ledger_entries
          SET status = 'released'
-       WHERE status = 'held' AND expires_at < ${now.toISOString()}::timestamptz
+       WHERE status = 'held' AND expires_at < ${now.toISOString()}::timestamptz ${scope}
       RETURNING id, account_id, amount_micros, endpoint
     ),
     compensating AS (
