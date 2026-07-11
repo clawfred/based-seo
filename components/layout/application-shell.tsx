@@ -7,6 +7,7 @@ import {
   Settings,
   Sparkles,
   Terminal,
+  Wallet,
   ChevronRight,
 } from "lucide-react";
 import { XIcon } from "@/components/icons/x-icon";
@@ -103,6 +104,7 @@ const sidebarData: SidebarData = {
   footerGroup: {
     title: "Developers",
     items: [
+      { label: "Account", icon: Wallet, href: "/account" },
       { label: "API & Agents", icon: Terminal, href: "/developers" },
       { label: "Settings", icon: Settings, href: "/settings" },
     ],
