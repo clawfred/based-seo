@@ -17,6 +17,7 @@ import { db } from "@/db";
 import { verifyAuth } from "@/lib/auth";
 import { chargeAndRun, type ChargeContext } from "@/lib/billing/charge";
 import { QuoteError, quoteFor } from "@/lib/billing/quote";
+import { createTask } from "@/lib/billing/tasks";
 import { buildPath, callDataForSEO } from "@/lib/dataforseo/client";
 import {
   DataForSEOAuthError,
@@ -118,22 +119,86 @@ async function handle(req: NextRequest, { params }: Params): Promise<NextRespons
       });
     }
 
+    // Async endpoints return a DataForSEO task id in `value`. That id is a
+    // secret — it reads any customer's result on our shared account — so we mint
+    // our own id, keep theirs private, and hand back a capability token.
+    if (quote.endpoint.mode === "task_post") {
+      const created = await handleTaskPost(quote, value, chargeCtx.accountId, charge.source);
+      const res = NextResponse.json(created.body, { status: created.status });
+      applyChargeHeaders(res, charge, quote);
+      return res;
+    }
+
     const res = NextResponse.json({
       endpoint: quote.endpoint.slug,
       price: { usd: quote.usd, confidence: quote.confidence },
       data: value,
     });
 
-    for (const [k, v] of Object.entries(charge.headers)) res.headers.set(k, v);
-    res.headers.set(HEADER_CHARGE_SOURCE, charge.source);
-    res.headers.set(HEADER_CHARGE_AMOUNT, quote.formatted);
-    if (charge.balanceRemainingMicros !== undefined) {
-      res.headers.set(HEADER_BALANCE_REMAINING, charge.balanceRemainingMicros.toString());
-    }
+    applyChargeHeaders(res, charge, quote);
     return res;
   } catch (err) {
     return errorResponse(err);
   }
+}
+
+function applyChargeHeaders(
+  res: NextResponse,
+  charge: Extract<Awaited<ReturnType<typeof chargeAndRun>>["charge"], { ok: true }>,
+  quote: { formatted: string },
+): void {
+  for (const [k, v] of Object.entries(charge.headers)) res.headers.set(k, v);
+  res.headers.set(HEADER_CHARGE_SOURCE, charge.source);
+  res.headers.set(HEADER_CHARGE_AMOUNT, quote.formatted);
+  if (charge.balanceRemainingMicros !== undefined) {
+    res.headers.set(HEADER_BALANCE_REMAINING, charge.balanceRemainingMicros.toString());
+  }
+}
+
+/**
+ * Persist a just-posted async task and return OUR id + a capability token,
+ * stripping DataForSEO's task id from the response.
+ */
+async function handleTaskPost(
+  quote: { endpoint: { slug: string }; usd: number },
+  value: unknown,
+  accountId: string | null,
+  chargeSource: string,
+): Promise<{ status: number; body: Record<string, unknown> }> {
+  const envelope = value as { tasks?: { id?: string; status_code?: number }[] };
+  const dfsTaskId = envelope.tasks?.[0]?.id;
+
+  if (!dfsTaskId) {
+    return {
+      status: 502,
+      body: { error: "UPSTREAM_ERROR", message: "DataForSEO did not return a task id." },
+    };
+  }
+  if (!db) {
+    return { status: 503, body: { error: "DB_UNAVAILABLE" } };
+  }
+
+  const created = await createTask(db, {
+    accountId: accountId ?? `anon:${dfsTaskId}`,
+    dfsTaskId,
+    endpoint: quote.endpoint.slug,
+    chargeRef: chargeSource,
+  });
+
+  return {
+    status: 202,
+    body: {
+      endpoint: quote.endpoint.slug,
+      price: { usd: quote.usd },
+      task: {
+        id: created.id,
+        status: created.status,
+        // Possession of this token authorizes fetching the result; store it.
+        capabilityToken: created.capabilityToken,
+        resultUrl: `/api/v3/tasks/${created.id}`,
+      },
+    },
+  };
 }
 
 /**
