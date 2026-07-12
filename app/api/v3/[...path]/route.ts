@@ -99,9 +99,11 @@ async function handle(req: NextRequest, { params }: Params): Promise<NextRespons
     db,
   };
 
+  const isTaskPost = quote.endpoint.mode === "task_post";
+
   try {
-    const { charge, value } = await chargeAndRun(chargeCtx, async () =>
-      callDataForSEO({
+    const { charge, value } = await chargeAndRun(chargeCtx, async () => {
+      const envelope = await callDataForSEO({
         dfsPath: buildPath(
           quote.endpoint.dfsPath,
           quote.endpoint.pathParams.map((p) => quote.pathParams[p]),
@@ -109,8 +111,19 @@ async function handle(req: NextRequest, { params }: Params): Promise<NextRespons
         method: quote.endpoint.method,
         // The tasks we priced, never the caller's raw body.
         tasks: quote.tasks,
-      }),
-    );
+      });
+
+      // For an async endpoint, persisting the tenant-scoped task and minting the
+      // capability token is part of the WORK, not a post-charge step. It runs
+      // here, before chargeAndRun captures the hold or settles the x402 payment.
+      // If it throws (no db, insert fails, capability secret misconfigured), the
+      // hold is released / the payment is never settled, so the caller is never
+      // charged for a task they could not retrieve.
+      if (isTaskPost) {
+        return persistTaskPost(quote, envelope, chargeCtx.accountId);
+      }
+      return envelope;
+    });
 
     if (!charge.ok) {
       return NextResponse.json(charge.body as object, {
@@ -119,12 +132,21 @@ async function handle(req: NextRequest, { params }: Params): Promise<NextRespons
       });
     }
 
-    // Async endpoints return a DataForSEO task id in `value`. That id is a
-    // secret — it reads any customer's result on our shared account — so we mint
-    // our own id, keep theirs private, and hand back a capability token.
-    if (quote.endpoint.mode === "task_post") {
-      const created = await handleTaskPost(quote, value, chargeCtx.accountId, charge.source);
-      const res = NextResponse.json(created.body, { status: created.status });
+    if (isTaskPost) {
+      const created = value as CreatedTaskResponse;
+      const res = NextResponse.json(
+        {
+          endpoint: quote.endpoint.slug,
+          price: { usd: quote.usd },
+          task: {
+            id: created.id,
+            status: created.status,
+            capabilityToken: created.capabilityToken,
+            resultUrl: `/api/v3/tasks/${created.id}`,
+          },
+        },
+        { status: 202 },
+      );
       applyChargeHeaders(res, charge, quote);
       return res;
     }
@@ -155,50 +177,42 @@ function applyChargeHeaders(
   }
 }
 
-/**
- * Persist a just-posted async task and return OUR id + a capability token,
- * stripping DataForSEO's task id from the response.
- */
-async function handleTaskPost(
-  quote: { endpoint: { slug: string }; usd: number },
-  value: unknown,
-  accountId: string | null,
-  chargeSource: string,
-): Promise<{ status: number; body: Record<string, unknown> }> {
-  const envelope = value as { tasks?: { id?: string; status_code?: number }[] };
-  const dfsTaskId = envelope.tasks?.[0]?.id;
+interface CreatedTaskResponse {
+  id: string;
+  status: string;
+  capabilityToken: string;
+}
 
+/**
+ * Persist a just-posted async task and return OUR id + a capability token.
+ *
+ * THROWS on any failure, by design: this runs inside the charged work, so a
+ * throw makes chargeAndRun release the balance hold / skip x402 settlement. The
+ * caller is never charged for a task whose handle we could not store. It is not
+ * allowed to return a partial success.
+ */
+async function persistTaskPost(
+  quote: { endpoint: { slug: string }; usd: number },
+  envelope: unknown,
+  accountId: string | null,
+): Promise<CreatedTaskResponse> {
+  const dfsTaskId = (envelope as { tasks?: { id?: string }[] }).tasks?.[0]?.id;
   if (!dfsTaskId) {
-    return {
-      status: 502,
-      body: { error: "UPSTREAM_ERROR", message: "DataForSEO did not return a task id." },
-    };
+    throw new DataForSEOUpstreamError("DataForSEO did not return a task id.");
   }
   if (!db) {
-    return { status: 503, body: { error: "DB_UNAVAILABLE" } };
+    // A charged request cannot complete without storing its task handle.
+    throw new DataForSEOUpstreamError("Task storage is unavailable.");
   }
 
   const created = await createTask(db, {
     accountId: accountId ?? `anon:${dfsTaskId}`,
     dfsTaskId,
     endpoint: quote.endpoint.slug,
-    chargeRef: chargeSource,
+    chargeRef: accountId ? "balance" : "x402",
   });
 
-  return {
-    status: 202,
-    body: {
-      endpoint: quote.endpoint.slug,
-      price: { usd: quote.usd },
-      task: {
-        id: created.id,
-        status: created.status,
-        // Possession of this token authorizes fetching the result; store it.
-        capabilityToken: created.capabilityToken,
-        resultUrl: `/api/v3/tasks/${created.id}`,
-      },
-    },
-  };
+  return { id: created.id, status: created.status, capabilityToken: created.capabilityToken };
 }
 
 /**
