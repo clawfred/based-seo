@@ -1,6 +1,9 @@
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
-import * as schema from "./schema";
+import * as appSchema from "./schema";
+import * as billingSchema from "./schema/billing";
+
+const schema = { ...appSchema, ...billingSchema };
 
 // Database is optional — app works in guest mode (localStorage) without it
 export const db = process.env.DATABASE_URL

@@ -107,7 +107,7 @@ export async function fetchKeywordOverview(
   locationCode: number = 2840,
   languageCode: string = "en",
 ): Promise<ApiResponse<CompleteKeywordData>> {
-  return apiFetch<CompleteKeywordData>("/api/keywords/overview", {
+  return apiFetch<CompleteKeywordData>("/api/products/keyword-overview", {
     keyword,
     location_code: locationCode,
     language_code: languageCode,
@@ -128,18 +128,13 @@ export async function fetchKeywordOverviewBatch(
   locationCode: number = 2840,
   languageCode: string = "en",
 ): Promise<ApiResponse<CompleteKeywordBatchItem[]>> {
-  return apiFetch<CompleteKeywordBatchItem[]>(
-    "/api/keywords/overview/batch",
-    {
-      keywords,
-      location_code: locationCode,
-      language_code: languageCode,
-    },
-    {
-      // Used by x402 dynamic pricing on the server.
-      "x-keyword-count": String(keywords.length),
-    },
-  );
+  // No count header: the server prices the batch from the `keywords` array it is
+  // about to forward, so the quote and the work cannot disagree.
+  return apiFetch<CompleteKeywordBatchItem[]>("/api/products/keyword-overview", {
+    keywords,
+    location_code: locationCode,
+    language_code: languageCode,
+  });
 }
 
 export interface KeywordIdeaWithMeta extends KeywordIdea {
@@ -154,7 +149,7 @@ export async function fetchKeywordIdeas(
   locationCode: number = 2840,
   languageCode: string = "en",
 ): Promise<ApiResponse<KeywordIdeaWithMeta[]>> {
-  return apiFetch<KeywordIdeaWithMeta[]>("/api/keywords/ideas", {
+  return apiFetch<KeywordIdeaWithMeta[]>("/api/products/keyword-ideas", {
     keyword,
     location_code: locationCode,
     language_code: languageCode,

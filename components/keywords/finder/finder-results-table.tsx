@@ -150,14 +150,14 @@ export const FinderResultsTable = memo(function FinderResultsTable({
                 <TableCell>{(keyword.competition ?? 0).toFixed(2)}</TableCell>
                 <TableCell>
                   <Badge className={getIntentColor(keyword.intent || "Informational")}>
-                    {keyword.intent || "—"}
+                    {keyword.intent || "-"}
                   </Badge>
                 </TableCell>
                 <TableCell>
                   {keyword.trend && keyword.trend.length > 0 ? (
                     <TrendBars trend={keyword.trend} />
                   ) : (
-                    <span className="text-muted-foreground text-xs">—</span>
+                    <span className="text-muted-foreground text-xs">-</span>
                   )}
                 </TableCell>
               </TableRow>

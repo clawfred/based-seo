@@ -1,0 +1,37 @@
+{
+  "skipped": [
+    {
+      "path": "/v3/dataforseo_labs/google/available_history/live",
+      "reason": "verified 404 against sandbox"
+    },
+    {
+      "path": "/v3/content_generation/check_grammar/rules",
+      "reason": "verified 404 against sandbox"
+    }
+  ],
+  "estimated": [
+    "/v3/keywords_data/dataforseo_trends/explore/live",
+    "/v3/keywords_data/dataforseo_trends/subregion_interests/live",
+    "/v3/keywords_data/dataforseo_trends/demography/live",
+    "/v3/keywords_data/dataforseo_trends/merged_data/live",
+    "/v3/on_page/page_screenshot",
+    "/v3/business_data/google/questions_and_answers/task_post",
+    "/v3/business_data/google/questions_and_answers/live",
+    "/v3/business_data/trustpilot/search/task_post",
+    "/v3/business_data/trustpilot/reviews/task_post",
+    "/v3/business_data/tripadvisor/search/task_post",
+    "/v3/business_data/tripadvisor/reviews/task_post",
+    "/v3/ai_optimization/chat_gpt/llm_scraper/task_post",
+    "/v3/ai_optimization/chat_gpt/llm_scraper/live/advanced",
+    "/v3/ai_optimization/chat_gpt/llm_scraper/live/html",
+    "/v3/ai_optimization/gemini/llm_scraper/task_post",
+    "/v3/ai_optimization/gemini/llm_scraper/live/advanced",
+    "/v3/ai_optimization/gemini/llm_scraper/live/html",
+    "/v3/ai_optimization/llm_mentions/target_metrics_lite/live",
+    "/v3/ai_optimization/llm_mentions/top_mentioned_domains_lite/live",
+    "/v3/ai_optimization/llm_mentions/top_mentioned_pages_lite/live",
+    "/v3/ai_optimization/llm_mentions/top_mentioned_brands_lite/live",
+    "/v3/ai_optimization/llm_mentions/top_mentioned_brand_categories_lite/live"
+  ],
+  "count": 531
+}

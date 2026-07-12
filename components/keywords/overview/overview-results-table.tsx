@@ -68,7 +68,7 @@ export const OverviewResultsTable = memo(function OverviewResultsTable({
                   {row.trend && row.trend.length > 0 ? (
                     <TrendBars trend={row.trend} />
                   ) : (
-                    <span className="text-muted-foreground text-xs">—</span>
+                    <span className="text-muted-foreground text-xs">-</span>
                   )}
                 </TableCell>
               </TableRow>

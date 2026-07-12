@@ -1,15 +1,14 @@
 "use client";
 
 import { useMemo } from "react";
-import { base } from "wagmi/chains";
 import { createConfig, http, WagmiProvider, useConfig } from "wagmi";
 import { coinbaseWallet } from "wagmi/connectors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { OnchainKitProvider } from "@coinbase/onchainkit";
 import { PrivyProvider } from "@privy-io/react-auth";
 import { WagmiProvider as PrivyWagmiProvider } from "@privy-io/wagmi";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthTokenProvider } from "@/lib/auth-context";
+import { activeChain } from "@/lib/wallet-network";
 import { useWagmiConfig } from "@/hooks/use-wagmi-config";
 import { useUserSync } from "@/hooks/use-user-sync";
 import { useAuthTokenSetup } from "@/hooks/use-auth-token-setup";
@@ -33,21 +32,30 @@ function PrivyInitializers() {
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
+  // Match the server's X402_NETWORK. Wallet, RPC, and Privy all point at the
+  // same chain so a payment can't fail from a client/server chain mismatch.
+  const chain = activeChain();
+
   const wagmiConfig = useMemo(
     () =>
       createConfig({
-        chains: [base],
+        chains: [chain],
         connectors: [coinbaseWallet({ appName: "Based SEO", preference: "smartWalletOnly" })],
         ssr: true,
+        // Optional dedicated RPC; falls back to the chain's public endpoint.
         transports: {
-          [base.id]: process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY
-            ? http(
-                `https://api.developer.coinbase.com/rpc/v1/base/${process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}`,
-              )
+          [chain.id]: process.env.NEXT_PUBLIC_RPC_URL
+            ? http(process.env.NEXT_PUBLIC_RPC_URL)
             : http(),
         },
       }),
-    [],
+    [chain],
+  );
+
+  const themed = (
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      {children}
+    </ThemeProvider>
   );
 
   const privyAppId = process.env.NEXT_PUBLIC_PRIVY_APP_ID;
@@ -56,27 +64,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
     return (
       <WagmiProvider config={wagmiConfig} reconnectOnMount={false}>
         <QueryClientProvider client={queryClient}>
-          <OnchainKitProvider
-            apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
-            chain={base}
-            config={{
-              appearance: {
-                mode: "auto",
-                name: "Based SEO",
-              },
-              wallet: { display: "modal" },
-            }}
-          >
-            <AppInitializers />
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {children}
-            </ThemeProvider>
-          </OnchainKitProvider>
+          <AppInitializers />
+          {themed}
         </QueryClientProvider>
       </WagmiProvider>
     );
@@ -90,8 +79,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
           primary: ["email", "base_account", "twitter", "google"],
           overflow: ["farcaster", "detected_ethereum_wallets", "wallet_connect"],
         },
-        defaultChain: base,
-        supportedChains: [base],
+        defaultChain: chain,
+        supportedChains: [chain],
         embeddedWallets: {
           ethereum: {
             createOnLogin: "users-without-wallets",
@@ -107,29 +96,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
     >
       <QueryClientProvider client={queryClient}>
         <PrivyWagmiProvider config={wagmiConfig} reconnectOnMount={false}>
-          <OnchainKitProvider
-            apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
-            chain={base}
-            config={{
-              appearance: {
-                mode: "auto",
-                name: "Based SEO",
-              },
-              wallet: { display: "modal" },
-            }}
-          >
-            <AuthTokenProvider>
-              <PrivyInitializers />
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-              >
-                {children}
-              </ThemeProvider>
-            </AuthTokenProvider>
-          </OnchainKitProvider>
+          <AuthTokenProvider>
+            <PrivyInitializers />
+            {themed}
+          </AuthTokenProvider>
         </PrivyWagmiProvider>
       </QueryClientProvider>
     </PrivyProvider>
