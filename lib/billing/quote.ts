@@ -22,6 +22,13 @@ import { quoteBatch, type PriceQuote } from "@/lib/registry/pricing";
 /** DataForSEO caps a queued POST at 100 tasks and a live POST at 1. */
 const MAX_TASKS_LIVE = 1;
 const MAX_TASKS_QUEUED = 100;
+/**
+ * task_post is capped at one task even though DataForSEO would accept 100. We
+ * mint one tenant-scoped handle + capability token per request, so a batch would
+ * charge for N tasks while making only the first retrievable — paid-data loss on
+ * the discarded ids. Per-task handles for true async batching is future work.
+ */
+const MAX_TASKS_TASK_POST = 1;
 
 export class QuoteError extends Error {
   readonly status: number;
@@ -40,7 +47,9 @@ export interface RequestQuote extends PriceQuote, Chargeable {
 }
 
 export function maxTasksFor(endpoint: EndpointDef): number {
-  return endpoint.mode === "live" ? MAX_TASKS_LIVE : MAX_TASKS_QUEUED;
+  if (endpoint.mode === "live") return MAX_TASKS_LIVE;
+  if (endpoint.mode === "task_post") return MAX_TASKS_TASK_POST;
+  return MAX_TASKS_QUEUED;
 }
 
 /** Path segments after `/api/v3/`. */
